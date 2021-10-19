@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { Products } from './src/component';
+import { Products } from './component';
 
 const App = () => {
     const [allProducts, setAllProducts]= useState([]);
@@ -26,6 +26,7 @@ const App = () => {
     }
 
     return (
+
 		<Router>
 			<div className="app"
 			style={{backgroundColor:"rgb(3, 58, 141)"}}>	

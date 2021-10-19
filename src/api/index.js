@@ -1,4 +1,4 @@
-export const BASE_URL = 'localhost:3000';
+export const BASE_URL = 'https://radiant-fjord-00657.herokuapp.com/api';
 
 export async function fetchRegisterUser(url, username, password) {
     try {
