@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { Products } from './component';
+import { Products, EditProduct, Header, Home, IndividualProd, Login, MakeProduct, Register } from './component';
+import { getCurrentUserToken, getCurrentUsername } from './auth'
+
 
 const App = () => {
     const [allProducts, setAllProducts]= useState([]);
@@ -100,25 +102,8 @@ const App = () => {
 								setSelectedProd={setSelectedProd}
 								productID={productID} />
 						</Route>
-						<Route path="/product/:id">
-                            <IndividualProduct
-                              allProducts={allProducts}
-                              setAllProducts={setAllProducts}
-                              userToken={userToken}
-                              selectedProd={selectedProd}
-                              productName={productName}
-                              setProductName={setProductName}
-                              productDescript={productDescript}
-                              setProductDescript={setProductDescript}
-                              productPrice={productPrice}
-                              setProductPrice={setProductPrice}
-                              productCategory={productCategory}
-                              setProductCategory={setProductCategory}
-                              productQuantity={productQuantity}
-                              setProductQuantity={setProductQuantity}
-                              productPhoto={productPhoto}
-                              setProductPhoto={setProductPhoto} /> 
-                        </Route>
+
+						
 						<Route path="/register">
 							<Register 
 								setUserToken={setUserToken}

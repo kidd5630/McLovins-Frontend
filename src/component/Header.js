@@ -61,7 +61,7 @@ const Header = ({userToken, setUserToken, setMyUsername}) => {
                             <li className="navBtn">Products</li>
                             </Link>
                             <Link to="/cart">
-                            <li className="navBtn">cart</li>
+                            <li className="navBtn">Cart</li>
                             </Link>
                             <Link to="/login">
                             <li className="navBtn"> LOGIN</li>
