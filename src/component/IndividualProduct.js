@@ -4,7 +4,7 @@ import EditProduct from './EditProduct';
 
 
 
-const IndividualProd = ({userToken, allProducts, setAllProducts, selectedProd, productName, productDescript, setProductName, setProductDescript, productPrice, setProductPrice, productCategory, setProductCategory, productQuantity, setProductQuantity, productPhoto, setProductPhoto}) => {
+const IndividualProduct = ({userToken, allProducts, setAllProducts, selectedProd, productName, productDescript, setProductName, setProductDescript, productPrice, setProductPrice, productCategory, setProductCategory, productQuantity, setProductQuantity, productPhoto, setProductPhoto}) => {
     const ToggleClass = () => {
         setActiveEdit(!isActiveEdit);
     };
@@ -68,4 +68,4 @@ const IndividualProd = ({userToken, allProducts, setAllProducts, selectedProd, p
         </>
     )
 } 
-export default IndividualProd; 
+export default IndividualProduct; 

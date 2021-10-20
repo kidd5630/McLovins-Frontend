@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { Products, EditProduct, Header, Home, IndividualProd, Login, MakeProduct, Register } from './component';
+import { Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register } from './component';
 import { getCurrentUserToken, getCurrentUsername } from './auth'
 
 
