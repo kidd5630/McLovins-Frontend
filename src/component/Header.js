@@ -31,7 +31,7 @@ const Header = ({userToken, setUserToken, setMyUsername}) => {
                                 <Link to="/home">
                                 <li className="navBtn">Home</li>
                                 </Link>
-                                <Link to="/products">
+                                <Link to="/product">
                                 <li className="navBtn">All Products</li>
                                 </Link>
                                 <Link to="/cart">
@@ -57,7 +57,7 @@ const Header = ({userToken, setUserToken, setMyUsername}) => {
                             <Link to="/home">
                             <li className="navBtn">Home</li>
                             </Link>
-                            <Link to="/products">
+                            <Link to="/product">
                             <li className="navBtn">Products</li>
                             </Link>
                             <Link to="/cart">

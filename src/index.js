@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register } from './component';
 import { getCurrentUserToken, getCurrentUsername } from './auth'
+import {  fetchAllProducts } from './api'
 
 
 const App = () => {
@@ -10,7 +11,8 @@ const App = () => {
     const [userToken, setUserToken] = useState(getCurrentUserToken());
     const [myUsername, setMyUsername] = useState(getCurrentUsername());
     const [myPassword, setMyPassword] = useState('');
-    const [selectedProd, setSelectedProd] = useState(getProdId());
+	const [myEmail, setMyEmail] = useState('');
+    const [selectedProduct, setselectedProduct] = useState(getProdId());
     const [productName, setProductName] = useState("");
 	const [productDescript, setProductDescript] = useState("");
     const [productPrice, setProductPrice] = useState("");
@@ -23,9 +25,16 @@ const App = () => {
         localStorage.setItem('prodId', JSON.stringify(prod_ID));
     }
 	function getProdId() {
-    	const selectedProdID = JSON.parse(localStorage.getItem('prodId'));
-        return selectedProdID;
+    	const selectedProductID = JSON.parse(localStorage.getItem('prodId'));
+        return selectedProductID;
     }
+	useEffect(() => {
+        fetchAllProducts()
+            .then((allProducts) => {
+                setAllProducts(allProducts);
+            })
+            .catch(error => console.error(error))
+    }, []);
 
     return (
 
@@ -56,7 +65,7 @@ const App = () => {
 								userToken={userToken}
 								allProducts={allProducts}
 								setAllProducts={setAllProducts}
-								setSelectedProd={setSelectedProd}
+								setselectedProduct={setselectedProduct}
 								productID={productID}
                                 />
 						</Route> 
@@ -65,7 +74,7 @@ const App = () => {
                                 allProducts={allProducts}
                                 setAllProducts={setAllProducts}
                                 userToken={userToken}
-                                selectedProd={selectedProd}
+                                selectedProduct={selectedProduct}
                                 productName={productName}
                                 setProductName={setProductName}
                                 productDescript={productDescript}
@@ -99,7 +108,7 @@ const App = () => {
 								userToken={userToken}
 								allProducts={allProducts}
 								setAllProducts={setAllProducts}
-								setSelectedProd={setSelectedProd}
+								setselectedProduct={setselectedProduct}
 								productID={productID} />
 						</Route>
 
@@ -110,7 +119,9 @@ const App = () => {
 								myUsername={myUsername}
 								setMyUsername={setMyUsername}
 								myPassword={myPassword}
-								setMyPassword={setMyPassword} />
+								setMyPassword={setMyPassword} 
+								myEmail = {myEmail}
+								setMyEmail={setMyEmail}/>
 						</Route>
 						<Route path="/login">
 							<Login 

@@ -83,7 +83,7 @@ const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserTok
         event.preventDefault();
         try {
             const results = await fetchLoginUser(BASE_URL, myUsername, myPassword);
-            console.log(results)
+            
             if(results.user) {
                 const token = await results.token;
                 setUserToken(token);

@@ -4,18 +4,19 @@ import EditProduct from './EditProduct';
 
 
 
-const IndividualProduct = ({userToken, allProducts, setAllProducts, selectedProd, productName, productDescript, setProductName, setProductDescript, productPrice, setProductPrice, productCategory, setProductCategory, productQuantity, setProductQuantity, productPhoto, setProductPhoto}) => {
+const IndividualProduct = ({userToken, allProducts, setAllProducts, selectedProduct, productName, productDescript, setProductName, setProductDescript, productPrice, setProductPrice, productCategory, setProductCategory, productQuantity, setProductQuantity, productPhoto, setProductPhoto}) => {
+    /*
     const ToggleClass = () => {
         setActiveEdit(!isActiveEdit);
     };
-    
+    */
     
     return (
         <> 
             <div className="ip">
                 {allProducts.map(prod => {
                     const {id, name, description, price, quantity, photo} = prod;
-                    if(id === selectedProd) {   
+                    if(id === selectedProduct) {   
                         return (
                         <div className="individualContainer" key={id}>
                                 <div className="showbox">
@@ -30,7 +31,9 @@ const IndividualProduct = ({userToken, allProducts, setAllProducts, selectedProd
                                 {userToken
                                 ?
                                 (<div>
-                                    <button className="edit button" onClick={ToggleClass}>
+                                    <button className="edit button" 
+                                    //</div>onClick={ToggleClass}
+                                    >
                                         Edit
                                     </button>
                                 </div>)
@@ -41,13 +44,15 @@ const IndividualProduct = ({userToken, allProducts, setAllProducts, selectedProd
                                 {userToken
                                 ?
                                 (<div className="iaInteractiveBox">
-                                        <div className={`editFeild-${isActiveEdit ? "inactive" : "active"}`}>
+                                        <div 
+                                        //className={`editFeild-${isActiveEdit ? "inactive" : "active"}`}
+                                        >
                                             <EditProduct 
                                                 userToken={userToken} 
                                                 allProducts={allProducts} 
                                                 setAllProducts={setAllProducts} 
-                                                selectedProd={selectedProd}
-                                                ToggleClass={ToggleClass}                             
+                                                selectedProduct={selectedProduct}
+                                                //ToggleClass={ToggleClass}                             
                                                 setProductName={setProductName}                                             
                                                 setProductDescript={setProductDescript}
                                                 setProductPrice={setProductPrice} 

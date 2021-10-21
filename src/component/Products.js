@@ -16,7 +16,8 @@ const Container = styled.header`
   background: #587cf5;
   color: #fafafa;
 `;
-const Products = ({userToken, allProducts, setAllProducts, setSelectedProduct, productID}) => {
+const Products = ({userToken, allProducts, setAllProducts, setselectedProduct, productID}) => {
+  console.log(allProducts);
   return ( 
     <Container>
       <Header><h1>All Products</h1></Header>
@@ -42,7 +43,7 @@ const Products = ({userToken, allProducts, setAllProducts, setSelectedProduct, p
                         <div className='innerboxText' style={{fontWeight:"bolder", color:"black"}}
                             onClick={() => {
                             productID(prod.id)
-                            setSelectedProduct(prod.id)
+                            setselectedProduct(prod.id)
                             }}>
                           <Link to={`/product/${prod.id}`} className="prodLink">
                             {prod.name}
