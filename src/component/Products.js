@@ -9,12 +9,8 @@ const Header = styled.header`
   font-size: 20px;
   text-align: center;
   padding: 0.25em 0;
-  background: #033a8d;
-  color: #fafafa;
 `;
 const Container = styled.header`
-  background: #587cf5;
-  color: #fafafa;
 `;
 const Products = ({userToken, allProducts, setAllProducts, setselectedProduct, productID}) => {
   console.log(allProducts);
@@ -49,7 +45,7 @@ const Products = ({userToken, allProducts, setAllProducts, setselectedProduct, p
                             {prod.name}
                           </Link>
                         </div>
-                        <div className='prodPhoto'>{prod.photo}</div>
+                        <img src={prod.photo} alt="a picture of product" width="400" height="500" />
                         <div className='innerboxText'>{prod.description}</div>
                         <div className='innerboxText'>{prod.price}</div>
                       </div>
