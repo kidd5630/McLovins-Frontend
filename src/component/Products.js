@@ -12,14 +12,13 @@ const Header = styled.header`
 `;
 const Container = styled.header`
 `;
-const Products = ({userToken, allProducts, setAllProducts, setselectedProduct, productID}) => {
-  console.log(allProducts);
+const Products = ({userToken, isAdmin, allProducts, setAllProducts, setselectedProduct, productID}) => {
   return ( 
     <Container>
       <Header><h1>All Products</h1></Header>
       <div className="allProducts">
         <div className="products">
-          {userToken?
+          {isAdmin?
             (<div className="productContainer">
               <MakeProduct
                 userToken={userToken}
@@ -30,6 +29,7 @@ const Products = ({userToken, allProducts, setAllProducts, setselectedProduct, p
             (<div></div>)
           }
           {allProducts.map(prod=> {
+            console.log("this is prod", prod);
             return (
               <div className="productContainer" key={prod.id}>
                 <div className="productBody">

@@ -10,6 +10,7 @@ const App = () => {
     const [allProducts, setAllProducts]= useState([]);
     const [userToken, setUserToken] = useState(getCurrentUserToken());
     const [myUsername, setMyUsername] = useState(getCurrentUsername());
+	const [isAdmin, setIsAdmin] = useState(false);
     const [myPassword, setMyPassword] = useState('');
 	const [myEmail, setMyEmail] = useState('');
     const [selectedProduct, setselectedProduct] = useState(getProdId());
@@ -75,6 +76,7 @@ const App = () => {
 								setAllProducts={setAllProducts}
 								setselectedProduct={setselectedProduct}
 								productID={productID}
+								isAdmin={isAdmin}
                                 />
 						</Route> 
 						<Route path="/product/:id">
@@ -160,7 +162,8 @@ const App = () => {
 								setMyUsername={setMyUsername}
 								myPassword={myPassword}
 								setMyPassword={setMyPassword}
-								setUserToken={setUserToken} />
+								setUserToken={setUserToken} 
+								setIsAdmin={setIsAdmin}/>
 						</Route>
 						<Route exact path ="/cart">
 							<Cart 

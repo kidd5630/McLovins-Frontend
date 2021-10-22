@@ -77,22 +77,25 @@ const FooterButton = styled.div`
     color: white;
   }
 `;
-const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserToken}) => {
+const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin}) => {
     let history = useHistory();
     async function loginUser(event) {
         event.preventDefault();
         try {
             const results = await fetchLoginUser(BASE_URL, myUsername, myPassword);
-            
+            console.log("here now", results)
             if(results.user) {
                 const token = await results.token;
+                const admin = await results.user.admin;
                 setUserToken(token);
                 setMyUsername(myUsername);
+                setIsAdmin(admin);
                 localStorage.setItem('userToken', token);
+                localStorage.setItem('adminUser', admin);
                 localStorage.setItem('myUsername', JSON.stringify(myUsername));
                 // const routines = await fetchUsersRoutines(myUsername, token)
                 // setusersRoutines(routines)
-                // history.push("/");
+                history.push("/");
             } else {
                 alert("Your Username Or Password Is Incorrect");
             }

@@ -1,27 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap');
 * { 
 	margin:0;
-	padding:0;
+	padding: 2px;
 	box-sizing: border-box;
 }
 .header {
     display: flex;
-    justify-content: flex-start;
-	flex-direction: row;
-	gap: 1px;
+	justify-content: space-between;
+
 }
 .shopName{
 	display: inline-flex;
     padding-right: 20px;
     font-family: "Akaya Telivigala";
-    font-size: medium;
-	align-self: flex-start;
+    font-size: xx-large;
 }
 .navBtn {
     display: inline-flex;
-    padding-right: 20px;
     font-family: "Akaya Telivigala";
-    font-size: medium;
+    font-size: x-large;
+	color: black;
+	text-decoration: none;
 }
 .prodLink{
 	color: black;
