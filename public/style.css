@@ -34,4 +34,9 @@
 .innerboxText{
     margin-left: 5px;
 }
-
+.editFeild-inactive{
+    display: none;
+}
+.editFeild-active{
+    display: active;
+}

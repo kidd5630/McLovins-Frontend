@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import {removeCurrentUserToken, removeCurrentUsername}
+import {removeCurrentUserToken, removeCurrentUsername, removeIsAdmin}
 from '../auth'
 // import styled from "styled-components";
 import LogoutIcon from '@mui/icons-material/Logout';
 
-const Header = ({userToken, setUserToken, setMyUsername}) => {
+const Header = ({userToken, setUserToken, setMyUsername, setIsAdmin}) => {
     let history = useHistory()	
     return(
         <>
@@ -32,6 +32,7 @@ const Header = ({userToken, setUserToken, setMyUsername}) => {
                                     onClick={() => {
                                     setUserToken(removeCurrentUserToken());
                                     setMyUsername(removeCurrentUsername());
+                                    setIsAdmin(removeIsAdmin());
                                 history.push("/");
                                 }}><LogoutIcon></LogoutIcon> LOGOUT
                                 </button>

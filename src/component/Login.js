@@ -83,7 +83,6 @@ const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserTok
         event.preventDefault();
         try {
             const results = await fetchLoginUser(BASE_URL, myUsername, myPassword);
-            console.log("here now", results)
             if(results.user) {
                 const token = await results.token;
                 const admin = await results.user.admin;
@@ -91,7 +90,7 @@ const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserTok
                 setMyUsername(myUsername);
                 setIsAdmin(admin);
                 localStorage.setItem('userToken', token);
-                localStorage.setItem('adminUser', admin);
+                localStorage.setItem('isAdmin', admin);
                 localStorage.setItem('myUsername', JSON.stringify(myUsername));
                 // const routines = await fetchUsersRoutines(myUsername, token)
                 // setusersRoutines(routines)

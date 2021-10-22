@@ -29,7 +29,6 @@ const Products = ({userToken, isAdmin, allProducts, setAllProducts, setselectedP
             (<div></div>)
           }
           {allProducts.map(prod=> {
-            console.log("this is prod", prod);
             return (
               <div className="productContainer" key={prod.id}>
                 <div className="productBody">

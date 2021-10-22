@@ -53,7 +53,9 @@ const App = () => {
 				<Header 
 					userToken={userToken}
 					setUserToken={setUserToken}
-					setMyUsername={setMyUsername} />	
+					setMyUsername={setMyUsername} 
+					setIsAdmin={setIsAdmin}
+					/>	
 
 				{userToken
 				?
@@ -96,7 +98,8 @@ const App = () => {
                                 productQuantity={productQuantity}
                                 setProductQuantity={setProductQuantity}
                                 productPhoto={productPhoto}
-                                setProductPhoto={setProductPhoto} /> 
+                                setProductPhoto={setProductPhoto} 
+								isAdmin={isAdmin}/> 
                         </Route>
 						<Route exact path ="/cart">
 							<Cart 
