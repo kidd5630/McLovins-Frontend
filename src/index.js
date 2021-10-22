@@ -47,7 +47,8 @@ const App = () => {
 
 		<Router>
 			<div className="app"
-			style={{backgroundColor:"rgb(3, 58, 141)"}}>	
+			//style={{backgroundColor:"rgb(3, 58, 141)"}}
+			>	
 				<Header 
 					userToken={userToken}
 					setUserToken={setUserToken}

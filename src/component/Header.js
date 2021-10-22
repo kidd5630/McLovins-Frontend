@@ -11,13 +11,13 @@ const Top = styled.header`
   font-size: 25px;
   text-align: center;
   padding: 0.25em 0;
-  background: #033a8d;
-  color: #fafafa;
+
   justify-content: center;
   align-content: center;
   width: 100%;
   z-index: 100;
 `;
+
 const Header = ({userToken, setUserToken, setMyUsername}) => {
     let history = useHistory()	
     return(
