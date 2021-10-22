@@ -100,6 +100,7 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                     localStorage.setItem('myEmail', JSON.stringify(myEmail));
                     history.push("/");
                     alert("Good News, You're Registered! Log In To Get Started.")
+                    location.reload();
                 } else {
                 }
             }catch(error) {
