@@ -1,10 +1,9 @@
 export const BASE_URL = 'https://radiant-fjord-00657.herokuapp.com/api';
 
-export async function fetchRegisterUser(url, username, email, password) {
+export async function fetchRegisterUser(url, username, password, email) {
     try {
         const response = await fetch(`${url}/users/register`, {
             method: "POST",
-            mode: "cors",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -14,7 +13,8 @@ export async function fetchRegisterUser(url, username, email, password) {
                     "email": email
             })
         })
-        const data = await response.json();
+        const data = await response.json()
+        console.log(data);
         return data
     } catch (error) {
         console.error(error);

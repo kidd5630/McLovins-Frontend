@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register } from './component';
+import { Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register, Cart } from './component';
 import { getCurrentUserToken, getCurrentUsername } from './auth'
-import {  fetchAllProducts } from './api'
+import {  fetchAllProducts,fetchUsersCart } from './api'
 
 
 const App = () => {
@@ -19,6 +19,7 @@ const App = () => {
     const [productQuantity, setProductQuantity] = useState("");
     const [productCategory, setProductCategory] = useState("");
     const [productPhoto, setProductPhoto] = useState("");
+	const [allCartItem, setAllCartItem] = useState("")
 
     function productID(prod_ID) {
         localStorage.removeItem('prodId');
@@ -34,7 +35,13 @@ const App = () => {
                 setAllProducts(allProducts);
             })
             .catch(error => console.error(error))
+		fetchUsersCart(myUsername, userToken)
+            .then((allCartItem) => {
+                setAllCartItem(allCartItem);
+            })
+            .catch(error => console.error(error))
     }, []);
+
 
     return (
 
@@ -88,6 +95,12 @@ const App = () => {
                                 productPhoto={productPhoto}
                                 setProductPhoto={setProductPhoto} /> 
                         </Route>
+						<Route exact path ="/cart">
+							<Cart 
+								userToken={userToken}
+								allProducts={allProducts} 
+								allCartItem={allCartItem}/>
+						</Route>
 					</Switch>
 				</div>)	
 				: 
@@ -111,8 +124,25 @@ const App = () => {
 								setselectedProduct={setselectedProduct}
 								productID={productID} />
 						</Route>
-
-						
+						<Route path="/product/:id">
+                            <IndividualProduct
+                                allProducts={allProducts}
+                                setAllProducts={setAllProducts}
+                                userToken={userToken}
+                                selectedProduct={selectedProduct}
+                                productName={productName}
+                                setProductName={setProductName}
+                                productDescript={productDescript}
+                                setProductDescript={setProductDescript}
+                                productPrice={productPrice}
+                                setProductPrice={setProductPrice}
+                                productCategory={productCategory}
+                                setProductCategory={setProductCategory}
+                                productQuantity={productQuantity}
+                                setProductQuantity={setProductQuantity}
+                                productPhoto={productPhoto}
+                                setProductPhoto={setProductPhoto} /> 
+                        </Route>
 						<Route path="/register">
 							<Register 
 								setUserToken={setUserToken}
@@ -130,6 +160,12 @@ const App = () => {
 								myPassword={myPassword}
 								setMyPassword={setMyPassword}
 								setUserToken={setUserToken} />
+						</Route>
+						<Route exact path ="/cart">
+							<Cart 
+								userToken={userToken}
+								allProducts={allProducts} 
+								allCartItem={allCartItem}/>
 						</Route>
 					</Switch>
 				</div>)

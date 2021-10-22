@@ -30,7 +30,7 @@ const Products = ({userToken, allProducts, setAllProducts, setselectedProduct, p
                 allProducts={allProducts}
                 setAllProducts={setAllProducts}/>
             </div>)
-            :
+            : 
             (<div></div>)
           }
           {allProducts.map(prod=> {
