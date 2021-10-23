@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-const Cart = ({userToken, allProducts, allCartItem}) => {
-    console.log('here',allCartItem);
-    return (
+const Cart = ({userToken, allProducts, allCartItem, isAdmin}) => {
+  console.log('isAdmin', isAdmin);
+    return ( 
         <div>
     
         {allCartItem ?
@@ -40,6 +40,7 @@ const Cart = ({userToken, allProducts, allCartItem}) => {
         "Your Cart is Empty"}
        
         </div>
+         
     )}
 
 export default Cart;

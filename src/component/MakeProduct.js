@@ -128,7 +128,7 @@ const MakeProduct = ({userToken, allProducts, setAllProducts}) => {
                 </div>
                 <div>
                 <input className="makeProdInput" 
-                        type="image" 
+                        type="url" 
                         placeholder="Photo" 
                         value={photo}
                         required

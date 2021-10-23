@@ -15,3 +15,10 @@ export function getCurrentUserToken() {
   export function removeIsAdmin() {
     localStorage.removeItem('isAdmin')
   }
+  export function removeUserId(){
+    localStorage.removeItem('userId')
+  }
+  export function  getIsAdmin() {
+    const storageUsername = JSON.parse(localStorage.getItem('isAdmin'));
+    return storageUsername;
+  }
