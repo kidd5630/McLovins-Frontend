@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register, Cart } from './component';
-import { getCurrentUserToken, getCurrentUsername } from './auth'
+import { getCurrentUserToken, getCurrentUsername, getIsAdmin } from './auth'
 import {  fetchAllProducts,fetchUsersCart } from './api'
 
 
@@ -10,7 +10,7 @@ const App = () => {
     const [allProducts, setAllProducts]= useState([]);
     const [userToken, setUserToken] = useState(getCurrentUserToken());
     const [myUsername, setMyUsername] = useState(getCurrentUsername());
-	const [isAdmin, setIsAdmin] = useState(false);
+	const [isAdmin, setIsAdmin] = useState(getIsAdmin());
     const [myPassword, setMyPassword] = useState('');
 	const [myEmail, setMyEmail] = useState('');
     const [selectedProduct, setselectedProduct] = useState(getProdId());
@@ -21,6 +21,8 @@ const App = () => {
     const [productCategory, setProductCategory] = useState("");
     const [productPhoto, setProductPhoto] = useState("");
 	const [allCartItem, setAllCartItem] = useState("")
+	const [userId, setUserId] = useState("")
+
 
     function productID(prod_ID) {
         localStorage.removeItem('prodId');
@@ -34,11 +36,6 @@ const App = () => {
         fetchAllProducts()
             .then((allProducts) => {
                 setAllProducts(allProducts);
-            })
-            .catch(error => console.error(error))
-		fetchUsersCart(myUsername, userToken)
-            .then((allCartItem) => {
-                setAllCartItem(allCartItem);
             })
             .catch(error => console.error(error))
     }, []);
@@ -55,6 +52,7 @@ const App = () => {
 					setUserToken={setUserToken}
 					setMyUsername={setMyUsername} 
 					setIsAdmin={setIsAdmin}
+					setUserId={setUserId}
 					/>	
 
 				{userToken
@@ -105,7 +103,8 @@ const App = () => {
 							<Cart 
 								userToken={userToken}
 								allProducts={allProducts} 
-								allCartItem={allCartItem}/>
+								allCartItem={allCartItem}
+								isAdmin={isAdmin}/>
 						</Route>
 					</Switch>
 				</div>)	
@@ -166,13 +165,17 @@ const App = () => {
 								myPassword={myPassword}
 								setMyPassword={setMyPassword}
 								setUserToken={setUserToken} 
-								setIsAdmin={setIsAdmin}/>
+								setIsAdmin={setIsAdmin}
+								userId={userId}
+								setUserId={setUserId}
+								setAllCartItem={setAllCartItem}/>
 						</Route>
 						<Route exact path ="/cart">
 							<Cart 
 								userToken={userToken}
 								allProducts={allProducts} 
-								allCartItem={allCartItem}/>
+								allCartItem={allCartItem}
+								isAdmin={isAdmin}/>
 						</Route>
 					</Switch>
 				</div>)

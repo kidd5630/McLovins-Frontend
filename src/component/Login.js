@@ -8,6 +8,7 @@ import styled from "styled-components";
 import {
     BASE_URL,
     fetchLoginUser,
+    fetchUsersCart
 } from '../api';
 
 // CHECK THAT PATH
@@ -77,23 +78,32 @@ const FooterButton = styled.div`
     color: white;
   }
 `;
-const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin}) => {
+const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem}) => {
     let history = useHistory();
     async function loginUser(event) {
         event.preventDefault();
+        
         try {
             const results = await fetchLoginUser(BASE_URL, myUsername, myPassword);
             if(results.user) {
+                console.log("results", results);
                 const token = await results.token;
                 const admin = await results.user.admin;
                 setUserToken(token);
                 setMyUsername(myUsername);
                 setIsAdmin(admin);
+                setUserId(userId);
                 localStorage.setItem('userToken', token);
                 localStorage.setItem('isAdmin', admin);
                 localStorage.setItem('myUsername', JSON.stringify(myUsername));
-                // const routines = await fetchUsersRoutines(myUsername, token)
-                // setusersRoutines(routines)
+                localStorage.setItem('userId', userId);
+
+                fetchUsersCart(results.user.id, token)
+                .then((allCartItem) => {
+                    setAllCartItem(allCartItem);
+                })
+                .catch(error => console.error(error))
+
                 history.push("/");
             } else {
                 alert("Your Username Or Password Is Incorrect");

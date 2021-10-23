@@ -77,7 +77,10 @@ export async function createProduct( url, userToken, name, description, category
     }
 }
 
-export async function fetchUsersCart(username, userToken){
+export async function fetchUsersCart(id, userToken){
+    console.log('this id',id);
+    console.log('token',userToken);
+
       try{
           const headers = {
             headers: {
@@ -85,7 +88,7 @@ export async function fetchUsersCart(username, userToken){
                 Authorization: `Bearer ${userToken}`,
             },
         };
-        const response = await fetch(`${BASE_URL}/users/${username}/cart`, headers)
+        const response = await fetch(`${BASE_URL}/users/${id}/cart`, headers)
         const results = await response.json()
         return results
     }catch(error){
