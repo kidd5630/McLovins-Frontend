@@ -74,7 +74,7 @@ const FooterButton = styled.div`
     color: white;
   }
 `;
-const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUsername}) => {
+const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUsername, myEmail, setMyEmail}) => {
     const [confirMmyPassword, setConfirmMyPassword] = useState('');
     let history = useHistory();
     async function registerUser(event) {
@@ -85,15 +85,22 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
            alert("please make sure your passwords match");
         }else{
             try {
-                const results = await fetchRegisterUser(BASE_URL, myUsername, myPassword);
+                const results = await fetchRegisterUser(BASE_URL, myUsername, myPassword, myEmail);
+                console.log(myUsername);
+                console.log(myPassword);
+                console.log(myEmail);
+
                 if(results) {
                     const token = await results.token;
                     setUserToken(token);
                     setMyUsername(myUsername);
+                    setMyEmail(myEmail)
                     localStorage.setItem('userToken', token);
                     localStorage.setItem('myUsername', JSON.stringify(myUsername));
+                    localStorage.setItem('myEmail', JSON.stringify(myEmail));
                     history.push("/");
                     alert("Good News, You're Registered! Log In To Get Started.")
+                    location.reload();
                 } else {
                 }
             }catch(error) {
@@ -114,6 +121,14 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                                 placeholder="Username" 
                                 className="registerInput"
                                 onChange={(event) => {setMyUsername(event.target.value)}} 
+                                required/>
+                        </div>
+                        <div>
+                            <Label>Email:</Label>
+                            <Input type="email" 
+                                placeholder="Email" 
+                                className="registerInput"
+                                onChange={(event) => {setMyEmail(event.target.value)}} 
                                 required/>
                         </div>
                         <div>

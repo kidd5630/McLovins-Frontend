@@ -1,37 +1,25 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import {removeCurrentUserToken, removeCurrentUsername}
+import {removeCurrentUserToken, removeCurrentUsername, removeIsAdmin}
 from '../auth'
-import styled from "styled-components";
+// import styled from "styled-components";
 import LogoutIcon from '@mui/icons-material/Logout';
-const Top = styled.header`
-  font-family: "Akaya Telivigala", cursive;
-  font-weight: 100;
-  font-style: italic;
-  font-size: 25px;
-  text-align: center;
-  padding: 0.25em 0;
-  background: #033a8d;
-  color: #fafafa;
-  justify-content: center;
-  align-content: center;
-  width: 100%;
-  z-index: 100;
-`;
-const Header = ({userToken, setUserToken, setMyUsername}) => {
+
+const Header = ({userToken, setUserToken, setMyUsername, setIsAdmin}) => {
     let history = useHistory()	
     return(
         <>
-            <Top>
+            {/* <Top> */}
             {/* Will need to work in a ternary for admin */}
                 {userToken? 
                     <div className="header">
+                        <div className="shopName">McLovin's</div>
                         <nav>
                             <ul>
                                 <Link to="/home">
                                 <li className="navBtn">Home</li>
                                 </Link>
-                                <Link to="/products">
+                                <Link to="/product">
                                 <li className="navBtn">All Products</li>
                                 </Link>
                                 <Link to="/cart">
@@ -44,6 +32,7 @@ const Header = ({userToken, setUserToken, setMyUsername}) => {
                                     onClick={() => {
                                     setUserToken(removeCurrentUserToken());
                                     setMyUsername(removeCurrentUsername());
+                                    setIsAdmin(removeIsAdmin());
                                 history.push("/");
                                 }}><LogoutIcon></LogoutIcon> LOGOUT
                                 </button>
@@ -53,11 +42,12 @@ const Header = ({userToken, setUserToken, setMyUsername}) => {
                 :
                 <nav>
                     <div className="header">
+                    <div className="shopName">McLovin's</div>
                         <ul>
                             <Link to="/home">
                             <li className="navBtn">Home</li>
                             </Link>
-                            <Link to="/products">
+                            <Link to="/product">
                             <li className="navBtn">Products</li>
                             </Link>
                             <Link to="/cart">
@@ -73,7 +63,7 @@ const Header = ({userToken, setUserToken, setMyUsername}) => {
                     </div>
                 </nav>
                 }
-            </Top>
+            {/* </Top> */}
         </>
     ) 
 }

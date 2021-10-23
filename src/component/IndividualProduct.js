@@ -4,18 +4,19 @@ import EditProduct from './EditProduct';
 
 
 
-const IndividualProduct = ({userToken, allProducts, setAllProducts, selectedProd, productName, productDescript, setProductName, setProductDescript, productPrice, setProductPrice, productCategory, setProductCategory, productQuantity, setProductQuantity, productPhoto, setProductPhoto}) => {
+const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, selectedProduct, productName, productDescript, setProductName, setProductDescript, productPrice, setProductPrice, productCategory, setProductCategory, productQuantity, setProductQuantity, productPhoto, setProductPhoto}) => {
+    const [isActiveEdit, setActiveEdit] = useState("false");
     const ToggleClass = () => {
         setActiveEdit(!isActiveEdit);
     };
-    
     
     return (
         <> 
             <div className="ip">
                 {allProducts.map(prod => {
                     const {id, name, description, price, quantity, photo} = prod;
-                    if(id === selectedProd) {   
+                    if(id === selectedProduct) {   
+                        console.log("here now!", isAdmin)
                         return (
                         <div className="individualContainer" key={id}>
                                 <div className="showbox">
@@ -24,13 +25,13 @@ const IndividualProduct = ({userToken, allProducts, setAllProducts, selectedProd
                                     <p className="innerText">{description}</p>
                                     <p className="innerText">{price}</p>
                                     <p className="innerText">{quantity}</p>
-                                    <img src={photo} alt="a picture of ${name}" />
+                                    <img src={prod.photo} alt="a picture of product" width="400" height="500" />
                                 </div> 
-                            {/* Admin feature? */}
-                                {userToken
+                                {isAdmin
                                 ?
                                 (<div>
-                                    <button className="edit button" onClick={ToggleClass}>
+                                    <button className="edit button" 
+                                    onClick={ToggleClass}>
                                         Edit
                                     </button>
                                 </div>)
@@ -38,15 +39,17 @@ const IndividualProduct = ({userToken, allProducts, setAllProducts, selectedProd
                                 (<div></div>)
                                 }
                                 
-                                {userToken
+                                {isAdmin
                                 ?
                                 (<div className="iaInteractiveBox">
-                                        <div className={`editFeild-${isActiveEdit ? "inactive" : "active"}`}>
+                                        <div 
+                                        className={`editFeild-${isActiveEdit ? "inactive" : "active"}`}
+                                        >
                                             <EditProduct 
                                                 userToken={userToken} 
                                                 allProducts={allProducts} 
                                                 setAllProducts={setAllProducts} 
-                                                selectedProd={selectedProd}
+                                                selectedProduct={selectedProduct}
                                                 ToggleClass={ToggleClass}                             
                                                 setProductName={setProductName}                                             
                                                 setProductDescript={setProductDescript}

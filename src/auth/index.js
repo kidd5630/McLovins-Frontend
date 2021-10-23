@@ -12,3 +12,6 @@ export function getCurrentUserToken() {
   export function removeCurrentUsername() {
     localStorage.removeItem('myUsername')
   }
+  export function removeIsAdmin() {
+    localStorage.removeItem('isAdmin')
+  }
