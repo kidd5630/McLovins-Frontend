@@ -40,3 +40,11 @@
 .editFeild-active{
     display: active;
 }
+.category{
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+}
+.categoryContainer{
+    display: flex;
+}

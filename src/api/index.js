@@ -60,7 +60,7 @@ export async function createProduct( url, userToken, name, description, category
         "photo": photo
     }
     try {
-        const response = await fetch(`${url}/products`, {
+        const response = await fetch(`${url}/product`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
