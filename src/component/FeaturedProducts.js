@@ -9,8 +9,6 @@ const FeaturedProducts = ({allProducts, isAdmin, setselectedProduct}) => {
             <div className="ip">
                 {allProducts.map(prod => {
                     const {id, name, photo} = prod;
-                
-                   
                         return (
                         <div className="individualContainer" key={id}>
                                 <div className="showbox">

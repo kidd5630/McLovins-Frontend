@@ -93,7 +93,7 @@ const App = () => {
 								isAdmin={isAdmin}
                                 />
 						</Route> 
-						<Route path="/product/:id">
+						<Route path="/product/:productid">
                             <IndividualProduct
                                 allProducts={allProducts}
                                 setAllProducts={setAllProducts}
@@ -151,7 +151,7 @@ const App = () => {
 								setselectedProduct={setselectedProduct}
 								productID={productID} />
 						</Route>
-						<Route path="/product/:id">
+						<Route path="/product/:productid">
                             <IndividualProduct
                                 allProducts={allProducts}
                                 setAllProducts={setAllProducts}

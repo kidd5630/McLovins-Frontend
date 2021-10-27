@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom'
 import { BASE_URL} from '../api'
 import EditProduct from './EditProduct';
 
@@ -9,22 +10,24 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
     const ToggleClass = () => {
         setActiveEdit(!isActiveEdit);
     };
-    
+    console.log('products',allProducts);
+    const { productid } = useParams();
+    const filteredProduct = allProducts.filter(product => {
+        console.log('this that id', product.id, productid);
+        return parseInt(productid) == product.id
+    })[0]
     return (
         <> 
             <div className="ip">
-                {allProducts.map(prod => {
-                    const {id, name, description, price, quantity, photo} = prod;
-                    if(id === selectedProduct) {   
-                        return (
-                        <div className="individualContainer" key={id}>
+                
+                        <div className="individualContainer" key={filteredProduct.id}>
                                 <div className="showbox">
                                 <div className="ipText">
-                                    <h2 className="innerboxText"> {name}, {id}</h2>
-                                    <p className="innerText">{description}</p>
-                                    <p className="innerText">{price}</p>
-                                    <p className="innerText">{quantity}</p>
-                                    <img src={photo} alt="a picture of product" width="400" height="500" />
+                                    <h2 className="innerboxText"> {filteredProduct.name}, {filteredProduct.id}</h2>
+                                    <p className="innerText">{filteredProduct.description}</p>
+                                    <p className="innerText">{filteredProduct.price}</p>
+                                    <p className="innerText">{filteredProduct.quantity}</p>
+                                    <img src={filteredProduct.photo} alt="a picture of product" width="400" height="500" />
                                 </div> 
                                 {isAdmin
                                 ?
@@ -63,9 +66,9 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                                 (<div></div>)
                                 }
                             </div> 
-                        </div>)  
-                    }
-                })}
+                        </div>
+                    
+                
             </div>
         </>
     )
