@@ -13,7 +13,7 @@ const Header = ({userToken, setUserToken, setMyUsername, setIsAdmin, setUserId})
             {/* Will need to work in a ternary for admin */}
                 {userToken? 
                     <div className="header">
-                        <div className="shopName">McLovin's</div>
+                        <div className="shopName">McLovin's Scents</div>
                         <nav>
                             <ul>
                                 <Link to="/home">
@@ -43,7 +43,7 @@ const Header = ({userToken, setUserToken, setMyUsername, setIsAdmin, setUserId})
                 :
                 <nav>
                     <div className="header">
-                    <div className="shopName">McLovin's</div>
+                    <div className="shopName">McLovin's Scents</div>
                         <ul>
                             <Link to="/home">
                             <li className="navBtn">Home</li>

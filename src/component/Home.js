@@ -7,16 +7,15 @@ const Home = ({userToken, myUsername, isAdmin, allProducts, setselectedProduct})
             <div className="home">
                 {userToken ?
                 <div className="loggedInMessage">
-                    Welcome back {myUsername}, let's go shopping!
+                    Welcome back to McLovin's Scents{myUsername}, let's go shopping!
                 </div>
                 :
                 <div className="loggedOutMessage">
                     <div className="welcome">
-                    <h1>Welcome To McLovin's Scents</h1>
+                    <h1>Welcome To</h1>
+                    <h1 className="shopName"> McLovin's Scents </h1>
                     </div>
-                    <div className="slogan">
-                    <p>Appeal to your nostrils</p>
-                    </div>
+                    <p className="slogan">Appeal to your nostrils</p>
                 </div>
                 }
             </div>

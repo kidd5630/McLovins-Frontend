@@ -23,7 +23,7 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                         <div className="individualContainer" key={filteredProduct.id}>
                                 <div className="showbox">
                                 <div className="ipText">
-                                    <h2 className="innerboxText"> {filteredProduct.name}, {filteredProduct.id}</h2>
+                                    <h2 className="innerboxTextName"> {filteredProduct.name}, {filteredProduct.id}</h2>
                                     <p className="innerText">{filteredProduct.description}</p>
                                     <p className="innerText">{filteredProduct.price}</p>
                                     <p className="innerText">{filteredProduct.quantity}</p>

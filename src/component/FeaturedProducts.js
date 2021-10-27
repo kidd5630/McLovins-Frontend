@@ -5,10 +5,13 @@ import { Link} from 'react-router-dom';
 
 const FeaturedProducts = ({allProducts, isAdmin, setselectedProduct}) => {
     return (
+        <>
+        
             <div className="fp">
                 {allProducts.map(prod => {
                     const {id, name, photo} = prod;
                     return (
+                    
                     <div className="featuredContainer" key={id}>
                         <div className="featuredShowBox"onClick={()=>{
                             setselectedProduct(id)
@@ -23,6 +26,7 @@ const FeaturedProducts = ({allProducts, isAdmin, setselectedProduct}) => {
                     </div>)     
                 })}
             </div>
+            </>
     )
    
 }

@@ -10,6 +10,7 @@ const Header = styled.header`
   font-size: 20px;
   text-align: center;
   padding: 0.25em 0;
+  text-decoration: underline;
 `;
 const Container = styled.header`
 `;
@@ -19,7 +20,6 @@ const Products = ({userToken, isAdmin, allProducts, setAllProducts, setselectedP
   const categoryColognes = allProducts.filter(products => products.category === "cologne");
   const categoryOils = allProducts.filter(products => products.category === "essential oils");
   const categoryIncense = allProducts.filter(products => products.category === "incense");
- console.log(allProducts);
   return ( 
     <Container>
       <Header><h1>All Products</h1></Header>
