@@ -48,3 +48,58 @@
 .categoryContainer{
     display: flex;
 }
+.fp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    overflow: auto;
+    padding-top: 50px;
+    background-color: cadetblue;
+    height: 100vh;
+}
+.featuredContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.featuredShowBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.fpName{
+    display: flex;
+    text-decoration: none;
+    font-size: 15px;
+    color: black;
+    align-self: center;
+    justify-content: center;
+    background-color: grey;
+}
+.featuredLink{
+    text-decoration: none;
+    align-self: center;
+}
+.fpImg{
+    align-self: center;
+}
+.home{
+    font-family: "Akaya Telivigala";
+    background-color: chocolate;
+    display: flex;
+    justify-content: center;
+}
+.backdrop{
+    background-color: cyan;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.loggedInMessage{
+    
+}
+.loggedOutMessage{
+    
+}

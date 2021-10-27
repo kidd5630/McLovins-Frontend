@@ -11,8 +11,12 @@ const Home = ({userToken, myUsername, isAdmin, allProducts, setselectedProduct})
                 </div>
                 :
                 <div className="loggedOutMessage">
+                    <div className="welcome">
                     <h1>Welcome To McLovin's Scents</h1>
+                    </div>
+                    <div className="slogan">
                     <p>Appeal to your nostrils</p>
+                    </div>
                 </div>
                 }
             </div>

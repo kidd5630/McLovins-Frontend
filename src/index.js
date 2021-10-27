@@ -37,12 +37,12 @@ const App = () => {
         fetchAllProducts()
             .then((allProducts) => {
                 setAllProducts(allProducts);
-				const newArr = []
+					const newArr = [];
 				for(let i = 0; i < 3; i++){
-				const randomProd = Math.floor(Math.random()*allProducts.length-1)
-				newArr.push(allProducts[randomProd])
+					const randomProd = Math.floor(Math.random()*allProducts.length)
+					newArr.push(allProducts[randomProd])
 				}
-				setFeaturedProds(newArr)
+				setFeaturedProds(newArr);
             })
             .catch(error => console.error(error))
     }, []);

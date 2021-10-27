@@ -5,33 +5,24 @@ import { Link} from 'react-router-dom';
 
 const FeaturedProducts = ({allProducts, isAdmin, setselectedProduct}) => {
     return (
-        <> 
-            <div className="ip">
+            <div className="fp">
                 {allProducts.map(prod => {
                     const {id, name, photo} = prod;
-                        return (
-                        <div className="individualContainer" key={id}>
-                                <div className="showbox">
-                                <div className="ipText">
-                                <div onClick={()=>{
-                                    setselectedProduct(id)
-                                }}>
-                                <Link to={`/product/${id}`} className="prodLink">
-                                    <h2 className="innerboxText"> {name}, {id}</h2>
-                                </Link>
-                                   
-                                <Link to={`/product/${id}`} className="prodLink">
-                                    <img src={photo} alt="a picture of product" width="400" height="500" />
-                                </Link>   
-                                </div> 
-                                </div>
-                                
-                            </div> 
-                        </div>)  
-                    
+                    return (
+                    <div className="featuredContainer" key={id}>
+                        <div className="featuredShowBox"onClick={()=>{
+                            setselectedProduct(id)
+                        }}>  
+                            <Link to={`/product/${id}`} className="featuredLink">
+                                <img src={photo} alt="a picture of product" className="fpImg" width="200" height="300" />
+                            </Link>   
+                            <Link to={`/product/${id}`} className="featuredLink">
+                                <h2 className="fpName"> {name}</h2>
+                            </Link>
+                        </div> 
+                    </div>)     
                 })}
             </div>
-        </>
     )
    
 }
