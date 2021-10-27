@@ -1,4 +1,8 @@
-const Home = ({userToken, myUsername}) => {
+import React from 'react';
+import FeaturedProducts from './FeaturedProducts';
+
+const Home = ({userToken, myUsername, isAdmin, allProducts}) => {
+    console.log(allProducts, "here")
     return (
         <>
             <div className="home">
@@ -13,7 +17,12 @@ const Home = ({userToken, myUsername}) => {
                 </div>
                 }
             </div>
+            <FeaturedProducts
+				isAdmin={isAdmin}
+				allProducts={allProducts}
+			/>
         </>
-    )
+    ) 
 }
+
 export default Home; 

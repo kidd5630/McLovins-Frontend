@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register, Cart } from './component';
+import { Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register, Cart, FeaturedProducts } from './component';
 import { getCurrentUserToken, getCurrentUsername, getIsAdmin } from './auth'
 import {  fetchAllProducts,fetchUsersCart } from './api'
 
@@ -20,8 +20,9 @@ const App = () => {
     const [productQuantity, setProductQuantity] = useState("");
     const [productCategory, setProductCategory] = useState("");
     const [productPhoto, setProductPhoto] = useState("");
-	const [allCartItem, setAllCartItem] = useState("")
-	const [userId, setUserId] = useState("")
+	const [allCartItem, setAllCartItem] = useState("");
+	const [userId, setUserId] = useState("");
+	const [featuredProds, setFeaturedProds] = useState([]);
 
 
     function productID(prod_ID) {
@@ -36,10 +37,15 @@ const App = () => {
         fetchAllProducts()
             .then((allProducts) => {
                 setAllProducts(allProducts);
+				const newArr = []
+				for(let i = 0; i < 3; i++){
+				const randomProd = Math.floor(Math.random()*allProducts.length-1)
+				newArr.push(allProducts[randomProd])
+				}
+				setFeaturedProds(newArr)
             })
             .catch(error => console.error(error))
     }, []);
-
 
     return (
 
@@ -62,12 +68,16 @@ const App = () => {
 						<Route exact path ="/">
 							<Home 
 								userToken={userToken}
-								myUsername={myUsername} />
+								myUsername={myUsername} 
+								isAdmin={isAdmin}
+								allProducts={featuredProds}/>
 						</Route>
 						<Route exact path ="/home">
 							<Home 
 								userToken={userToken}
-								myUsername={myUsername} />
+								myUsername={myUsername} 
+								isAdmin={isAdmin}
+								allProducts={featuredProds}/>
 						</Route>
 						<Route exact path ="/product">
 							<Products 
@@ -114,12 +124,16 @@ const App = () => {
 						<Route exact path ="/">
 							<Home 
 								userToken={userToken}
-								myUsername={myUsername} />
+								myUsername={myUsername} 
+								isAdmin={isAdmin}
+								allProducts={featuredProds}/>
 						</Route>
 						<Route exact path ="/home">
 							<Home 
 								userToken={userToken}
-								myUsername={myUsername} />
+								myUsername={myUsername} 
+								isAdmin={isAdmin}
+								allProducts={featuredProds}/>								
 						</Route>
 						<Route exact path ="/product">
 							<Products

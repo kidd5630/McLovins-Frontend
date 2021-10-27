@@ -7,5 +7,6 @@ export { default as IndividualProduct } from './IndividualProduct';
 export { default as MakeProduct } from './MakeProduct';
 export { default as EditProduct } from './EditProduct';
 export { default as Cart } from './Cart';
+export { default as FeaturedProducts } from './FeaturedProducts';
 
 
