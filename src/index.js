@@ -70,14 +70,18 @@ const App = () => {
 								userToken={userToken}
 								myUsername={myUsername} 
 								isAdmin={isAdmin}
-								allProducts={featuredProds}/>
+								allProducts={featuredProds}
+								setselectedProduct={setselectedProduct}
+								/>
 						</Route>
 						<Route exact path ="/home">
 							<Home 
 								userToken={userToken}
 								myUsername={myUsername} 
 								isAdmin={isAdmin}
-								allProducts={featuredProds}/>
+								allProducts={featuredProds}
+								setselectedProduct={setselectedProduct}
+								/>
 						</Route>
 						<Route exact path ="/product">
 							<Products 
@@ -126,14 +130,18 @@ const App = () => {
 								userToken={userToken}
 								myUsername={myUsername} 
 								isAdmin={isAdmin}
-								allProducts={featuredProds}/>
+								allProducts={featuredProds}
+								setselectedProduct={setselectedProduct}
+								/>
 						</Route>
 						<Route exact path ="/home">
 							<Home 
 								userToken={userToken}
 								myUsername={myUsername} 
 								isAdmin={isAdmin}
-								allProducts={featuredProds}/>								
+								allProducts={featuredProds}
+								setselectedProduct={setselectedProduct}
+								/>								
 						</Route>
 						<Route exact path ="/product">
 							<Products

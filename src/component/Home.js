@@ -1,8 +1,7 @@
 import React from 'react';
 import FeaturedProducts from './FeaturedProducts';
 
-const Home = ({userToken, myUsername, isAdmin, allProducts}) => {
-    console.log(allProducts, "here")
+const Home = ({userToken, myUsername, isAdmin, allProducts, setselectedProduct}) => {
     return (
         <>
             <div className="home">
@@ -20,6 +19,7 @@ const Home = ({userToken, myUsername, isAdmin, allProducts}) => {
             <FeaturedProducts
 				isAdmin={isAdmin}
 				allProducts={allProducts}
+                setselectedProduct={setselectedProduct}
 			/>
         </>
     ) 

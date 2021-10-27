@@ -16,16 +16,15 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                 {allProducts.map(prod => {
                     const {id, name, description, price, quantity, photo} = prod;
                     if(id === selectedProduct) {   
-                        console.log("here now!", isAdmin)
                         return (
                         <div className="individualContainer" key={id}>
                                 <div className="showbox">
                                 <div className="ipText">
-                                    <h2 className="innerboxText"> {name}</h2>
+                                    <h2 className="innerboxText"> {name}, {id}</h2>
                                     <p className="innerText">{description}</p>
                                     <p className="innerText">{price}</p>
                                     <p className="innerText">{quantity}</p>
-                                    <img src={prod.photo} alt="a picture of product" width="400" height="500" />
+                                    <img src={photo} alt="a picture of product" width="400" height="500" />
                                 </div> 
                                 {isAdmin
                                 ?

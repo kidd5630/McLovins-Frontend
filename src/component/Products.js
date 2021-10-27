@@ -40,30 +40,40 @@ const Products = ({userToken, isAdmin, allProducts, setAllProducts, setselectedP
           Candles
           <ProductsByCategory
           CategoryProducts={categoryCandles}
+          productID={productID}
+          setselectedProduct={setselectedProduct}
           />
           </div>
           <div className='category'>
           Lotions
           <ProductsByCategory
           CategoryProducts={categoryLotions}
+          productID={productID}
+          setselectedProduct={setselectedProduct}
           />
           </div>
           <div className='category'>
           Colognes/Perfumes
           <ProductsByCategory
           CategoryProducts={categoryColognes}
+          productID={productID}
+          setselectedProduct={setselectedProduct}
           />
           </div>
           <div className='category'>
           Essential Oils
           <ProductsByCategory
           CategoryProducts={categoryOils}
+          productID={productID}
+          setselectedProduct={setselectedProduct}
           />
           </div>
           <div className='category'>
           Incense
           <ProductsByCategory
           CategoryProducts={categoryIncense}
+          productID={productID}
+          setselectedProduct={setselectedProduct}
           />
           </div>
         </div>
