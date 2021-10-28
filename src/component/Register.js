@@ -22,36 +22,37 @@ const Modal = styled.div`
   backdrop-filter: blur(6px);
 `;
 const Content = styled.div`
-  font-family: "ABeeZee", sans-serif;
+  font-family: "Akaya Telivigala";
   width: 480px;
   padding: 12px;
   min-height: 200px;
   border: black solid 2px;
-  background: #ADD8E6;
   box-shadow: 0 2px 12px -8px black;
   border-radius: 2%;
 `;
 const Heading = styled.div`
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: 24px;
-  border-bottom: 1px solid #888;
+height: 36px;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+font-size: 24px;
+border-bottom: 1px solid #888;
+color: red;
 `;
 const Form = styled.div`
   display: flex;
   flex-direction: column;
 `;
 const Label = styled.label`
+color:red;
 `;
 const Input = styled.input`
-  height: 1.5rem;
-  background: #ddd;
-  width: 460px;
-  padding: 8px;
-  font-size: 22px;
-  margin-bottom: 8px;
+height: 1.5rem;
+background: #ddd;
+width: 400px;
+padding: 8px;
+font-size: 22px;
+margin-bottom: 8px;
 `;
 const Footer = styled.div`
   display: flex;
@@ -65,10 +66,10 @@ const FooterButton = styled.div`
   justify-content: flex-end;
   border-radius: 6px;
   box-shadow: 0 2px 6px -2px black;
-  background-color: black;
+  background-color: red;
   justify-content: space-around;
   align-items: center;
-  height: 36px;
+  height: 40px;
   width: 100px;
   a:visited {
     color: white;
@@ -156,8 +157,9 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                                     variant="contained"
                                     style={{
                                     textDecoration: "none",
-                                    backgroundColor: "black",
+                                    backgroundColor: "red",
                                     color: "white",
+                                    fontFamily: "Akaya Telivigala",
                                     }}
                                     className="btn btn-primary"
                                     type="submit"
@@ -175,7 +177,7 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                                     className="btn btn-primary"
                                     onClick={() => {}}
                                 >
-                                    Cancel
+                                    CANCEL
                                 </Link>
                             </FooterButton>
                         </Footer>

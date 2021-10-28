@@ -14,7 +14,6 @@ export async function fetchRegisterUser(url, username, password, email) {
             })
         })
         const data = await response.json()
-        console.log(data);
         return data
     } catch (error) {
         console.error(error);
@@ -78,9 +77,6 @@ export async function createProduct( url, userToken, name, description, category
 }
 
 export async function fetchUsersCart(id, userToken){
-    console.log('this id',id);
-    console.log('token',userToken);
-
       try{
           const headers = {
             headers: {

@@ -25,7 +25,10 @@ const MakeProduct = ({userToken, allProducts, setAllProducts}) => {
         e.preventDefault();
         try {
             const results = await createProduct(BASE_URL, userToken, name, description,category, quantity, price, photo);
-            if(results.id){
+           console.log(name, description,category, quantity, price, photo);
+            
+            console.log("lookin at results", results)
+            if(results){
                 setAllProducts([...allProducts, results])
                 alert("New Product Has Been Made")
                 resetForm();
@@ -73,20 +76,13 @@ const MakeProduct = ({userToken, allProducts, setAllProducts}) => {
                 </div>    
             </div>
             <div className="makeProdContent">
-                <div>
-                    <label className="makeProdLabel">Category</label>
-                </div>
-                <div>
-                <input className="makeProdInput" 
-                        type="text" 
-                        placeholder="category" 
-                        value={category}
-                        required
-                        onChange={(event) => {
-                            setCategory(event.target.value);
-                        }}
-                    />
-                </div>    
+            <label>Category </label>
+                <br></br>
+                <select id="makeProdDD"  value={category} onChange={(e)=> {setCategory(event.target.value)}}>
+                {allProducts.map((obj)=>
+                    <option key={obj.id} value={obj.category}>{obj.category}</option>
+                  )}
+                </select>
             </div>
             <div className="makeProdContent">
                 <div>

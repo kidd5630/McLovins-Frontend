@@ -7,9 +7,6 @@ const ProductsByCategory = ({userToken, allProducts, allCartItem, isAdmin, Categ
         {CategoryProducts.map(prod=> {
             return (
               <div className="categoryContainer" key={prod.id}>
-                
-                  
-                    
                       <div className='innerbox'>  
                         <div className='innerboxText' style={{fontWeight:"bolder", color:"black"}}
                             onClick={() => {

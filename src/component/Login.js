@@ -26,14 +26,13 @@ const Modal = styled.div`
   backdrop-filter: blur(6px);
 `;
 const Content = styled.div`
-  font-family: "ABeeZee", sans-serif;
-  width: 480px;
-  padding: 12px;
-  min-height: 200px;
-  border: black solid 2px;
-  background: #ADD8E6;
-  box-shadow: 0 2px 12px -8px black;
-  border-radius: 2%;
+    font-family: "Akaya Telivigala";
+    width: 480px;
+    padding: 12px;
+    min-height: 200px;
+    border: black solid 2px;
+    box-shadow: 0 2px 12px -8px black;
+    border-radius: 2%;
 `;
 const Heading = styled.div`
   height: 36px;
@@ -42,17 +41,19 @@ const Heading = styled.div`
   justify-content: flex-start;
   font-size: 24px;
   border-bottom: 1px solid #888;
+  color: red;
 `;
 const Form = styled.div`
   display: flex;
   flex-direction: column;
 `;
 const Label = styled.label`
+    color:red;
 `;
 const Input = styled.input`
   height: 1.5rem;
   background: #ddd;
-  width: 460px;
+  width: 400px;
   padding: 8px;
   font-size: 22px;
   margin-bottom: 8px;
@@ -69,10 +70,10 @@ const FooterButton = styled.div`
   justify-content: flex-end;
   border-radius: 6px;
   box-shadow: 0 2px 6px -2px black;
-  background-color: black;
+  background-color: red;
   justify-content: space-around;
   align-items: center;
-  height: 36px;
+  height: 40px;
   width: 100px;
   a:visited {
     color: white;
@@ -113,8 +114,7 @@ const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserTok
         } 
     }
     return (
-        <div className="background"
-            style={{backgroundColor:"blue"}}>
+        <div className="background">
             <Modal>
                 <Content>
                     <section className="loginContainer">
@@ -146,9 +146,11 @@ const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserTok
                                             <Button
                                                 variant="contained"
                                                 style={{
+                                                fontFamily: "Akaya Telivigala",
                                                 textDecoration: "none",
-                                                backgroundColor: "black",
+                                                backgroundColor: "red",
                                                 color: "white",
+                                                
                                                 }}
                                                 className="btn btn-primary"
                                                 type="submit"
@@ -166,7 +168,7 @@ const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserTok
                                                 className="btn btn-primary"
                                                 onClick={() => {}}
                                             >
-                                                Cancel
+                                                CANCEL
                                             </Link>
                                         </FooterButton>
                                     </Footer>
