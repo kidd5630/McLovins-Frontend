@@ -8,7 +8,8 @@ import styled from "styled-components";
 import {
     BASE_URL,
     fetchLoginUser,
-    fetchUsersCart
+    fetchUsersCartItems,
+    fetchAllUsers
 } from '../api';
 
 // CHECK THAT PATH
@@ -98,10 +99,17 @@ const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserTok
                 localStorage.setItem('isAdmin', admin);
                 localStorage.setItem('myUsername', JSON.stringify(myUsername));
                 localStorage.setItem('userId', userId);
-
-                fetchUsersCart(results.user.id, token)
+                fetchAllUsers(token)
+                .then(
+                    users => {
+                        console.log(users)
+                    }
+                )
+                .catch(error => console.error(error))
+                fetchUsersCartItems(results.user.id, token)
                 .then((allCartItem) => {
                     setAllCartItem(allCartItem);
+                    localStorage.setItem('cartItems', JSON.stringify(allCartItem));
                 })
                 .catch(error => console.error(error))
 

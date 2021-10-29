@@ -91,6 +91,24 @@ export async function fetchUsersCart(id, userToken){
         console.error(error)
     }
 }
+
+export async function fetchUsersCartItems(id, userToken){
+    console.log("here", id, userToken);
+    try{    
+      const response = await fetch(`${BASE_URL}/cart/cart/${id}`, 
+      {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        }
+      })
+      const results = await response.json()
+      return results
+  }catch(error){
+      console.error(error)
+  }
+}
+
 export async function editThisProduct( url, SelectedProduct, userToken, name, description, category, quantity, price, photo) {
     const actObj = { }
     if(name) {
@@ -128,7 +146,21 @@ export async function editThisProduct( url, SelectedProduct, userToken, name, de
         console.error(error);
     }
 }
-
+export async function fetchAllUsers(userToken){
+    try{    
+      const response = await fetch(`${BASE_URL}/users/allUsers`, 
+      {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        }
+      })
+      const results = await response.json()
+      return results
+  }catch(error){
+      console.error(error)
+  }
+}
 /*
 export async function fetchOrderHistory(url, selectedAct) {
     try {
