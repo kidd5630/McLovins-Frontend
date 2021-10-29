@@ -36,7 +36,6 @@ const App = () => {
         fetchAllProducts()
             .then((allProducts) => {
                 setAllProducts(allProducts);
-				console.log(allProducts,'>>>>>>>>>>');
 					const newArr = [];
 				for(let i = 0; i < 3; i++){
 					const randomProd = Math.floor(Math.random()*allProducts.length)

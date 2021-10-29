@@ -4,6 +4,7 @@ import { BASE_URL} from '../api'
 import EditProduct from './EditProduct';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import e from 'express';
 
 
 const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, selectedProduct, productName, productDescript, setProductName, setProductDescript, productPrice, setProductPrice, productCategory, setProductCategory, productQuantity, setProductQuantity, productPhoto, setProductPhoto}) => {
@@ -17,6 +18,23 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
         return parseInt(productid) == product.id
     })[0]
     
+    const Removehandler = (e)=>{
+        e.preventDefault()
+        if(valueQuant>0){
+        setValueQuant(valueQuant - 1)
+        }
+                
+    }
+    const Addhandler = (e)=>{
+        e.preventDefault()
+        if(valueQuant<filteredProduct.quantity){
+        setValueQuant(valueQuant + 1)}
+    }
+    const SubmitHandler = (e)=>{
+        e.preventDefault()
+        
+    }
+
     return (
         <> {filteredProduct?
             <div className="ip">
@@ -28,18 +46,12 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                             <p className="innerText"> {filteredProduct.description}</p>
                             <p className="innerText">Price: ${filteredProduct.price}</p>
                             <p className="innerText">Available Quantity{filteredProduct.quantity}</p>
-                            <form className="addRemoveProduct" onSubmit={()=>{
-
+                            <form className="addRemoveProduct" onSubmit={(e)=>{
+                                SubmitHandler(e)
                             }}>
-                            <button className="removeProduct" onClick={(e)=>{
-                                e.preventDefault()
-                                setValueQuant(valueQuant - 1)
-                            }}><RemoveIcon></RemoveIcon></button>
+                            <button className="removeProduct" onClick={e =>Removehandler(e)}><RemoveIcon></RemoveIcon></button>
                             <input type="number" value={valueQuant} onChange={ event=> {setValueQuant(parseInt(event.target.value))}}></input>
-                            <button className="addProduct" onClick={(e)=>{
-                                e.preventDefault()
-                                setValueQuant(valueQuant + 1)
-                            }}><AddIcon></AddIcon></button>
+                            <button className="addProduct" onClick={e => Addhandler(e)}><AddIcon></AddIcon></button>
                             <button type="submit">Add To Cart</button>
                             </form>
                         </div> 
