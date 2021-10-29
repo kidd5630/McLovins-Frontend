@@ -36,10 +36,15 @@
     font-size: xx-large;
 }
 .navBtn {
-    display: inline-flex;
+    display: inline;
     font-family: "Akaya Telivigala";
     font-size: x-large;
 	color: black;
+}
+.navSection{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
 }
 .link{
     text-decoration: black underline;
@@ -64,15 +69,20 @@
     display: flex;
     flex-direction: row;
     overflow: scroll;
+    font-family: "Akaya Telivigala";
+    font-size: x-large;
 }
 .categoryContainer{
-    display: flex;
+    font-size: large;
 }
 .fp {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     height: 70vh;
+}
+.fpImg{
+    border: 5px solid black;
 }
 .featuredContainer{
     display: flex;
