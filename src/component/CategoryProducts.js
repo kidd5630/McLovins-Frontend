@@ -17,12 +17,10 @@ const ProductsByCategory = ({userToken, allProducts, allCartItem, isAdmin, Categ
                             {prod.name}
                           </Link>
                         </div>
-                        <img src={prod.photo} alt="a picture of product" width="200" height="250" />
+                        <img className="prodPhoto"src={prod.photo} alt="a picture of product" width="200" height="250" />
                         <div className='innerboxText'>{prod.description}</div>
                         <div className='innerboxText'>Price: ${prod.price}</div>
                       </div>
-                     
-                   
                 </div>    
               
             )

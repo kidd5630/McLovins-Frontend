@@ -16,16 +16,19 @@ const Header = ({userToken, setUserToken, setMyUsername, setIsAdmin, setUserId})
                         <div className="shopName">McLovin's Scents</div>
                         <nav>
                             <ul>
-                                <Link to="/home">
+                                <Link to="/home" className="link">
                                 <li className="navBtn">Home</li>
                                 </Link>
-                                <Link to="/product">
+                                <Link to="/user/:id" className="link">
+                                <li className="navBtn">Profile</li>
+                                </Link>
+                                <Link to="/product" className="link">
                                 <li className="navBtn">All Products</li>
                                 </Link>
-                                <Link to="/cart">
+                                <Link to="/cart" className="link">
                                 <li className="navBtn">My Cart</li>
                                 </Link>
-                                <Link to="/order_history">
+                                <Link to="/order_history" className="link">
                                 <li className="navBtn">Order History</li>
                                 </Link>
                                 <button className="logOut"
@@ -45,19 +48,19 @@ const Header = ({userToken, setUserToken, setMyUsername, setIsAdmin, setUserId})
                     <div className="header">
                     <div className="shopName">McLovin's Scents</div>
                         <ul>
-                            <Link to="/home">
+                            <Link to="/home" className="link">
                             <li className="navBtn">Home</li>
                             </Link>
-                            <Link to="/product">
+                            <Link to="/product" className="link">
                             <li className="navBtn">Products</li>
                             </Link>
-                            <Link to="/cart">
+                            <Link to="/cart" className="link">
                             <li className="navBtn">Cart</li>
                             </Link>
-                            <Link to="/login">
+                            <Link to="/login" className="link">
                             <li className="navBtn"> LOGIN</li>
                             </Link>
-                            <Link to="/register">
+                            <Link to="/register" className="link">
                             <li className="navBtn">REGISTER</li>
                             </Link>
                         </ul>

@@ -6,7 +6,6 @@ import { Link} from 'react-router-dom';
 const FeaturedProducts = ({allProducts, isAdmin, setselectedProduct}) => {
     return (
         <>
-        
             <div className="fp">
                 {allProducts.map(prod => {
                     const {id, name, photo} = prod;
@@ -17,7 +16,7 @@ const FeaturedProducts = ({allProducts, isAdmin, setselectedProduct}) => {
                             setselectedProduct(id)
                         }}>  
                             <Link to={`/product/${id}`} className="featuredLink">
-                                <img src={photo} alt="a picture of product" className="fpImg" width="200" height="300" />
+                                <img src={photo} alt="a picture of product" className="prodPhoto" width="200" height="300" />
                             </Link>   
                             <Link to={`/product/${id}`} className="featuredLink">
                                 <h2 className="fpName"> {name}</h2>
@@ -26,9 +25,8 @@ const FeaturedProducts = ({allProducts, isAdmin, setselectedProduct}) => {
                     </div>)     
                 })}
             </div>
-            </>
+        </>
     )
-   
 }
 
 export default FeaturedProducts;
