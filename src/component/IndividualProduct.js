@@ -18,7 +18,7 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
     })[0]
     
     return (
-        <> 
+        <> {filteredProduct?
             <div className="ip">
                 <div className="individualContainer" key={filteredProduct.id}>
                         <div className="showbox">
@@ -31,11 +31,13 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                             <form className="addRemoveProduct" onSubmit={()=>{
 
                             }}>
-                            <button className="removeProduct" onClick={()=>{
+                            <button className="removeProduct" onClick={(e)=>{
+                                e.preventDefault()
                                 setValueQuant(valueQuant - 1)
                             }}><RemoveIcon></RemoveIcon></button>
-                            <input type="number" value={valueQuant}></input>
-                            <button className="addProduct" onClick={()=>{
+                            <input type="number" value={valueQuant} onChange={ event=> {setValueQuant(parseInt(event.target.value))}}></input>
+                            <button className="addProduct" onClick={(e)=>{
+                                e.preventDefault()
                                 setValueQuant(valueQuant + 1)
                             }}><AddIcon></AddIcon></button>
                             <button type="submit">Add To Cart</button>
@@ -81,7 +83,7 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                 </div>
                     
                 
-            </div>
+            </div>:null}
         </>
     )
 } 

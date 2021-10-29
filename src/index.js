@@ -24,7 +24,6 @@ const App = () => {
 	const [userId, setUserId] = useState("");
 	const [featuredProds, setFeaturedProds] = useState([]);
 
-
     function productID(prod_ID) {
         localStorage.removeItem('prodId');
         localStorage.setItem('prodId', JSON.stringify(prod_ID));
@@ -37,6 +36,7 @@ const App = () => {
         fetchAllProducts()
             .then((allProducts) => {
                 setAllProducts(allProducts);
+				console.log(allProducts,'>>>>>>>>>>');
 					const newArr = [];
 				for(let i = 0; i < 3; i++){
 					const randomProd = Math.floor(Math.random()*allProducts.length)
@@ -109,7 +109,8 @@ const App = () => {
                                 setProductQuantity={setProductQuantity}
                                 productPhoto={productPhoto}
                                 setProductPhoto={setProductPhoto} 
-								isAdmin={isAdmin}/> 
+								isAdmin={isAdmin}
+								key={window.location.pathname}/> 
                         </Route>
 						<Route exact path ="/cart">
 							<Cart 
@@ -166,7 +167,9 @@ const App = () => {
                                 productQuantity={productQuantity}
                                 setProductQuantity={setProductQuantity}
                                 productPhoto={productPhoto}
-                                setProductPhoto={setProductPhoto} /> 
+                                setProductPhoto={setProductPhoto}
+								key={window.location.pathname}
+								/> 
                         </Route>
 						<Route path="/register">
 							<Register 
