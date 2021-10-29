@@ -19,7 +19,7 @@ const Header = ({userToken, setUserToken, setMyUsername, setIsAdmin, setUserId})
                                 <Link to="/home" className="link">
                                 <li className="navBtn">Home</li>
                                 </Link>
-                                <Link to="/user/:id" className="link">
+                                <Link to="/user/me" className="link">
                                 <li className="navBtn">Profile</li>
                                 </Link>
                                 <Link to="/product" className="link">

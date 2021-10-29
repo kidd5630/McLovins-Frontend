@@ -19,6 +19,11 @@
     flex-direction: column;
     overflow: scroll;
 }
+.logOut{
+    background-color: red;
+    font-family: "Akaya Telivigala";
+    
+}
 .header {
     display: flex;
 	justify-content: space-between;
