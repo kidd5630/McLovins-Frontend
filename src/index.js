@@ -9,7 +9,7 @@ import {  fetchAllProducts,fetchUsersCart } from './api'
 const App = () => {
     const [allProducts, setAllProducts]= useState([]);
     const [userToken, setUserToken] = useState(getCurrentUserToken());
-    const [myUsername, setMyUsername] = useState(getCurrentUsername());
+    const [myUsername, setMyUsername] = useState('');
 	const [isAdmin, setIsAdmin] = useState(getIsAdmin());
     const [myPassword, setMyPassword] = useState('');
 	const [myEmail, setMyEmail] = useState('');
@@ -20,7 +20,7 @@ const App = () => {
     const [productQuantity, setProductQuantity] = useState("");
     const [productCategory, setProductCategory] = useState("");
     const [productPhoto, setProductPhoto] = useState("");
-	const [allCartItem, setAllCartItem] = useState("");
+	const [allCartItem, setAllCartItem] = useState([]);
 	const [userId, setUserId] = useState("");
 	const [featuredProds, setFeaturedProds] = useState([]);
 
@@ -109,7 +109,9 @@ const App = () => {
                                 productPhoto={productPhoto}
                                 setProductPhoto={setProductPhoto} 
 								isAdmin={isAdmin}
-								key={window.location.pathname}/> 
+								key={window.location.pathname}
+								allCartItem={allCartItem}
+								setAllCartItem={setAllCartItem}/> 
                         </Route>
 						<Route exact path ="/cart">
 							<Cart 

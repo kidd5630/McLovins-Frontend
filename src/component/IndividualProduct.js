@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom'
-import { BASE_URL} from '../api'
+import { BASE_URL, createCartItems, checkCartByProduct} from '../api'
 import EditProduct from './EditProduct';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 //import e from 'express';
 
 
-const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, selectedProduct, productName, productDescript, setProductName, setProductDescript, productPrice, setProductPrice, productCategory, setProductCategory, productQuantity, setProductQuantity, productPhoto, setProductPhoto}) => {
+const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, selectedProduct, setProductName, setProductDescript, setProductPrice, setProductCategory, setProductQuantity, setProductPhoto, allCartItem, setAllCartItem}) => {
     const [isActiveEdit, setActiveEdit] = useState("false");
-    const [valueQuant, setValueQuant] = useState(0)
+    const [valueQuant, setValueQuant] = useState(1)
     const ToggleClass = () => {
         setActiveEdit(!isActiveEdit);
     };
@@ -22,8 +22,7 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
         e.preventDefault()
         if(valueQuant>0){
         setValueQuant(valueQuant - 1)
-        }
-                
+        }    
     }
     const Addhandler = (e)=>{
         e.preventDefault()
@@ -31,8 +30,17 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
         setValueQuant(valueQuant + 1)}
     }
     const SubmitHandler = (e)=>{
-        e.preventDefault()
-        
+        e.preventDefault();
+        const cartId = JSON.parse(localStorage.getItem('Cart')).id
+        const userId = JSON.parse(localStorage.getItem('userId'))
+        checkCartByProduct(userToken, userId, cartId, filteredProduct.id)
+            .then(res => console.log('checkCartByProduct', res))
+        createCartItems(userToken, cartId, filteredProduct.id, valueQuant, filteredProduct.price, userId)
+            .then(res => {
+                const newArr = [...allCartItem, res]
+                setAllCartItem(newArr);
+            }) 
+            .catch(error => console.error(error))
     }
 
     return (
@@ -50,7 +58,7 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                                 SubmitHandler(e)
                             }}>
                             <button className="removeProduct" onClick={e =>Removehandler(e)}><RemoveIcon></RemoveIcon></button>
-                            <input type="number" value={valueQuant} onChange={ event=> {setValueQuant(parseInt(event.target.value))}}></input>
+                            <input type="number" min="1" value={valueQuant} onChange={ event=> {setValueQuant(parseInt(event.target.value))}}></input>
                             <button className="addProduct" onClick={e => Addhandler(e)}><AddIcon></AddIcon></button>
                             <button type="submit">Add To Cart</button>
                             </form>

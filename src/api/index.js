@@ -76,7 +76,7 @@ export async function createProduct( url, userToken, name, description, category
     }
 }
 
-export async function fetchUsersCart(id, userToken){
+export async function fetchUsersCart(usersId, userToken){
       try{
           const headers = {
             headers: {
@@ -84,7 +84,7 @@ export async function fetchUsersCart(id, userToken){
                 Authorization: `Bearer ${userToken}`,
             },
         };
-        const response = await fetch(`${BASE_URL}/users/${id}/cart`, headers)
+        const response = await fetch(`${BASE_URL}/users/${usersId}/cart`, headers)
         const results = await response.json()
         return results
     }catch(error){
@@ -93,9 +93,8 @@ export async function fetchUsersCart(id, userToken){
 }
 
 export async function fetchUsersCartItems(id, userToken){
-    console.log("here", id, userToken);
     try{    
-      const response = await fetch(`${BASE_URL}/cart/cart/${id}`, 
+      const response = await fetch(`${BASE_URL}/cart/${id}`, 
       {
         headers: {
             "Content-Type": "application/json",
@@ -109,6 +108,32 @@ export async function fetchUsersCartItems(id, userToken){
   }
 }
 
+export async function createCartItems(userToken, cartId, product_id, item_quantity, price, userId){
+    const actObj = {
+        "cartId": cartId,
+        "product_id": product_id,
+        "item_quantity": item_quantity,
+        "price": price,
+        "userId": userId
+    }
+    try{    
+      const response = await fetch(`${BASE_URL}/cart_items`, 
+      {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(
+            actObj
+        )
+    })
+      const results = await response.json()
+      return results
+  }catch(error){
+      console.error(error)
+  }
+}
 
 export async function editThisProduct( url, SelectedProduct, userToken, name, description, category, quantity, price, photo) {
     const actObj = { }
@@ -162,21 +187,24 @@ export async function fetchAllUsers(userToken){
       console.error(error)
   }
 }
-/*
-export async function fetchOrderHistory(url, selectedAct) {
-    try {
-        const response = await fetch(`${url}/activities/${selectedAct}/routines`, {
+
+export async function checkCartByProduct(userToken, userId, cartId, product_id){
+    try{
+        console.log('userToken',userToken);
+        const response = await fetch(`${BASE_URL}/cart/cart_check/${userId}/${cartId}/${product_id}`, 
+        {
             headers: {
-                'Content-Type': 'application/json',
-            },
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userToken}`,
+            }
         })
-        const data = await response.json();
-        return data
+        const results = await response.json()
+        const products = await results
+        return products
     } catch (error) {
         console.error(error);
     }
 }
-*/
 
 
 

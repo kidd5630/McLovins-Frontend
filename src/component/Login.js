@@ -9,7 +9,9 @@ import {
     BASE_URL,
     fetchLoginUser,
     fetchUsersCartItems,
-    fetchAllUsers
+    fetchAllUsers,
+    fetchUsersCart,
+
 } from '../api';
 
 // CHECK THAT PATH
@@ -91,14 +93,25 @@ const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserTok
                 console.log("results", results);
                 const token = await results.token;
                 const admin = await results.user.admin;
+                const userId = await results.user.id
+                const myUsername = await results.user.username
+
                 setUserToken(token);
                 setMyUsername(myUsername);
                 setIsAdmin(admin);
                 setUserId(userId);
+
                 localStorage.setItem('userToken', token);
                 localStorage.setItem('isAdmin', admin);
                 localStorage.setItem('myUsername', JSON.stringify(myUsername));
                 localStorage.setItem('userId', userId);
+
+                fetchUsersCart(results.user.id, token)
+                .then((cart) => {
+                    localStorage.setItem('Cart', JSON.stringify(cart));
+                })                
+                .catch(error => console.error(error))
+                
                 fetchAllUsers(token)
                 .then(
                     users => {
