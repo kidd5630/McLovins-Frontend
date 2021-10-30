@@ -109,21 +109,6 @@ export async function fetchUsersCartItems(id, userToken){
   }
 }
 
-export async function fetchUsersCartItems(id, userToken){
- try{    
-      const response = await fetch(`${BASE_URL}/cart/cart/${id}`, 
-      {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-        }
-      })
-      const results = await response.json()
-      return results
-  }catch(error){
-      console.error(error)
-  }
-}
 
 export async function editThisProduct( url, SelectedProduct, userToken, name, description, category, quantity, price, photo) {
     const actObj = { }
