@@ -26,7 +26,7 @@ const Cart = ({userToken, allProducts, allCartItem, isAdmin}) => {
                             {productsToCartItem[0].name}
                           </Link>
                         </div>
-                        <div className='Photo'>{productsToCartItem[0].photo}</div>
+                        <img className="prodPhoto"src={productsToCartItem[0].photo} alt="a picture of product" width="200" height="250" />
                         <div className='innerboxText'>{productsToCartItem[0].description}</div>
                         <div className='innerboxText'>{productsToCartItem[0].price}</div>
                       </div>
