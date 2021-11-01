@@ -206,7 +206,32 @@ export async function checkCartByProduct(userToken, userId, cartId, product_id){
     }
 }
 
-
+export async function updateItemQuantity(userToken, userId, cartItemId, item_quantity){
+    try{
+        const actObj = {
+            "cartItemId": cartItemId,
+            "item_quantity": item_quantity,
+            "userId": userId
+        }
+        console.log('actObj kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk', actObj);
+        const response = await fetch(`${BASE_URL}/cart_items/cartItemUpdate`, 
+        {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(
+                actObj
+            )
+        })
+        const results = await response.json()
+        const products = await results
+        return products
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 
 

@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom'
-import { BASE_URL, createCartItems, checkCartByProduct} from '../api'
+import { BASE_URL, createCartItems, checkCartByProduct, updateItemQuantity} from '../api'
 import EditProduct from './EditProduct';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-//import e from 'express';
 
 
 const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, selectedProduct, setProductName, setProductDescript, setProductPrice, setProductCategory, setProductQuantity, setProductPhoto, allCartItem, setAllCartItem}) => {
@@ -29,18 +28,36 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
         if(valueQuant<filteredProduct.quantity){
         setValueQuant(valueQuant + 1)}
     }
-    const SubmitHandler = (e)=>{
+    async function SubmitHandler (e) {
         e.preventDefault();
         const cartId = JSON.parse(localStorage.getItem('Cart')).id
         const userId = JSON.parse(localStorage.getItem('userId'))
-        checkCartByProduct(userToken, userId, cartId, filteredProduct.id)
-            .then(res => console.log('checkCartByProduct', res))
-        createCartItems(userToken, cartId, filteredProduct.id, valueQuant, filteredProduct.price, userId)
-            .then(res => {
-                const newArr = [...allCartItem, res]
+        try{
+            const productCheck = await checkCartByProduct(userToken, userId, cartId, filteredProduct.id)            
+            if(productCheck && productCheck.length){
+                const quantity = productCheck[0].item_quantity + valueQuant
+                const updateItem = await updateItemQuantity(userToken, userId, productCheck[0].id, quantity)
+                const updatedAllCart = allCartItem.map(
+                    (item)=>{
+                        console.log(item.product_id, filteredProduct.id);
+                        if (item.product_id === filteredProduct.id){
+                            return updateItem[0]
+                        } else {
+                            return item
+                        }
+                    }
+                )
+                setAllCartItem(updatedAllCart)
+            } else {
+                const createItem = await createCartItems(userToken, cartId, filteredProduct.id, valueQuant, filteredProduct.price, userId);
+                const newArr = [...allCartItem, createItem]
                 setAllCartItem(newArr);
-            }) 
-            .catch(error => console.error(error))
+            }
+        }
+        catch(error){
+            console.error(error)
+        }
+        
     }
 
     return (
@@ -108,3 +125,10 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
     )
 } 
 export default IndividualProduct; 
+
+
+
+
+
+
+

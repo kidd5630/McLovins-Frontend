@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register, Cart, FeaturedProducts } from './component';
 import { getCurrentUserToken, getCurrentUsername, getIsAdmin } from './auth'
-import {  fetchAllProducts,fetchUsersCart } from './api'
+import {  fetchAllProducts,fetchUsersCart, fetchUsersCartItems } from './api'
 
 
 const App = () => {
@@ -42,9 +42,21 @@ const App = () => {
 					newArr.push(allProducts[randomProd])
 				}
 				setFeaturedProds(newArr);
+				
             })
             .catch(error => console.error(error))
+		if(JSON.parse(localStorage.getItem('userId')) && userToken){
+			const userId = JSON.parse(localStorage.getItem('userId'))
+			fetchUsersCartItems(userId, userToken)
+			.then((allCartItem) => {
+				setAllCartItem(allCartItem);
+				localStorage.setItem('cartItems', JSON.stringify(allCartItem));
+			})
+			.catch(error => console.error(error))
+		
+		}
     }, []);
+
 
     return (
 
