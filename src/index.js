@@ -96,9 +96,12 @@ const App = () => {
 						<Route exact path ="/user/me">
 							<Profile 
 								myUsername={myUsername}
+								setMyUsername={setMyUsername}
 								isAdmin={isAdmin}
 								myPassword={myPassword}
+								setMyPassword={setMyPassword}
 								myEmail={myEmail}
+								setMyEmail={setMyEmail}
 								/>
 						</Route>
 						<Route exact path ="/product">

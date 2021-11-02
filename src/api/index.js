@@ -19,6 +19,36 @@ export async function fetchRegisterUser(url, username, password, email) {
         console.error(error);
     }
 }
+export async function editUser( url, userToken, userName, password,email) {
+    const actObj = { }
+    if(userName) {
+        actObj["username"] = userName;
+    }
+    if(password) {
+        actObj["password"] = password;
+    }
+    if(email) {
+        actObj["email"] = email;
+    }
+    try {
+        const response = await fetch(`${url}/user/me`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + userToken
+            },
+            body: JSON.stringify(
+                actObj
+            )
+        })
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 export async function fetchLoginUser(url, username, password) {
     try {
         const response = await fetch(`${url}/users/login`, {
@@ -37,6 +67,12 @@ export async function fetchLoginUser(url, username, password) {
         console.error(error);
     }
 }
+
+
+
+
+
+
 export async function fetchAllProducts(){
     try{
         const response = await fetch(`${BASE_URL}/product`)

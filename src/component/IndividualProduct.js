@@ -69,7 +69,7 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                             <h2 className="innerboxTextName"> {filteredProduct.name}</h2>
                             <img className="prodPhoto"src={filteredProduct.photo} alt="a picture of product" width="400" height="500" />
                             <p className="innerText"> {filteredProduct.description}</p>
-                            <p className="innerText">Price: ${filteredProduct.price}</p>
+                            <p className="innerText">Price:$ {filteredProduct.price}</p>
                             <p className="innerText">Available Quantity{filteredProduct.quantity}</p>
                             <form className="addRemoveProduct" onSubmit={(e)=>{
                                 SubmitHandler(e)
