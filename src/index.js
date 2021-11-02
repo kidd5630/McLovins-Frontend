@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register, Cart, FeaturedProducts } from './component';
+import { Profile, Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register, Cart, FeaturedProducts } from './component';
 import { getCurrentUserToken, getCurrentUsername, getIsAdmin } from './auth'
 import {  fetchAllProducts,fetchUsersCart, fetchUsersCartItems } from './api'
 
@@ -68,6 +68,7 @@ const App = () => {
 					setMyUsername={setMyUsername} 
 					setIsAdmin={setIsAdmin}
 					setUserId={setUserId}
+					setMyEmail={setMyEmail}
 					/>	
 
 				{userToken
@@ -90,6 +91,14 @@ const App = () => {
 								isAdmin={isAdmin}
 								allProducts={featuredProds}
 								setselectedProduct={setselectedProduct}
+								/>
+						</Route>
+						<Route exact path ="/user/me">
+							<Profile 
+								myUsername={myUsername}
+								isAdmin={isAdmin}
+								myPassword={myPassword}
+								myEmail={myEmail}
 								/>
 						</Route>
 						<Route exact path ="/product">
@@ -204,7 +213,10 @@ const App = () => {
 								setIsAdmin={setIsAdmin}
 								userId={userId}
 								setUserId={setUserId}
-								setAllCartItem={setAllCartItem}/>
+								setAllCartItem={setAllCartItem}
+								myEmail={myEmail}
+								setMyEmail={setMyEmail}
+								/>
 						</Route>
 						<Route exact path ="/cart">
 							<Cart 

@@ -22,3 +22,6 @@ export function getCurrentUserToken() {
     const storageUsername = JSON.parse(localStorage.getItem('isAdmin'));
     return storageUsername;
   }
+  export function removeCurrentEmail() {
+    localStorage.removeItem('email')
+  }

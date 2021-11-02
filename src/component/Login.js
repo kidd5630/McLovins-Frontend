@@ -82,7 +82,7 @@ const FooterButton = styled.div`
     color: white;
   }
 `;
-const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem}) => {
+const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem}) => {
     let history = useHistory();
     async function loginUser(event) {
         event.preventDefault();
@@ -90,21 +90,25 @@ const Login = ({setMyPassword, myPassword, setMyUsername, myUsername, setUserTok
         try {
             const results = await fetchLoginUser(BASE_URL, myUsername, myPassword);
             if(results.user) {
-                console.log("results", results);
+                console.log("log in results", results);
                 const token = await results.token;
                 const admin = await results.user.admin;
                 const userId = await results.user.id
                 const myUsername = await results.user.username
+                const email = await results.user.email
+            
 
                 setUserToken(token);
                 setMyUsername(myUsername);
                 setIsAdmin(admin);
                 setUserId(userId);
+                setMyEmail(email);
 
                 localStorage.setItem('userToken', token);
                 localStorage.setItem('isAdmin', admin);
                 localStorage.setItem('myUsername', JSON.stringify(myUsername));
                 localStorage.setItem('userId', userId);
+                localStorage.setItem('email', email);
 
                 fetchUsersCart(results.user.id, token)
                 .then((cart) => {

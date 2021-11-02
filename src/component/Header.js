@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import {removeCurrentUserToken, removeCurrentUsername, removeIsAdmin, removeUserId}
+import {removeCurrentEmail, removeCurrentUserToken, removeCurrentUsername, removeIsAdmin, removeUserId}
 from '../auth'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -20,7 +20,7 @@ const Button = styled.div`
   color: white;
   }
 `;
-const Header = ({userToken, setUserToken, setMyUsername, setIsAdmin, setUserId}) => {
+const Header = ({setMyEmail, userToken, setUserToken, setMyUsername, setIsAdmin, setUserId}) => {
     let history = useHistory()	
     return(
         <>
@@ -51,6 +51,7 @@ const Header = ({userToken, setUserToken, setMyUsername, setIsAdmin, setUserId})
                                 setMyUsername(removeCurrentUsername());
                                 setIsAdmin(removeIsAdmin());
                                 setUserId(removeUserId())
+                                setMyEmail(removeCurrentEmail());
                             history.push("/");
                             }}><LogoutIcon></LogoutIcon> LOGOUT
                             </button>
