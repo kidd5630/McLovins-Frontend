@@ -102,6 +102,7 @@ const App = () => {
 								setMyPassword={setMyPassword}
 								myEmail={myEmail}
 								setMyEmail={setMyEmail}
+								userToken={userToken}
 								/>
 						</Route>
 						<Route exact path ="/product">

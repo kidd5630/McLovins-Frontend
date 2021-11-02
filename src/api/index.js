@@ -192,7 +192,7 @@ export async function editThisProduct( url, SelectedProduct, userToken, name, de
         actObj["photo"] = photo;
     }
     try {
-        const response = await fetch(`${url}/activities/${SelectedProduct}`, {
+        const response = await fetch(`${url}/product/${SelectedProduct}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json',

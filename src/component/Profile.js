@@ -5,36 +5,11 @@ import {editUser, BASE_URL} from '../api'
 import EditProfile from './EditProfile';
 
 
-const Profile = ({myUsername, setMyUsername, isAdmin, myPassword, setMyPassword, myEmail, setMyEmail}) => {
-    const [newUser, setNewUser] = useState('');
-    const [newPass, setNewPass] = useState('');
-    const [newEmail, setNewEmail] = useState('');
+const Profile = ({myUsername, userToken, setMyUsername, isAdmin, myPassword, setMyPassword, myEmail, setMyEmail}) => {
     const [isActiveEdit, setActiveEdit] = useState("false");
     const ToggleClass = () => {
         setActiveEdit(!isActiveEdit);
     };
-
-    function resetForm() {
-        setNewUser('');
-        setNewPass('');
-        setNewEmail('');
-    }
-    async function edit(e) {
-        e.preventDefault();
-            try {
-                const results = await editUser(BASE_URL, userToken, userName, password,email);
-                if(results.id) {
-                    setMyUsername(userName);
-                    setMyPassword(password);
-                    setMyEmail(email)
-                    location.reload()
-                    // ToggleClass();
-                    resetForm();
-                }
-            } catch(error) {
-                console.error(error)
-            }
-    }
 
 return (
    <>
@@ -69,6 +44,8 @@ return (
             className={`editFeild-${isActiveEdit ? "inactive" : "active"}`}
             >
                 <EditProfile 
+                ToggleClass={ToggleClass}   
+                userToken={userToken}
                     
                 />
             </div>

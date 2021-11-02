@@ -12,7 +12,7 @@
     width: 100%;
     padding: 10px;
     position:fixed;
-}
+} 
 .backdrop{
     height: 90vh;
     display: flex;
@@ -186,10 +186,10 @@
     display: flex;
     height: auto;
     width: 100%;
-    position: fixed;
     justify-content: center;
     align-items: center;
-    position: fixed;
+    
+  
 }
 .showbox{
     height: auto;
@@ -199,6 +199,11 @@
     padding:10px;
     color: black;
     background-color: red;
+}
+.ip{
+    display: flex;
+    height: auto;
+   
 }
 .ipText {
     display: flex;

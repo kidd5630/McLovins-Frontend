@@ -65,21 +65,21 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
             <div className="ip">
                 <div className="individualContainer" key={filteredProduct.id}>
                         <div className="showbox">
-                        <div className="ipText">
-                            <h2 className="innerboxTextName"> {filteredProduct.name}</h2>
-                            <img className="prodPhoto"src={filteredProduct.photo} alt="a picture of product" width="400" height="500" />
-                            <p className="innerText"> {filteredProduct.description}</p>
-                            <p className="innerText">Price:$ {filteredProduct.price}</p>
-                            <p className="innerText">Available Quantity{filteredProduct.quantity}</p>
-                            <form className="addRemoveProduct" onSubmit={(e)=>{
-                                SubmitHandler(e)
-                            }}>
-                            <button className="removeProduct" onClick={e =>Removehandler(e)}><RemoveIcon></RemoveIcon></button>
-                            <input type="number" min="1" value={valueQuant} onChange={ event=> {setValueQuant(parseInt(event.target.value))}}></input>
-                            <button className="addProduct" onClick={e => Addhandler(e)}><AddIcon></AddIcon></button>
-                            <button type="submit">Add To Cart</button>
-                            </form>
-                        </div> 
+                            <div className="ipText">
+                                <h2 className="innerboxTextName"> {filteredProduct.name}</h2>
+                                <img className="prodPhoto"src={filteredProduct.photo} alt="a picture of product" width="300" height="400" />
+                                <p className="innerText"> {filteredProduct.description}</p>
+                                <p className="innerText">Price:$ {filteredProduct.price}</p>
+                                <p className="innerText">Available Quantity{filteredProduct.quantity}</p>
+                                <form className="addRemoveProduct" onSubmit={(e)=>{
+                                    SubmitHandler(e)
+                                }}>
+                                <button className="removeProduct" onClick={e =>Removehandler(e)}><RemoveIcon></RemoveIcon></button>
+                                <input type="number" min="1" value={valueQuant} onChange={ event=> {setValueQuant(parseInt(event.target.value))}}></input>
+                                <button className="addProduct" onClick={e => Addhandler(e)}><AddIcon></AddIcon></button>
+                                <button type="submit">Add To Cart</button>
+                                </form>
+                            </div> 
                         {isAdmin
                         ?
                         (<div>
@@ -91,7 +91,6 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                         :
                         (<div></div>)
                         }
-                        
                         {isAdmin
                         ?
                         (<div className="iaInteractiveBox">
