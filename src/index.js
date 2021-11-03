@@ -144,7 +144,9 @@ const App = () => {
 								userToken={userToken}
 								allProducts={allProducts} 
 								allCartItem={allCartItem}
-								isAdmin={isAdmin}/>
+								isAdmin={isAdmin}
+								setAllCartItem={setAllCartItem}
+								/>
 						</Route>
 					</Switch>
 				</div>)	
@@ -228,7 +230,9 @@ const App = () => {
 								userToken={userToken}
 								allProducts={allProducts} 
 								allCartItem={allCartItem}
-								isAdmin={isAdmin}/>
+								isAdmin={isAdmin}
+								setAllCartItem={setAllCartItem}
+								/>
 						</Route>
 					</Switch>
 				</div>)

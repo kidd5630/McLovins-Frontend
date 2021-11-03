@@ -249,7 +249,6 @@ export async function updateItemQuantity(userToken, userId, cartItemId, item_qua
             "item_quantity": item_quantity,
             "userId": userId
         }
-        console.log('actObj kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk', actObj);
         const response = await fetch(`${BASE_URL}/cart_items/cartItemUpdate`, 
         {
             method: "PATCH",
@@ -262,7 +261,6 @@ export async function updateItemQuantity(userToken, userId, cartItemId, item_qua
             )
         })
         const results = await response.json()
-        console.log('resultsresultsresultsresults', results);
         const products = await results
         return products
     } catch (error) {
@@ -270,7 +268,21 @@ export async function updateItemQuantity(userToken, userId, cartItemId, item_qua
     }
 }
 
-
+export async function checkByProduct(userToken, product_id){
+    try{    
+      const response = await fetch(`${BASE_URL}/product/${product_id}`, 
+      {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        }
+      })
+      const results = await response.json()
+      return results
+  }catch(error){
+      console.error(error)
+  }
+}
 
 
 

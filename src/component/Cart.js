@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import CartItem from './CartItem'
 
-const Cart = ({userToken, allProducts, allCartItem, isAdmin}) => {
+const Cart = ({userToken, allProducts, allCartItem, isAdmin, setAllCartItem}) => {
   
     return ( 
         <div>
@@ -18,7 +18,10 @@ const Cart = ({userToken, allProducts, allCartItem, isAdmin}) => {
             return (
               <CartItem
               cartItem={cartItem}
-              productsToCartItem={productsToCartItem}/>
+              productsToCartItem={productsToCartItem}
+              userToken={userToken}
+              setAllCartItem={setAllCartItem}
+              allCartItem={allCartItem}/>
             )
           })
         :

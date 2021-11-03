@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { checkByProduct, updateItemQuantity } from '../api'
 
-const CartItem = ({cartItem, productsToCartItem, allCartItem, isAdmin}) => {
+const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllCartItem}) => {
     const [valueQuant, setValueQuant] = useState(cartItem.item_quantity)
 
     const Removehandler = (e)=>{
@@ -16,31 +17,26 @@ const CartItem = ({cartItem, productsToCartItem, allCartItem, isAdmin}) => {
         e.preventDefault()
         setValueQuant(valueQuant + 1)
     }
-    
     async function SubmitHandler (e) {
         e.preventDefault();
-        const cartId = JSON.parse(localStorage.getItem('Cart')).id
+        //const cartId = JSON.parse(localStorage.getItem('Cart')).id
         const userId = JSON.parse(localStorage.getItem('userId'))
         try{
-            const productCheck = await checkCartByProduct(userToken, userId, cartId, filteredProduct.id)            
-            if(productCheck && productCheck.length){
-                const quantity = productCheck[0].item_quantity + valueQuant
-                const updateItem = await updateItemQuantity(userToken, userId, productCheck[0].id, quantity)
-                const updatedAllCart = allCartItem.map(
+            const cartItemCheck = await checkByProduct(userToken, cartItem.product_id)
+            if(valueQuant <= cartItemCheck.quantity){
+                const updateItemQuant = await updateItemQuantity(userToken, userId, cartItem.id, valueQuant)
+                const updatedAllCartQuant = allCartItem.map(
                     (item)=>{
-                        if (item.product_id === filteredProduct.id){
-                            return updateItem[0]
+                        if (item.product_id === cartItem.product_id){
+                            return updateItemQuant[0]
                         } else {
                             return item
                         }
                     }
                 )
-                console.log('updatedAllCart=====>', updatedAllCart);
-                setAllCartItem(updatedAllCart)
+                setAllCartItem(updatedAllCartQuant)
             } else {
-                const createItem = await createCartItems(userToken, cartId, filteredProduct.id, valueQuant, filteredProduct.price, userId);
-                const newArr = [...allCartItem, createItem]
-                setAllCartItem(newArr);
+                alert('aye yo bish we dont got that much')
             }
         }
         catch(error){
