@@ -3,8 +3,9 @@ import { Link, useHistory } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { checkByProduct, updateItemQuantity } from '../api'
+import DeleteCartItem from './DeleteCartItem'
 
-const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllCartItem}) => {
+const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllCartItem, updateCart, setUpdateCart, userId}) => {
     const [valueQuant, setValueQuant] = useState(cartItem.item_quantity)
 
     const Removehandler = (e)=>{
@@ -71,6 +72,15 @@ const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllC
                         <input type="number" min="1" value={valueQuant} onChange={ event=> {setValueQuant(parseInt(event.target.value))}}></input>
                         <button className="addProduct" onClick={e => Addhandler(e)}><AddIcon></AddIcon></button>
                         <button type="submit">Update</button>
+                        <DeleteCartItem
+                        userToken={userToken}
+                        updateCart={updateCart}
+                        setUpdateCart={setUpdateCart}
+                        itemToDelete={cartItem}
+                        userId={userId}
+                        allCartItem={allCartItem}
+                        setAllCartItem={setAllCartItem}
+                        />
                     </form>
                     </div>
                 </div>  

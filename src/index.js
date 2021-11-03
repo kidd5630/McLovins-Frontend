@@ -43,7 +43,6 @@ const App = () => {
 					newArr.push(allProducts[randomProd])
 				}
 				setFeaturedProds(newArr);
-				
             })
             .catch(error => console.error(error))
 		if(JSON.parse(localStorage.getItem('userId')) && userToken){
@@ -54,7 +53,9 @@ const App = () => {
 				localStorage.setItem('cartItems', JSON.stringify(allCartItem));
 			})
 			.catch(error => console.error(error))
-		
+		}
+		if(JSON.parse(localStorage.getItem('userId'))){
+			setUserId(JSON.parse(localStorage.getItem('userId')))
 		}
     }, []);
 
@@ -146,6 +147,7 @@ const App = () => {
 								allCartItem={allCartItem}
 								isAdmin={isAdmin}
 								setAllCartItem={setAllCartItem}
+								userId={userId}
 								/>
 						</Route>
 					</Switch>
@@ -232,6 +234,7 @@ const App = () => {
 								allCartItem={allCartItem}
 								isAdmin={isAdmin}
 								setAllCartItem={setAllCartItem}
+								userId={userId}
 								/>
 						</Route>
 					</Switch>

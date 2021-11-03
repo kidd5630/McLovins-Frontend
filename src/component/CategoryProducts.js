@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 const ProductsByCategory = ({CategoryProducts, setselectedProduct, productID}) => {
   return ( 
     <div className="catBox">

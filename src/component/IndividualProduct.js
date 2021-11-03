@@ -33,7 +33,6 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
         const userId = JSON.parse(localStorage.getItem('userId'))
         try{
             const productCheck = await checkCartByProduct(userToken, userId, cartId, filteredProduct.id)     
-            console.log('productCheckproductCheckproductCheckproductCheck', productCheck);       
             if(productCheck && productCheck.length){
                 const quantity = productCheck[0].item_quantity + valueQuant
                 const updateItem = await updateItemQuantity(userToken, userId, productCheck[0].id, quantity)
