@@ -20,7 +20,6 @@ const Profile = ({myUsername, userToken, setMyUsername, isAdmin, myPassword, set
                 <h1>My Profile</h1>
                 <div>
                     <div>UserName: {myUsername}</div>
-
                 </div>
                 <div>
                     <div>Email: {myEmail}</div>

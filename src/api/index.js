@@ -262,6 +262,7 @@ export async function updateItemQuantity(userToken, userId, cartItemId, item_qua
             )
         })
         const results = await response.json()
+        console.log('resultsresultsresultsresults', results);
         const products = await results
         return products
     } catch (error) {

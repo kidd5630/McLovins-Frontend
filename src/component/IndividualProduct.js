@@ -5,7 +5,6 @@ import EditProduct from './EditProduct';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-
 const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, selectedProduct, setProductName, setProductDescript, setProductPrice, setProductCategory, setProductQuantity, setProductPhoto, allCartItem, setAllCartItem}) => {
     const [isActiveEdit, setActiveEdit] = useState("false");
     const [valueQuant, setValueQuant] = useState(1)
@@ -33,13 +32,13 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
         const cartId = JSON.parse(localStorage.getItem('Cart')).id
         const userId = JSON.parse(localStorage.getItem('userId'))
         try{
-            const productCheck = await checkCartByProduct(userToken, userId, cartId, filteredProduct.id)            
+            const productCheck = await checkCartByProduct(userToken, userId, cartId, filteredProduct.id)     
+            console.log('productCheckproductCheckproductCheckproductCheck', productCheck);       
             if(productCheck && productCheck.length){
                 const quantity = productCheck[0].item_quantity + valueQuant
                 const updateItem = await updateItemQuantity(userToken, userId, productCheck[0].id, quantity)
                 const updatedAllCart = allCartItem.map(
                     (item)=>{
-                        console.log(item.product_id, filteredProduct.id);
                         if (item.product_id === filteredProduct.id){
                             return updateItem[0]
                         } else {
