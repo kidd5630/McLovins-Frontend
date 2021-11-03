@@ -107,6 +107,7 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                                         setProductCategory={setProductCategory} 
                                         setProductQuantity={setProductQuantity} 
                                         setProductPhoto={setProductPhoto}
+                                        productId={productid}
                                     />
                                 </div>
                         </div>)

@@ -172,6 +172,7 @@ export async function createCartItems(userToken, cartId, product_id, item_quanti
 }
 
 export async function editThisProduct( url, SelectedProduct, userToken, name, description, category, quantity, price, photo) {
+    console.log('editThisProduct marker', SelectedProduct, userToken, name, description, category, quantity, price, photo);
     const actObj = { }
     if(name) {
         actObj["name"] = name;

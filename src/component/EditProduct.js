@@ -3,7 +3,7 @@ import {
     editThisProduct, 
     BASE_URL
 } from '../api'
-const EditProduct = ({allProducts, setAllProducts, userToken, selectedProd, ToggleClass,  setProductName,  setProductDescript, setProductPrice,  setProductCategory,  setProductQuantity,  setProductPhoto}) => {
+const EditProduct = ({allProducts, setAllProducts, userToken, productId, ToggleClass,  setProductName,  setProductDescript, setProductPrice, setProductCategory,  setProductQuantity,  setProductPhoto}) => {
    
     const [newName, setNewName] = useState('');
     const [newDescription, setNewDescription] = useState('');
@@ -22,7 +22,7 @@ const EditProduct = ({allProducts, setAllProducts, userToken, selectedProd, Togg
     async function edit(e) {
         e.preventDefault();
             try {
-                const results = await editThisProduct(BASE_URL, selectedProd, userToken, newName, newDescription, newPrice, newCategory, newQuantity, newPhoto);
+                const results = await editThisProduct(BASE_URL, productId, userToken, newName, newDescription, newQuantity, newPrice, newCategory, newPhoto);
                 if(results.id) {
                     setProductName(results.name)
                     setProductDescript(results.description)
@@ -76,7 +76,7 @@ const EditProduct = ({allProducts, setAllProducts, userToken, selectedProd, Togg
                          step="any"
                          placeholder="Price" value={newPrice}
                          onChange={(event) => {
-                            setNewDescription(event.target.value);
+                            setNewPrice(event.target.value);
                         }}/>
                     </div>
                     <div className="editProductContent">

@@ -138,7 +138,8 @@ const App = () => {
 								isAdmin={isAdmin}
 								key={window.location.pathname}
 								allCartItem={allCartItem}
-								setAllCartItem={setAllCartItem}/> 
+								setAllCartItem={setAllCartItem}
+								/> 
                         </Route>
 						<Route exact path ="/cart">
 							<Cart 
