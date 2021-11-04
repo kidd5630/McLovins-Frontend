@@ -4,17 +4,19 @@ import { BASE_URL, createCartItems, checkCartByProduct, updateItemQuantity} from
 import EditProduct from './EditProduct';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import EditIcon from '@mui/icons-material/Edit';
+import CheckIcon from '@mui/icons-material/Check';
 
-const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, selectedProduct, setProductName, setProductDescript, setProductPrice, setProductCategory, setProductQuantity, setProductPhoto, allCartItem, setAllCartItem}) => {
+const IndividualProduct = ({setCartDisplayNumber, userToken, isAdmin, allProducts, setAllProducts, selectedProduct, setProductName, setProductDescript, setProductPrice, setProductCategory, setProductQuantity, setProductPhoto, allCartItem, setAllCartItem}) => {
     const [isActiveEdit, setActiveEdit] = useState("false");
-    const [valueQuant, setValueQuant] = useState(1)
+    const [valueQuant, setValueQuant] = useState(0);
     const ToggleClass = () => {
         setActiveEdit(!isActiveEdit);
     };
     const { productid } = useParams();
     const filteredProduct = allProducts.filter(product => {
         return parseInt(productid) == product.id
-    })[0]
+    })[0];
     
     const Removehandler = (e)=>{
         e.preventDefault()
@@ -34,6 +36,8 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
         try{
             const productCheck = await checkCartByProduct(userToken, userId, cartId, filteredProduct.id)     
             if(productCheck && productCheck.length){
+                const countNumbers=[];
+                let sum = 0;
                 const quantity = productCheck[0].item_quantity + valueQuant
                 const updateItem = await updateItemQuantity(userToken, userId, productCheck[0].id, quantity)
                 const updatedAllCart = allCartItem.map(
@@ -45,19 +49,43 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                         }
                     }
                 )
-                setAllCartItem(updatedAllCart)
+                updatedAllCart.map(
+                    (item)=>{
+                        countNumbers.push(item.item_quantity);
+                    }
+                )
+                for(let i=0; i<countNumbers.length; i++){
+                    sum += parseInt(countNumbers[i]);
+                }
+                setCartDisplayNumber(sum);
+                localStorage.setItem('cartDisplayNumb', sum)
+                setAllCartItem(updatedAllCart);
+                setValueQuant(0);
             } else {
                 const createItem = await createCartItems(userToken, cartId, filteredProduct.id, valueQuant, filteredProduct.price, userId);
                 const newArr = [...allCartItem, createItem]
                 setAllCartItem(newArr);
+
+                const countNumbers=[];
+                    let sum = 0;
+                    newArr.map(
+                        (item)=>{
+                            countNumbers.push(item.item_quantity);
+                        }
+                    )
+                    for(let i=0; i<countNumbers.length; i++){
+                        sum += parseInt(countNumbers[i]);
+                    }
+                    setCartDisplayNumber(sum);
+                    localStorage.setItem('cartDisplayNumb', sum)
             }
+
         }
         catch(error){
             console.error(error)
         }
         
     }
-
     return (
         <> {filteredProduct?
             <div className="ip">
@@ -68,14 +96,16 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                                 <img className="prodPhoto"src={filteredProduct.photo} alt="a picture of product" width="300" height="400" />
                                 <p className="innerText"> {filteredProduct.description}</p>
                                 <p className="innerText">Price:$ {filteredProduct.price}</p>
-                                <p className="innerText">Available Quantity{filteredProduct.quantity}</p>
+                                <p className="innerText">Available Quantity: {filteredProduct.quantity}</p>
                                 <form className="addRemoveProduct" onSubmit={(e)=>{
                                     SubmitHandler(e)
                                 }}>
-                                <button className="removeProduct" onClick={e =>Removehandler(e)}><RemoveIcon></RemoveIcon></button>
-                                <input type="number" min="1" value={valueQuant} onChange={ event=> {setValueQuant(parseInt(event.target.value))}}></input>
-                                <button className="addProduct" onClick={e => Addhandler(e)}><AddIcon></AddIcon></button>
-                                <button type="submit">Add To Cart</button>
+                                    <div className="quantBox"> 
+                                        <button className="removeProduct" onClick={e =>Removehandler(e)}><RemoveIcon /></button>
+                                        <input className="quantNumber"type="number" min="1" value={valueQuant} onChange={ event=> {setValueQuant(parseInt(event.target.value))}}></input>
+                                        <button className="addProduct" onClick={e => Addhandler(e)}><AddIcon /></button>
+                                        <button className="submitBtn" type="submit"><CheckIcon /></button>
+                                    </div>  
                                 </form>
                             </div> 
                         {isAdmin
@@ -83,7 +113,7 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
                         (<div>
                             <button className="edit button" 
                             onClick={ToggleClass}>
-                                Edit
+                                <EditIcon></EditIcon>
                             </button>
                         </div>)
                         :
@@ -123,10 +153,3 @@ const IndividualProduct = ({userToken, isAdmin, allProducts, setAllProducts, sel
     )
 } 
 export default IndividualProduct; 
-
-
-
-
-
-
-

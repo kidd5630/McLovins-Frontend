@@ -10,7 +10,7 @@ import './style.css'
 const App = () => {
     const [allProducts, setAllProducts]= useState([]);
     const [userToken, setUserToken] = useState(getCurrentUserToken());
-    const [myUsername, setMyUsername] = useState('');
+    const [myUsername, setMyUsername] = useState(localStorage.getItem('myUsername') ? localStorage.getItem('myUsername').slice(1,-1) : null);
 	const [isAdmin, setIsAdmin] = useState(getIsAdmin());
     const [myPassword, setMyPassword] = useState('');
 	const [myEmail, setMyEmail] = useState('');
@@ -24,6 +24,7 @@ const App = () => {
 	const [allCartItem, setAllCartItem] = useState([]);
 	const [userId, setUserId] = useState("");
 	const [featuredProds, setFeaturedProds] = useState([]);
+	const [cartDisplayNumber, setCartDisplayNumber] = useState(localStorage.getItem('cartDisplayNumb') ? localStorage.getItem('cartDisplayNumb'): null);
 
     function productID(prod_ID) {
         localStorage.removeItem('prodId');
@@ -51,6 +52,7 @@ const App = () => {
 			.then((allCartItem) => {
 				setAllCartItem(allCartItem);
 				localStorage.setItem('cartItems', JSON.stringify(allCartItem));
+				
 			})
 			.catch(error => console.error(error))
 		}
@@ -71,6 +73,8 @@ const App = () => {
 					setIsAdmin={setIsAdmin}
 					setUserId={setUserId}
 					setMyEmail={setMyEmail}
+					cartDisplayNumber={cartDisplayNumber}
+					setCartDisplayNumber={setCartDisplayNumber}
 					/>	
 
 				{userToken
@@ -139,6 +143,7 @@ const App = () => {
 								key={window.location.pathname}
 								allCartItem={allCartItem}
 								setAllCartItem={setAllCartItem}
+								setCartDisplayNumber={setCartDisplayNumber}
 								/> 
                         </Route>
 						<Route exact path ="/cart">
@@ -149,6 +154,8 @@ const App = () => {
 								isAdmin={isAdmin}
 								setAllCartItem={setAllCartItem}
 								userId={userId}
+								cartDisplayNumber={cartDisplayNumber}
+								setCartDisplayNumber={setCartDisplayNumber}
 								/>
 						</Route>
 					</Switch>
@@ -226,6 +233,8 @@ const App = () => {
 								setAllCartItem={setAllCartItem}
 								myEmail={myEmail}
 								setMyEmail={setMyEmail}
+								cartDisplayNumber={cartDisplayNumber}
+								setCartDisplayNumber={setCartDisplayNumber}
 								/>
 						</Route>
 						<Route exact path ="/cart">

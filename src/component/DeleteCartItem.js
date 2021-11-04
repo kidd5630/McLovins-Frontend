@@ -2,8 +2,6 @@ import React from 'react';
 import styled from "styled-components";
 import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import { BASE_URL } from '../api'
-
-
 const Button = styled.button`
   display: flex;
   border-radius: 6px;
@@ -18,12 +16,12 @@ const Button = styled.button`
     color: white;
   }
 `;
-const DeleteCartItem = ({ userToken, updateCart, setUpdateCart, itemToDelete, userId, allCartItem, setAllCartItem}) => {
+const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, updateCart, setUpdateCart, itemToDelete, userId, allCartItem, setAllCartItem}) => {
   const deleteHandler = async () =>{
     const actObj = {
       "cartItemId": itemToDelete.id,
       "userId": userId
-  }
+    }
     const response = await fetch(`${BASE_URL}/cart_items/${itemToDelete.id}`, {
       method: "DELETE",
       headers: {
@@ -41,7 +39,10 @@ const DeleteCartItem = ({ userToken, updateCart, setUpdateCart, itemToDelete, us
       const newCart = allCartItem.filter((cartItem)=>{
         return cartItem.id!==itemToDelete.id
       })
-        setAllCartItem(newCart);  
+      let newNumber = cartDisplayNumber-data[0].item_quantity
+      setCartDisplayNumber(newNumber)
+      localStorage.setItem('cartDisplayNumb', newNumber)
+      setAllCartItem(newCart);  
     }
   }
   return (

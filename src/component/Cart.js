@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import CartItem from './CartItem'
 
-const Cart = ({userToken, allProducts, allCartItem, isAdmin, setAllCartItem, userId}) => {
+const Cart = ({cartDisplayNumber, setCartDisplayNumber, userToken, allProducts, allCartItem, isAdmin, setAllCartItem, userId}) => {
   const [updateCart,setUpdateCart] = useState(allCartItem)
 
     return ( 
@@ -25,7 +25,9 @@ const Cart = ({userToken, allProducts, allCartItem, isAdmin, setAllCartItem, use
               allCartItem={allCartItem}
               updateCart={updateCart}
               setUpdateCart={setUpdateCart}
-              userId={userId}/>
+              userId={userId}
+              cartDisplayNumber={cartDisplayNumber}
+              setCartDisplayNumber={setCartDisplayNumber}/>
             )
           })
         :

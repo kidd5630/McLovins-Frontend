@@ -5,9 +5,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { checkByProduct, updateItemQuantity } from '../api'
 import DeleteCartItem from './DeleteCartItem'
 
-const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllCartItem, updateCart, setUpdateCart, userId}) => {
+const CartItem = ({cartDisplayNumber, setCartDisplayNumber, cartItem, productsToCartItem, allCartItem, userToken, setAllCartItem, updateCart, setUpdateCart, userId}) => {
     const [valueQuant, setValueQuant] = useState(cartItem.item_quantity)
-
     const Removehandler = (e)=>{
         e.preventDefault()
         if(valueQuant>0){
@@ -26,6 +25,8 @@ const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllC
             const cartItemCheck = await checkByProduct(userToken, cartItem.product_id)
             if(valueQuant <= cartItemCheck.quantity){
                 const updateItemQuant = await updateItemQuantity(userToken, userId, cartItem.id, valueQuant)
+                const countNumbers=[];
+                let sum = 0;
                 const updatedAllCartQuant = allCartItem.map(
                     (item)=>{
                         if (item.product_id === cartItem.product_id){
@@ -35,9 +36,19 @@ const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllC
                         }
                     }
                 )
-                setAllCartItem(updatedAllCartQuant)
+                updatedAllCartQuant.map(
+                    (item)=>{
+                        countNumbers.push(item.item_quantity);
+                    }
+                )
+                for(let i=0; i<countNumbers.length; i++){
+                    sum += parseInt(countNumbers[i]);
+                }
+                setCartDisplayNumber(sum);
+                localStorage.setItem('cartDisplayNumb', sum)
+                setAllCartItem(updatedAllCartQuant);
             } else {
-                alert('aye yo bish we dont got that much')
+                alert('Calm down!!! We only have '+ cartItemCheck.quantity+' available!')
             }
         }
         catch(error){
@@ -46,6 +57,7 @@ const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllC
         
     }
 
+  
         return (
             <div className="cartContainer" key={cartItem.id}>
             <div className="cartBody">
@@ -80,6 +92,8 @@ const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllC
                         userId={userId}
                         allCartItem={allCartItem}
                         setAllCartItem={setAllCartItem}
+                        cartDisplayNumber={cartDisplayNumber}
+                        setCartDisplayNumber={setCartDisplayNumber}
                         />
                     </form>
                     </div>

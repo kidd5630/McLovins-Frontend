@@ -14,9 +14,6 @@ import {
 
 } from '../api';
 
-// CHECK THAT PATH
-
-
 const Modal = styled.div`
   position: absolute;
   top: 0;
@@ -30,7 +27,7 @@ const Modal = styled.div`
 `;
 const Content = styled.div`
     font-family: "Akaya Telivigala";
-    width: 480px;
+    width: 400px;
     padding: 12px;
     min-height: 200px;
     border: black solid 2px;
@@ -53,28 +50,36 @@ const Form = styled.div`
 const Label = styled.label`
     color:red;
 `;
-const Input = styled.input`
+const UserInput = styled.input`
   height: 1.5rem;
   background: #ddd;
-  width: 400px;
+  width: 200px;
   padding: 8px;
   font-size: 22px;
   margin-bottom: 8px;
 `;
+const PassInput = styled.input`
+  height: 1.5rem;
+  background: #ddd;
+  width: 201px;
+  padding: 8px;
+  font-size: 22px;
+  margin-bottom: 8px;
+  margin-left: 5px;
+`;
 const Footer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
 const FooterButton = styled.div`
   margin-top: 12px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
   border-radius: 6px;
   box-shadow: 0 2px 6px -2px black;
   background-color: red;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   height: 40px;
   width: 100px;
@@ -82,7 +87,7 @@ const FooterButton = styled.div`
     color: white;
   }
 `;
-const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem}) => {
+const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem, cartDisplayNumber, setCartDisplayNumber}) => {
     let history = useHistory();
     async function loginUser(event) {
         event.preventDefault();
@@ -90,7 +95,6 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
         try {
             const results = await fetchLoginUser(BASE_URL, myUsername, myPassword);
             if(results.user) {
-                console.log("log in results", results);
                 const token = await results.token;
                 const admin = await results.user.admin;
                 const userId = await results.user.id
@@ -127,6 +131,18 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
                 .then((allCartItem) => {
                     setAllCartItem(allCartItem);
                     localStorage.setItem('cartItems', JSON.stringify(allCartItem));
+                    const countNumbers=[];
+                    let sum = 0;
+                    allCartItem.map(
+                        (item)=>{
+                            countNumbers.push(item.item_quantity);
+                        }
+                    )
+                    for(let i=0; i<countNumbers.length; i++){
+                        sum += parseInt(countNumbers[i]);
+                    }
+                    setCartDisplayNumber(sum);
+                    localStorage.setItem('cartDisplayNumb', sum);
                 })
                 .catch(error => console.error(error))
 
@@ -137,6 +153,7 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
         } catch(error) {
             console.error(error);
         } 
+
     }
     return (
         <div className="background">
@@ -148,7 +165,7 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
                                 <form className="loginForm" onSubmit={loginUser}>
                                     <div>
                                         <Label>Username:</Label>
-                                        <Input 
+                                        <UserInput 
                                             type="username" 
                                             placeholder="Username" 
                                             className="loginInput" 
@@ -157,7 +174,7 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
                                     </div>
                                     <div>
                                         <Label>Password:</Label>
-                                        <Input type="password" 
+                                        <PassInput type="password" 
                                         placeholder="Password" 
                                         className="loginInput" 
                                         onChange={(event) => {setMyPassword(event.target.value)}} 

@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import {removeCurrentEmail, removeCurrentUserToken, removeCurrentUsername, removeIsAdmin, removeUserId}
+import {removeCurrentEmail, removeCurrentUserToken, removeCurrentUsername, removeIsAdmin, removeUserId, removeCurrentCartDisplayNumb}
 from '../auth'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import styled from "styled-components";
-
 
 const Button = styled.div`
   margin-top: 12px;
@@ -20,7 +19,7 @@ const Button = styled.div`
   color: white;
   }
 `;
-const Header = ({setMyEmail, userToken, setUserToken, setMyUsername, setIsAdmin, setUserId}) => {
+const Header = ({setMyEmail, userToken, setUserToken, setMyUsername, setIsAdmin, setUserId, cartDisplayNumber,setCartDisplayNumber}) => {
     let history = useHistory()	
     return(
         <>
@@ -39,7 +38,7 @@ const Header = ({setMyEmail, userToken, setUserToken, setMyUsername, setIsAdmin,
                         <li className="navBtn">All Products</li>
                         </Link>
                         <Link to="/cart" className="link">
-                        <li className="navBtn"><ShoppingCartIcon></ShoppingCartIcon>My Cart</li>
+                        <li className="navBtn"><ShoppingCartIcon></ShoppingCartIcon> {cartDisplayNumber}</li>
                         </Link>
                         <Link to="/order_history" className="link">
                         <li className="navBtn">Order History</li>
@@ -52,6 +51,7 @@ const Header = ({setMyEmail, userToken, setUserToken, setMyUsername, setIsAdmin,
                                 setIsAdmin(removeIsAdmin());
                                 setUserId(removeUserId())
                                 setMyEmail(removeCurrentEmail());
+                                setCartDisplayNumber(removeCurrentCartDisplayNumb());
                             history.push("/");
                             }}><LogoutIcon></LogoutIcon> LOGOUT
                             </button>
@@ -88,4 +88,3 @@ const Header = ({setMyEmail, userToken, setUserToken, setMyUsername, setIsAdmin,
     ) 
 }
 export default Header;
-
