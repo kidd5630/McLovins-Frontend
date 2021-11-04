@@ -10,7 +10,7 @@ import './style.css'
 const App = () => {
     const [allProducts, setAllProducts]= useState([]);
     const [userToken, setUserToken] = useState(getCurrentUserToken());
-    const [myUsername, setMyUsername] = useState('');
+    const [myUsername, setMyUsername] = useState(localStorage.getItem('myUsername') ? localStorage.getItem('myUsername').slice(1,-1) : null);
 	const [isAdmin, setIsAdmin] = useState(getIsAdmin());
     const [myPassword, setMyPassword] = useState('');
 	const [myEmail, setMyEmail] = useState('');

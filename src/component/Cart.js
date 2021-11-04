@@ -1,13 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import CartItem from './CartItem'
 
 const Cart = ({userToken, allProducts, allCartItem, isAdmin, setAllCartItem, userId}) => {
   const [updateCart,setUpdateCart] = useState(allCartItem)
-  const totalCartPrice = allCartItem ? allCartItem.reduce( ( sum, { price } ) => sum + parseFloat(price) , 0) : 0
-  console.log('allCartItem fgsdf', allCartItem);
+  const [totalPrice, settotalPrice] = useState(0)
+  console.log('allCartItem 3=============D', allCartItem);
 
+  useEffect(() => {
 
+    let totalCartPrice = allCartItem ? allCartItem.reduce( ( sum, { price, item_quantity } ) => sum + (parseFloat(price) * parseFloat(item_quantity)), 0) : 0
+    settotalPrice(totalCartPrice)
+  }, [allCartItem]
+)
 
   return ( 
       <div>
@@ -36,7 +41,7 @@ const Cart = ({userToken, allProducts, allCartItem, isAdmin, setAllCartItem, use
         :
         "Your Cart is Empty"}
         </div>
-        <div>Total: ${totalCartPrice}</div>
+        <div>Total: ${totalPrice}</div>
         </div>
 
     )}
