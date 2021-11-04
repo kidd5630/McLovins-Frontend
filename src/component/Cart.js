@@ -4,10 +4,14 @@ import CartItem from './CartItem'
 
 const Cart = ({userToken, allProducts, allCartItem, isAdmin, setAllCartItem, userId}) => {
   const [updateCart,setUpdateCart] = useState(allCartItem)
+  const totalCartPrice = allCartItem ? allCartItem.reduce( ( sum, { price } ) => sum + parseFloat(price) , 0) : 0
+  console.log('allCartItem fgsdf', allCartItem);
 
-    return ( 
+
+
+  return ( 
+      <div>
         <div>
-    
         {allCartItem && allCartItem.length ?
         allCartItem.map(cartItem=> {
             const productsToCartItem = [];
@@ -25,14 +29,16 @@ const Cart = ({userToken, allProducts, allCartItem, isAdmin, setAllCartItem, use
               allCartItem={allCartItem}
               updateCart={updateCart}
               setUpdateCart={setUpdateCart}
-              userId={userId}/>
+              userId={userId}
+              />
             )
           })
         :
         "Your Cart is Empty"}
-       
         </div>
-         
+        <div>Total: ${totalCartPrice}</div>
+        </div>
+
     )}
 
 export default Cart;

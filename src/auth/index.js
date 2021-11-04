@@ -25,3 +25,10 @@ export function getCurrentUserToken() {
   export function removeCurrentEmail() {
     localStorage.removeItem('email')
   }
+  export function removeCurrentCartItems() {
+    localStorage.removeItem('cartItems')
+    localStorage.setItem('cartItems', [])
+  }
+  export function removeCurrentCart() {
+    localStorage.removeItem('Cart')
+  }

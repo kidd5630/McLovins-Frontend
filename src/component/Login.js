@@ -11,7 +11,8 @@ import {
     fetchUsersCartItems,
     fetchAllUsers,
     fetchUsersCart,
-
+    updateItemQuantity,
+    createCartItems
 } from '../api';
 
 // CHECK THAT PATH
@@ -82,8 +83,9 @@ const FooterButton = styled.div`
     color: white;
   }
 `;
-const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem}) => {
+const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem, allCartItem}) => {
     let history = useHistory();
+    console.log('log allCartItem', allCartItem);
     async function loginUser(event) {
         event.preventDefault();
         
@@ -123,14 +125,41 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
                     }
                 )
                 .catch(error => console.error(error))
-                fetchUsersCartItems(results.user.id, token)
-                .then((allCartItem) => {
-                    setAllCartItem(allCartItem);
-                    localStorage.setItem('cartItems', JSON.stringify(allCartItem));
-                })
-                .catch(error => console.error(error))
 
+                const fetchedUserCartItems = await fetchUsersCartItems(results.user.id, token)
+                    console.log('fetchedUserCartItems fetchedUserCartItems', fetchedUserCartItems);
+                const storageCartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
+                const getCart = localStorage.getItem('Cart') ? parseInt(JSON.parse(localStorage.getItem('Cart')).id) : []
+                console.log('getting cares', getCart);
+                    console.log('storageCartItems==>', storageCartItems);
+
+                for (let i=0; i<storageCartItems.length; i++){
+                    
+                    if(fetchedUserCartItems.filter(item =>item.product_id === storageCartItems[i].product_id).length > 0){
+                        const fetchedCartIndex = fetchedUserCartItems.findIndex(item=>item.product_id === storageCartItems[i].product_id)
+                        const updateItem = await updateItemQuantity(token, userId, fetchedUserCartItems[fetchedCartIndex].id, storageCartItems[i].item_quantity + fetchedUserCartItems[fetchedCartIndex].item_quantity)
+                        console.log('updateItem ===>', updateItem);
+                        console.log('allCartItem ====]', allCartItem);
+                        const updatedAllCart = allCartItem.map(
+                            (item)=>{
+                                if (item.product_id === storageCartItems[i].product_id){
+                                    return updateItem[0]
+                                } else {
+                                    return item
+                                }
+                            }
+                        )
+                        console.log('updatedAllCart ===>', updatedAllCart);
+                        setAllCartItem(updatedAllCart)
+                        localStorage.setItem('cartItems', JSON.stringify(updatedAllCart))
+                    } else {
+                        const createItem = await createCartItems(token, getCart, storageCartItems[i].product_id, storageCartItems[i].item_quantity, storageCartItems[i].price, userId);
+                        const newArr = [...allCartItem, createItem]
+                        setAllCartItem(newArr);
+                    }
+                }
                 history.push("/");
+
             } else {
                 alert("Your Username Or Password Is Incorrect");
             }

@@ -7,7 +7,7 @@ import DeleteCartItem from './DeleteCartItem'
 
 const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllCartItem, updateCart, setUpdateCart, userId}) => {
     const [valueQuant, setValueQuant] = useState(cartItem.item_quantity)
-
+    console.log('cartItem ====>', cartItem);
     const Removehandler = (e)=>{
         e.preventDefault()
         if(valueQuant>0){
@@ -22,10 +22,15 @@ const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllC
         e.preventDefault();
         //const cartId = JSON.parse(localStorage.getItem('Cart')).id
         const userId = JSON.parse(localStorage.getItem('userId'))
+        //if(!userToken){
+
+        //}
+
         try{
             const cartItemCheck = await checkByProduct(userToken, cartItem.product_id)
             if(valueQuant <= cartItemCheck.quantity){
                 const updateItemQuant = await updateItemQuantity(userToken, userId, cartItem.id, valueQuant)
+                
                 const updatedAllCartQuant = allCartItem.map(
                     (item)=>{
                         if (item.product_id === cartItem.product_id){
@@ -45,7 +50,7 @@ const CartItem = ({cartItem, productsToCartItem, allCartItem, userToken, setAllC
         }
         
     }
-
+    console.log('productsToCartItem', productsToCartItem);
         return (
             <div className="cartContainer" key={cartItem.id}>
             <div className="cartBody">
