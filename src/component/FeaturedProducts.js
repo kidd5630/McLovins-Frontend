@@ -4,6 +4,7 @@ import { Link} from 'react-router-dom';
 
 
 const FeaturedProducts = ({allProducts, isAdmin, setselectedProduct}) => {
+    console.log('allProducts[[[[', allProducts);
     return (
         <>
             <div className="fp">

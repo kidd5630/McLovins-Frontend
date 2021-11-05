@@ -311,6 +311,43 @@ export async function setCartInactive(userToken, userId, cartId){
     }
 }
 
+export async function createOrderHistory(userToken, userId, cartId,fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv){
+    const actObj = {
+        userId: userId, 
+        cartId: cartId,
+        fullname: fullname,
+        email: email,
+        address: address,
+        city: city,
+        state: state,
+        zip: zip,
+        cardname: cardname,
+        cardnumber:cardnumber,
+        expmonth:expmonth,
+        expyear:expyear,
+        cvv:cvv
+    };
+    console.log('actObjactObj', actObj);
+    try{    
+      const response = await fetch(`${BASE_URL}/order_history/`, 
+      {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(
+            actObj
+        )
+    })
+      const results = await response.json()
+      console.log('orderhistory resultsd', results);
+      return results
+  }catch(error){
+      console.error(error)
+  }
+}
+
 
 
 

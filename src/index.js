@@ -37,6 +37,7 @@ const App = () => {
 	useEffect(() => {
         fetchAllProducts()
             .then((allProducts) => {
+				console.log('allProductssssssssssssss', allProducts);
                 setAllProducts(allProducts);
 					const newArr = [];
 				for(let i = 0; i < 3; i++){
@@ -60,7 +61,6 @@ const App = () => {
 			setUserId(JSON.parse(localStorage.getItem('userId')))
 		}
 		if(!userToken){
-			console.log('=====l', allCartItem);
 			setAllCartItem(localStorage.setItem('cartItems', JSON.stringify(allCartItem)))			
 		}
     }, []);
@@ -79,6 +79,7 @@ const App = () => {
 					setMyEmail={setMyEmail}
 					cartDisplayNumber={cartDisplayNumber}
 					setCartDisplayNumber={setCartDisplayNumber}
+					setAllCartItem={setAllCartItem}
 					/>	
 
 				{userToken
@@ -164,6 +165,8 @@ const App = () => {
 						</Route>
 						<Route exact path = "/checkout">
 							<Checkout
+							userToken={userToken}
+							userId={userId}
 							/>
 						</Route>
 					</Switch>
@@ -260,6 +263,8 @@ const App = () => {
 						</Route>
 						<Route exact path = "/checkout">
 							<Checkout
+							userToken={userToken}
+							userId={userId}
 							/>
 						</Route>
 					</Switch>

@@ -6,13 +6,13 @@ const Cart = ({cartDisplayNumber, setCartDisplayNumber, userToken, allProducts, 
   const [updateCart,setUpdateCart] = useState(allCartItem)
   const [totalPrice, settotalPrice] = useState(0)
   console.log('allCartItem 3=============D', allCartItem);
+  //setAllCartItem(JSON.parse(localStorage.getItem('cartItems')));
 
   useEffect(() => {
-
     let totalCartPrice = allCartItem ? allCartItem.reduce( ( sum, { price, item_quantity } ) => sum + (parseFloat(price) * parseFloat(item_quantity)), 0) : 0
     settotalPrice(totalCartPrice)
-  }, [allCartItem]
-)
+    }, [allCartItem]
+  )
 
   return ( 
       <div>

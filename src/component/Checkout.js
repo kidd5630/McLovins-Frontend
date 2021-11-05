@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { setCartInactive } from '../api'
+import { setCartInactive, createOrderHistory } from '../api'
 
 
-const Checkout = ({userToken, userId, cartId}) => {
+const Checkout = ({userToken, userId}) => {
 
     const [fullname, setFullname] = useState('')
     const [email, setEmail] = useState('')
@@ -17,10 +17,14 @@ const Checkout = ({userToken, userId, cartId}) => {
     const [expyear, setExpyear] = useState('')
     const [cvv, setCvv] = useState('')
 
+    const cartId = JSON.parse(localStorage.getItem('Cart')).id
+console.log(userToken, userId, cartId);
     async function SubmitHandler (e) {
         e.preventDefault();
         setCartInactive(userToken, userId, cartId);
+        createOrderHistory(userToken, userId, cartId, fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv)
     }
+
 
     return(
         <div>

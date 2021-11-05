@@ -19,7 +19,7 @@ const Button = styled.div`
   color: white;
   }
 `;
-const Header = ({setMyEmail, userToken, setUserToken, setMyUsername, setIsAdmin, setUserId, cartDisplayNumber,setCartDisplayNumber}) => {
+const Header = ({setMyEmail, userToken, setUserToken, setMyUsername, setIsAdmin, setUserId, cartDisplayNumber,setCartDisplayNumber, setAllCartItem}) => {
     let history = useHistory()	
     return(
         <>
@@ -53,6 +53,7 @@ const Header = ({setMyEmail, userToken, setUserToken, setMyUsername, setIsAdmin,
                                 setMyEmail(removeCurrentEmail());
                                 setCartDisplayNumber(removeCurrentCartDisplayNumb());
                                 removeCurrentCartItems();
+                                setAllCartItem([]);
                                 removeCurrentCart();
                             history.push("/");
                             }}><LogoutIcon></LogoutIcon> LOGOUT
