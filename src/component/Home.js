@@ -13,7 +13,6 @@ const Home = ({userToken, myUsername, isAdmin, allProducts, setselectedProduct})
                             <h1 className="userName">{myUsername}</h1>
                         </div>    
                             <p className="slogan">Let's get to smellin' good</p>
-                        
                     </div>
                 :
                     <div className="message">

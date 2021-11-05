@@ -38,12 +38,15 @@ const App = () => {
         fetchAllProducts()
             .then((allProducts) => {
                 setAllProducts(allProducts);
-					const newArr = [];
-				for(let i = 0; i < 3; i++){
+					const arr = [];
+				for(let i = 0; i < allProducts.length; i++){
 					const randomProd = Math.floor(Math.random()*allProducts.length)
-					newArr.push(allProducts[randomProd])
+					arr.push(allProducts[randomProd])
 				}
-				setFeaturedProds(newArr);
+				const ids = arr.map(o => o.id)
+				const filtered = arr.filter(({id}, index) => !ids.includes(id, index + 1))
+				filtered.length=4;
+				setFeaturedProds(filtered);
             })
             .catch(error => console.error(error))
 		if(JSON.parse(localStorage.getItem('userId')) && userToken){
@@ -65,7 +68,6 @@ const App = () => {
 
 
     return (
-
 		<Router>
 			<div className="app">	
 				<Header 
@@ -79,7 +81,6 @@ const App = () => {
 					setCartDisplayNumber={setCartDisplayNumber}
 					setAllCartItem={setAllCartItem}
 					/>	
-
 				{userToken
 				?
 				(<div className="backdrop">
@@ -215,10 +216,12 @@ const App = () => {
                                 productQuantity={productQuantity}
                                 setProductQuantity={setProductQuantity}
                                 productPhoto={productPhoto}
-                                setProductPhoto={setProductPhoto}
+                                setProductPhoto={setProductPhoto} 
+								isAdmin={isAdmin}
 								key={window.location.pathname}
 								allCartItem={allCartItem}
 								setAllCartItem={setAllCartItem}
+								setCartDisplayNumber={setCartDisplayNumber}
 								/> 
                         </Route>
 						<Route path="/register">
@@ -257,6 +260,8 @@ const App = () => {
 								isAdmin={isAdmin}
 								setAllCartItem={setAllCartItem}
 								userId={userId}
+								cartDisplayNumber={cartDisplayNumber}
+								setCartDisplayNumber={setCartDisplayNumber}
 								/>
 						</Route>
 						<Route exact path = "/checkout">

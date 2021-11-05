@@ -74,7 +74,7 @@ const Header = ({setMyEmail, userToken, setUserToken, setMyUsername, setIsAdmin,
                         <li className="navBtn">Products</li>
                         </Link>
                         <Link to="/cart" className="link">
-                        <li className="navBtn"><ShoppingCartIcon></ShoppingCartIcon>Cart</li>
+                        <li className="navBtn"><ShoppingCartIcon></ShoppingCartIcon> {cartDisplayNumber}</li>
                         </Link>
                         <Link to="/login" className="link">
                         <li className="navBtn"> LOGIN</li>
