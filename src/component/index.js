@@ -10,5 +10,6 @@ export { default as Cart } from './Cart';
 export { default as FeaturedProducts } from './FeaturedProducts';
 export { default as Profile } from './Profile';
 export { default as DeleteCartItem } from './DeleteCartItem';
+export { default as Checkout } from './Checkout';
 
 

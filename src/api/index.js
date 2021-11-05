@@ -287,6 +287,29 @@ export async function checkByProduct(userToken, product_id){
   }
 }
 
+export async function setCartInactive(userToken, userId, cartId){
+    try{
+        const actObj = {
+            "userId": userId
+        }
+        const response = await fetch(`${BASE_URL}/cart/cartInactive/${cartId}`, 
+        {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(
+                actObj
+            )
+        })
+        const results = await response.json()
+        const products = await results
+        return products
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 
 
