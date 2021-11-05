@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
 
 const IndividualProduct = ({setCartDisplayNumber, userToken, isAdmin, allProducts, setAllProducts, selectedProduct, setProductName, setProductDescript, setProductPrice, setProductCategory, setProductQuantity, setProductPhoto, allCartItem, setAllCartItem}) => {
+    console.log('=====>', allCartItem);
     const [isActiveEdit, setActiveEdit] = useState("false");
     const [valueQuant, setValueQuant] = useState(0);
     const ToggleClass = () => {
@@ -31,12 +32,24 @@ const IndividualProduct = ({setCartDisplayNumber, userToken, isAdmin, allProduct
     }
     async function SubmitHandler (e) {
         e.preventDefault();
-        const cartId = JSON.parse(localStorage.getItem('Cart')).id
+        const cartId = JSON.parse(localStorage.getItem('Cart')) ? JSON.parse(localStorage.getItem('Cart')).id : null
         const userId = JSON.parse(localStorage.getItem('userId'))
-        try{
+if(!userToken){
+            const checkLocalStorageCart = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
+            if(checkLocalStorageCart.filter(item=>item.product_id === filteredProduct.id).length > 0){
+                const cartIndex = checkLocalStorageCart.findIndex((obj=>obj.product_id === filteredProduct.id))
+                checkLocalStorageCart[cartIndex].item_quantity += valueQuant
+                localStorage.setItem('cartItems', JSON.stringify(checkLocalStorageCart));
+            } else {
+                const productItem = { product_id:filteredProduct.id, item_quantity:valueQuant, price:filteredProduct.price, };
+                checkLocalStorageCart.push(productItem);
+                localStorage.setItem('cartItems', JSON.stringify(checkLocalStorageCart));
+            }
+        } else {
+ try{
             const productCheck = await checkCartByProduct(userToken, userId, cartId, filteredProduct.id)     
             if(productCheck && productCheck.length){
-                const countNumbers=[];
+ const countNumbers=[];
                 let sum = 0;
                 const quantity = productCheck[0].item_quantity + valueQuant
                 const updateItem = await updateItemQuantity(userToken, userId, productCheck[0].id, quantity)
@@ -84,8 +97,8 @@ const IndividualProduct = ({setCartDisplayNumber, userToken, isAdmin, allProduct
         catch(error){
             console.error(error)
         }
-        
-    }
+}
+}
     return (
         <> {filteredProduct?
             <div className="ip">

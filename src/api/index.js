@@ -227,7 +227,6 @@ export async function fetchAllUsers(userToken){
 
 export async function checkCartByProduct(userToken, userId, cartId, product_id){
     try{
-        console.log('userToken',userToken);
         const response = await fetch(`${BASE_URL}/cart/cart_check/${userId}/${cartId}/${product_id}`, 
         {
             headers: {
@@ -244,12 +243,14 @@ export async function checkCartByProduct(userToken, userId, cartId, product_id){
 }
 
 export async function updateItemQuantity(userToken, userId, cartItemId, item_quantity){
+    console.log('updateItemQuantity function', userId, cartItemId, item_quantity);
     try{
         const actObj = {
             "cartItemId": cartItemId,
             "item_quantity": item_quantity,
             "userId": userId
         }
+        console.log('updateItemQuantity actObj', actObj);
         const response = await fetch(`${BASE_URL}/cart_items/cartItemUpdate`, 
         {
             method: "PATCH",
@@ -263,6 +264,7 @@ export async function updateItemQuantity(userToken, userId, cartItemId, item_qua
         })
         const results = await response.json()
         const products = await results
+        console.log('updateItemQuantity products', products);
         return products
     } catch (error) {
         console.error(error);

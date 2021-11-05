@@ -59,6 +59,10 @@ const App = () => {
 		if(JSON.parse(localStorage.getItem('userId'))){
 			setUserId(JSON.parse(localStorage.getItem('userId')))
 		}
+		if(!userToken){
+			console.log('=====l', allCartItem);
+			setAllCartItem(localStorage.setItem('cartItems', JSON.stringify(allCartItem)))			
+		}
     }, []);
 
 
@@ -208,6 +212,8 @@ const App = () => {
                                 productPhoto={productPhoto}
                                 setProductPhoto={setProductPhoto}
 								key={window.location.pathname}
+								allCartItem={allCartItem}
+								setAllCartItem={setAllCartItem}
 								/> 
                         </Route>
 						<Route path="/register">
@@ -235,6 +241,7 @@ const App = () => {
 								setMyEmail={setMyEmail}
 								cartDisplayNumber={cartDisplayNumber}
 								setCartDisplayNumber={setCartDisplayNumber}
+								allCartItem={allCartItem}
 								/>
 						</Route>
 						<Route exact path ="/cart">

@@ -28,3 +28,10 @@ export function getCurrentUserToken() {
   export function removeCurrentCartDisplayNumb() {
     localStorage.removeItem('cartDisplayNumb')
   }
+  export function removeCurrentCartItems() {
+    localStorage.removeItem('cartItems')
+    localStorage.setItem('cartItems', [])
+  }
+  export function removeCurrentCart() {
+    localStorage.removeItem('Cart')
+  }
