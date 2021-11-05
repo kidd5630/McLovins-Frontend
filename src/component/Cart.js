@@ -13,7 +13,6 @@ const isitanarray = Array.isArray(allCartItem)
     settotalPrice(totalCartPrice)
     }, [allCartItem]
   )
-
     
   return ( 
       <div>
@@ -45,6 +44,9 @@ const isitanarray = Array.isArray(allCartItem)
         "Your Cart is Empty"}
         </div>
         <div>Total: $ {totalPrice}</div>
+        <Link to="/checkout" className="link">
+          <li className="navBtn">Checkout</li>
+        </Link>
         </div>
 
     )}

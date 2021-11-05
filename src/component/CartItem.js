@@ -49,7 +49,7 @@ const CartItem = ({cartDisplayNumber, setCartDisplayNumber, cartItem, productsTo
                 )
 
                 setAllCartItem(updatecartitems)
-                
+                localStorage.setItem('cartItems', JSON.stringify(updatecartitems))
 
                 }else{
                   alert('Calm down!!! We only have '+ cartItemCheck.quantity+' available!')

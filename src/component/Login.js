@@ -99,13 +99,14 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
         
         try {
             const results = await fetchLoginUser(BASE_URL, myUsername, myPassword);
+            console.log('resultsresultsresults', results);
             if(results.user) {
                 const token = await results.token;
                 const admin = await results.user.admin;
                 const userId = await results.user.id
                 const myUsername = await results.user.username
                 const email = await results.user.email
-            
+                
 
                 setUserToken(token);
                 setMyUsername(myUsername);

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { setCartInactive, createOrderHistory } from '../api'
+import { setCartInactive, createOrderHistory, createNewCart, checkAnonymousUser, createCartItems } from '../api'
 
 
 const Checkout = ({userToken, userId}) => {
@@ -17,14 +17,29 @@ const Checkout = ({userToken, userId}) => {
     const [expyear, setExpyear] = useState('')
     const [cvv, setCvv] = useState('')
 
-    const cartId = JSON.parse(localStorage.getItem('Cart')).id
-console.log(userToken, userId, cartId);
-    async function SubmitHandler (e) {
-        e.preventDefault();
-        setCartInactive(userToken, userId, cartId);
-        createOrderHistory(userToken, userId, cartId, fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv)
+    async function nonUserCheckout(userId){
+            const checkoutAnon = await checkAnonymousUser(fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv);
+            const newCart = await createNewCart(checkoutAnon.token, checkoutAnon.userId, email, address, city, state, zip);
+            const storageCartItems = JSON.parse(localStorage.getItem('cartItems'))
+            for(let i=0; i<storageCartItems.length; i++){
+                const createItem = await createCartItems(checkoutAnon.token, newCart.id, storageCartItems[i].product_id, storageCartItems[i].item_quantity, storageCartItems[i].price, checkoutAnon.userId);
+            }
+            const setInactive = await setCartInactive(checkoutAnon.token, checkoutAnon.userId, newCart.id);
+            const createOH = await createOrderHistory(checkoutAnon.token, checkoutAnon.userId, newCart.id, fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv);
     }
 
+    const cartId = localStorage.getItem('Cart') ? JSON.parse(localStorage.getItem('Cart')).id : null
+    async function SubmitHandler (e) {
+        e.preventDefault();
+        if(!userToken){
+            nonUserCheckout();
+        } else {
+            setCartInactive(userToken, userId, cartId);
+            createOrderHistory(userToken, userId, cartId, fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv);
+            const newCart = await createNewCart(userToken, userId, email, address, city, state, zip);
+            localStorage.setItem('Cart', JSON.stringify(newCart));
+        }
+    }
 
     return(
         <div>

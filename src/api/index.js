@@ -68,11 +68,6 @@ export async function fetchLoginUser(url, username, password) {
     }
 }
 
-
-
-
-
-
 export async function fetchAllProducts(){
     try{
         const response = await fetch(`${BASE_URL}/product`)
@@ -305,6 +300,7 @@ export async function setCartInactive(userToken, userId, cartId){
         })
         const results = await response.json()
         const products = await results
+        console.log('inactive', products);
         return products
     } catch (error) {
         console.error(error);
@@ -327,7 +323,6 @@ export async function createOrderHistory(userToken, userId, cartId,fullname , em
         expyear:expyear,
         cvv:cvv
     };
-    console.log('actObjactObj', actObj);
     try{    
       const response = await fetch(`${BASE_URL}/order_history/`, 
       {
@@ -341,16 +336,75 @@ export async function createOrderHistory(userToken, userId, cartId,fullname , em
         )
     })
       const results = await response.json()
-      console.log('orderhistory resultsd', results);
       return results
   }catch(error){
       console.error(error)
   }
 }
 
+export async function createNewCart(userToken, userId, email, street, city, state, zip){
+    const actObj = {
+        userId: userId, 
+        email: email,
+        street: street,
+        city: city,
+        state: state,
+        zip: zip
+    };
+    console.log('actObjactObj', actObj);
+    console.log('userTokenuserTokenuserToken', userToken);
+    try{    
+      const response = await fetch(`${BASE_URL}/cart/`, 
+      {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(
+            actObj
+        )
+    })
+      const results = await response.json()
+      console.log('createNewCart resultsd', results);
+      return results
+  }catch(error){
+      console.error(error)
+  }
+}
 
-
-
+export async function checkAnonymousUser( fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv){
+    const actObj = {
+        fullname: fullname,
+        email: email,
+        address: address,
+        city: city,
+        state: state,
+        zip: zip,
+        cardname: cardname,
+        cardnumber:cardnumber,
+        expmonth:expmonth,
+        expyear:expyear,
+        cvv:cvv
+    };
+    try{    
+      const response = await fetch(`${BASE_URL}/users/anonymouslogin/`, 
+      {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+            actObj
+        )
+    })
+      const results = await response.json()
+      console.log('anonymous login', results );
+      return results
+  }catch(error){
+      console.error(error)
+  }
+}
 
 
 
