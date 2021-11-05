@@ -37,7 +37,7 @@ const App = () => {
 	useEffect(() => {
         fetchAllProducts()
             .then((allProducts) => {
-				console.log('allProductssssssssssssss', allProducts);
+				console.log(allProducts,"JUICE?")
                 setAllProducts(allProducts);
 					const newArr = [];
 				for(let i = 0; i < 3; i++){
@@ -61,7 +61,7 @@ const App = () => {
 			setUserId(JSON.parse(localStorage.getItem('userId')))
 		}
 		if(!userToken){
-			setAllCartItem(localStorage.setItem('cartItems', JSON.stringify(allCartItem)))			
+			setAllCartItem(JSON.parse(localStorage.getItem('cartItems')))			
 		}
     }, []);
 

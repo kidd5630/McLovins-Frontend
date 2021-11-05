@@ -277,7 +277,7 @@ export async function checkByProduct(userToken, product_id){
       {
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
+            
         }
       })
       const results = await response.json()

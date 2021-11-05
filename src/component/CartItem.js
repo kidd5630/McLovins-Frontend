@@ -28,7 +28,34 @@ const CartItem = ({cartDisplayNumber, setCartDisplayNumber, cartItem, productsTo
 
         try{
             const cartItemCheck = await checkByProduct(userToken, cartItem.product_id)
-            if(valueQuant <= cartItemCheck.quantity){
+            if(!userToken){
+                if(valueQuant <= cartItemCheck.quantity){
+
+                console.log(allCartItem,"THIS THE ONE")
+                const theIndex = allCartItem.findIndex((obj=> obj.product_id === cartItem.product_id))
+                allCartItem[theIndex].item_quantity = valueQuant
+                console.log(allCartItem,"updated?")
+                const updatecartitems = allCartItem.map((item, idx)=>{
+                    if(idx===theIndex){
+
+                        item.item_quantity =valueQuant
+                        return item
+                    }else{
+                        return item
+                    }
+
+
+                }
+                )
+
+                setAllCartItem(updatecartitems)
+                
+
+                }else{
+                  alert('Calm down!!! We only have '+ cartItemCheck.quantity+' available!')
+                }
+            }
+            else{ if(valueQuant <= cartItemCheck.quantity){
                 const updateItemQuant = await updateItemQuantity(userToken, userId, cartItem.id, valueQuant)
                 const countNumbers=[];
                 let sum = 0;
@@ -52,15 +79,18 @@ const CartItem = ({cartDisplayNumber, setCartDisplayNumber, cartItem, productsTo
                 setCartDisplayNumber(sum);
                 localStorage.setItem('cartDisplayNumb', sum)
                 setAllCartItem(updatedAllCartQuant);
+                localStorage.setItem('cartItems', JSON.stringify(updatedAllCartQuant))
             } else {
                 alert('Calm down!!! We only have '+ cartItemCheck.quantity+' available!')
             }
+        }
         }
         catch(error){
             console.error(error)
         }
         
     }
+    const productlength = productsToCartItem.length>0
     console.log('productsToCartItem', productsToCartItem);
         return (
             <div className="cartContainer" key={cartItem.id}>
@@ -73,14 +103,14 @@ const CartItem = ({cartDisplayNumber, setCartDisplayNumber, cartItem, productsTo
                         cartID(cartItem.id)
                         setselectedcart(cartItem.id)
                         }}>
-                        <Link to={`/cart/${productsToCartItem[0].id}`} className="cartLink">
-                        {productsToCartItem[0].name}
+                        <Link to={`/cart/${productlength? productsToCartItem[0].id:1}`} className="cartLink">
+                        {productlength? productsToCartItem[0].name:1}
                         </Link>
                     </div>
-                    <img className="prodPhoto"src={productsToCartItem[0].photo} alt="a picture of product" width="200" height="250" />
-                    <div className='innerboxText'>{productsToCartItem[0].description}</div>
-                    <div className='innerboxText'>{productsToCartItem[0].price}</div>
-                    <div className='innerboxText'>{cartItem.item_quantity}</div>
+                    <img className="prodPhoto"src={productlength?productsToCartItem[0].photo:''} alt="a picture of product" width="200" height="250" />
+                    <div className='innerboxText'>{productlength?productsToCartItem[0].description:''}</div>
+                    <div className='innerboxText'>{productlength?productsToCartItem[0].price:''}</div>
+                    <div className='innerboxText'>{productlength?cartItem.item_quantity:''}</div>
                     <form className="addRemoveProduct" onSubmit={(e)=>{
                             SubmitHandler(e)
                         }}>

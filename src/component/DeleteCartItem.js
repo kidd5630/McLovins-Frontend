@@ -17,11 +17,23 @@ const Button = styled.button`
   }
 `;
 const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, updateCart, setUpdateCart, itemToDelete, userId, allCartItem, setAllCartItem}) => {
+
+  
+  
   const deleteHandler = async () =>{
     const actObj = {
       "cartItemId": itemToDelete.id,
       "userId": userId
     }
+
+    if(!userToken){
+      const newCart = allCartItem.filter((cartItem)=>{
+        return cartItem.product_id!==itemToDelete.product_id
+      })
+    
+      localStorage.setItem('cartItems', JSON.stringify(newCart))
+      setAllCartItem(newCart);  
+    } else{
     const response = await fetch(`${BASE_URL}/cart_items/${itemToDelete.id}`, {
       method: "DELETE",
       headers: {
@@ -39,12 +51,13 @@ const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, upda
       const newCart = allCartItem.filter((cartItem)=>{
         return cartItem.id!==itemToDelete.id
       })
-      let newNumber = cartDisplayNumber-data[0].item_quantity
-      setCartDisplayNumber(newNumber)
-      localStorage.setItem('cartDisplayNumb', newNumber)
+      // let newNumber = cartDisplayNumber-data[0].item_quantity
+      // setCartDisplayNumber(newNumber)
+      // localStorage.setItem('cartDisplayNumb', newNumber)
+    
       setAllCartItem(newCart);  
     }
-  }
+  }}
   return (
     <div>
       <Button

@@ -5,22 +5,24 @@ import CartItem from './CartItem'
 const Cart = ({cartDisplayNumber, setCartDisplayNumber, userToken, allProducts, allCartItem, isAdmin, setAllCartItem, userId}) => {
   const [updateCart,setUpdateCart] = useState(allCartItem)
   const [totalPrice, settotalPrice] = useState(0)
-  console.log('allCartItem 3=============D', allCartItem);
-  //setAllCartItem(JSON.parse(localStorage.getItem('cartItems')));
-
+  
+const isitanarray = Array.isArray(allCartItem)
   useEffect(() => {
-    let totalCartPrice = allCartItem ? allCartItem.reduce( ( sum, { price, item_quantity } ) => sum + (parseFloat(price) * parseFloat(item_quantity)), 0) : 0
+    const isitanarray1 = Array.isArray(allCartItem)
+    let totalCartPrice = isitanarray1 ? allCartItem.reduce( ( sum, { price, item_quantity } ) => sum + (parseFloat(price) * parseFloat(item_quantity)), 0) : 0
     settotalPrice(totalCartPrice)
     }, [allCartItem]
   )
 
+    
   return ( 
       <div>
         <div>
-        {allCartItem && allCartItem.length ?
+        {isitanarray ?
         allCartItem.map(cartItem=> {
             const productsToCartItem = [];
             for (let i=0; i<allProducts.length; i++){
+              
               if (allProducts[i].id == cartItem.product_id){
                 productsToCartItem.push(allProducts[i])
               }

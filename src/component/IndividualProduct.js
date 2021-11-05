@@ -35,11 +35,13 @@ const IndividualProduct = ({setCartDisplayNumber, userToken, isAdmin, allProduct
         const cartId = JSON.parse(localStorage.getItem('Cart')) ? JSON.parse(localStorage.getItem('Cart')).id : null
         const userId = JSON.parse(localStorage.getItem('userId'))
     if(!userToken){
+
             const checkLocalStorageCart = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
             if(checkLocalStorageCart.filter(item=>item.product_id === filteredProduct.id).length > 0){
                 const cartIndex = checkLocalStorageCart.findIndex((obj=>obj.product_id === filteredProduct.id))
                 checkLocalStorageCart[cartIndex].item_quantity += valueQuant
                 localStorage.setItem('cartItems', JSON.stringify(checkLocalStorageCart));
+                
                 setAllCartItem(checkLocalStorageCart)
 
             } else {
@@ -47,13 +49,16 @@ const IndividualProduct = ({setCartDisplayNumber, userToken, isAdmin, allProduct
                 checkLocalStorageCart.push(productItem);
                 localStorage.setItem('cartItems', JSON.stringify(checkLocalStorageCart));
                 setAllCartItem(checkLocalStorageCart)
+
             }
-        } else {
+        }
+     else {console.log('here?')
             try{
             const productCheck = await checkCartByProduct(userToken, userId, cartId, filteredProduct.id)     
             if(productCheck && productCheck.length){
                 const countNumbers=[];
                 let sum = 0;
+        
                 const quantity = productCheck[0].item_quantity + valueQuant
                 const updateItem = await updateItemQuantity(userToken, userId, productCheck[0].id, quantity)
                 const updatedAllCart = allCartItem.map(
@@ -81,7 +86,8 @@ const IndividualProduct = ({setCartDisplayNumber, userToken, isAdmin, allProduct
                 const createItem = await createCartItems(userToken, cartId, filteredProduct.id, valueQuant, filteredProduct.price, userId);
                 const newArr = [...allCartItem, createItem]
                 setAllCartItem(newArr);
-
+    
+                localStorage.setItem('cartItems', JSON.stringify(newArr))
                 const countNumbers=[];
                     let sum = 0;
                     newArr.map(

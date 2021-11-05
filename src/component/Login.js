@@ -90,6 +90,10 @@ const FooterButton = styled.div`
 `;
 const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem, cartDisplayNumber, setCartDisplayNumber, allCartItem}) => {
     let history = useHistory();
+
+
+
+
     async function loginUser(event) {
         event.preventDefault();
         
@@ -128,36 +132,43 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
                     }
                 )
                 .catch(error => console.error(error))
-                fetchUsersCartItems(results.user.id, token)
-                .then((allCartItem) => {
-                    setAllCartItem(allCartItem);
-                    localStorage.setItem('cartItems', JSON.stringify(allCartItem));
-                    const countNumbers=[];
-                    let sum = 0;
-                    allCartItem.map(
-                        (item)=>{
-                            countNumbers.push(item.item_quantity);
-                        }
-                    )
-                    for(let i=0; i<countNumbers.length; i++){
-                        sum += parseInt(countNumbers[i]);
-                    }
-                    setCartDisplayNumber(sum);
-                    localStorage.setItem('cartDisplayNumb', sum);
-                })
-                .catch(error => console.error(error))
+                // fetchUsersCartItems(results.user.id, token)
+                // .then((allCartItem) => {
+                //     console.log(allCartItem, "loggin")
+                //     setAllCartItem(allCartItem);
+                //     localStorage.setItem('cartItems', JSON.stringify(allCartItem));
+                //     const countNumbers=[];
+                //     let sum = 0;
+                //     allCartItem.map(
+                //         (item)=>{
+                //             countNumbers.push(item.item_quantity);
+                //         }
+                //     )
+                //     for(let i=0; i<countNumbers.length; i++){
+                //         sum += parseInt(countNumbers[i]);
+                //     }
+                //     setCartDisplayNumber(sum);
+                //     localStorage.setItem('cartDisplayNumb', sum);
+                // })
+                // .catch(error => console.error(error))
 
                 const fetchedUserCartItems = await fetchUsersCartItems(results.user.id, token)
+                setAllCartItem(fetchedUserCartItems)
+                
                 const storageCartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
                 const getCart = localStorage.getItem('Cart') ? parseInt(JSON.parse(localStorage.getItem('Cart')).id) : []
+                localStorage.setItem('cartItems', JSON.stringify(fetchedUserCartItems))
+                console.log(allCartItem,"the beginning of the end")
+
 
                 for (let i=0; i<storageCartItems.length; i++){
-                    
+    
                     if(fetchedUserCartItems.filter(item =>item.product_id === storageCartItems[i].product_id).length > 0){
                         const fetchedCartIndex = fetchedUserCartItems.findIndex(item=>item.product_id === storageCartItems[i].product_id)
                         const updateItem = await updateItemQuantity(token, userId, fetchedUserCartItems[fetchedCartIndex].id, storageCartItems[i].item_quantity + fetchedUserCartItems[fetchedCartIndex].item_quantity)
-                        const updatedAllCart = allCartItem.map(
+                        const updatedAllCart = fetchedUserCartItems.map(
                             (item)=>{
+                                console.log(item,"item")
                                 if (item.product_id === storageCartItems[i].product_id){
                                     return updateItem[0]
                                 } else {
@@ -165,12 +176,15 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
                                 }
                             }
                         )
+                     
                         setAllCartItem(updatedAllCart)
                         localStorage.setItem('cartItems', JSON.stringify(updatedAllCart))
                     } else {
+                        
                         const createItem = await createCartItems(token, getCart, storageCartItems[i].product_id, storageCartItems[i].item_quantity, storageCartItems[i].price, userId);
-                        const newArr = [...allCartItem, createItem]
+                        const newArr = [...fetchedUserCartItems, createItem]
                         setAllCartItem(newArr);
+                        localStorage.setItem('cartItems', JSON.stringify(newArr))
                     }
                 }
                 history.push("/");
