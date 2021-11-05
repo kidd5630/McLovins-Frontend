@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 * { 
-	margin:0;
-	padding: 2px;
-	box-sizing: border-box;
+    margin:0;
+    padding: 2px;
+    box-sizing: border-box;
 }
 .app{
     display: flex;
@@ -24,13 +24,18 @@
     font-family: "Akaya Telivigala";
     
 }
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    align-content: space-evenly;
+}
 .header {
     display: flex;
-	justify-content: space-between;
+    justify-content: space-between;
     align-items: baseline;
 }
 .shopName{
-	display: inline-flex;
+    display: inline-flex;
     padding-right: 20px;
     font-family: "Akaya Telivigala";
     font-size: xx-large;
@@ -39,7 +44,7 @@
     display: inline;
     font-family: "Akaya Telivigala";
     font-size: x-large;
-	color: black;
+    color: black;
 }
 .navSection{
     display: flex;
@@ -50,7 +55,7 @@
     text-decoration: black underline;
 }
 .prodLink{
-	color: black;
+    color: black;
 }
 .innerbox{
     display: flex;
@@ -223,6 +228,24 @@
 .innerText{
     padding-bottom: 10px;
     padding-top: 10px;
+}
+.submitBtn:active{
+    background-color: green;
+}
+.quantNumber{
+    display: flex;
+    justify-content: center;
+    width: 45px;
+    height: 35px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+.quantBox{
+    display:flex;
+    align-items: center;
 }
 
 

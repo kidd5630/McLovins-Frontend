@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { Link, Redirect } from "react-router-dom";
@@ -23,7 +22,7 @@ const Modal = styled.div`
 `;
 const Content = styled.div`
   font-family: "Akaya Telivigala";
-  width: 480px;
+  width: 400px;
   padding: 12px;
   min-height: 200px;
   border: black solid 2px;
@@ -53,6 +52,41 @@ width: 400px;
 padding: 8px;
 font-size: 22px;
 margin-bottom: 8px;
+`;
+const UserInput = styled.input`
+  height: 1.5rem;
+  background: #ddd;
+  width: 200px;
+  padding: 8px;
+  font-size: 22px;
+  margin-bottom: 8px;
+`;
+const EmailInput = styled.input`
+  height: 1.5rem;
+  background: #ddd;
+  width: 200px;
+  padding: 8px;
+  font-size: 22px;
+  margin-bottom: 8px;
+  margin-left: 29px;
+`;
+const PassInput = styled.input`
+  height: 1.5rem;
+  background: #ddd;
+  width: 201px;
+  padding: 8px;
+  font-size: 22px;
+  margin-bottom: 8px;
+  margin-left: 5px;
+`;
+const ConfirmInput = styled.input`
+  height: 1.5rem;
+  background: #ddd;
+  width: 201px;
+  padding: 8px;
+  font-size: 22px;
+  margin-bottom: 8px;
+  margin-left: 13px;
 `;
 const Footer = styled.div`
   display: flex;
@@ -100,7 +134,7 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                     localStorage.setItem('myUsername', JSON.stringify(myUsername));
                     localStorage.setItem('myEmail', JSON.stringify(myEmail));
                     history.push("/");
-                    alert("Good News, You're Registered! Log In To Get Started.")
+                    alert("Good News, You're Registered!")
                     location.reload();
                 } else {
                 }
@@ -118,7 +152,7 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                         <form className="registerForm"onSubmit={registerUser}>
                         <div>
                             <Label>Username:</Label>
-                            <Input type="username" 
+                            <UserInput type="username" 
                                 placeholder="Username" 
                                 className="registerInput"
                                 onChange={(event) => {setMyUsername(event.target.value)}} 
@@ -126,7 +160,7 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                         </div>
                         <div>
                             <Label>Email:</Label>
-                            <Input type="email" 
+                            <EmailInput type="email" 
                                 placeholder="Email" 
                                 className="registerInput"
                                 onChange={(event) => {setMyEmail(event.target.value)}} 
@@ -134,7 +168,7 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                         </div>
                         <div>
                             <Label>Password:</Label>
-                            <Input type="password" 
+                            <PassInput type="password" 
                                 placeholder="Password" 
                                 className="registerInput"
                                 onChange={(event) => {setMyPassword(event.target.value)}} 
@@ -142,7 +176,7 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                         </div>
                         <div>
                             <Label>Confirm:</Label>
-                            <Input type="password" 
+                            <ConfirmInput type="password" 
                                 placeholder="Confirm Password" 
                             className="registerInput"
                             onChange={(event) => {setConfirmMyPassword(event.target.value)}} 

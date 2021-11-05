@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import CartItem from './CartItem'
 
-const Cart = ({userToken, allProducts, allCartItem, isAdmin, setAllCartItem, userId}) => {
+const Cart = ({cartDisplayNumber, setCartDisplayNumber, userToken, allProducts, allCartItem, isAdmin, setAllCartItem, userId}) => {
   const [updateCart,setUpdateCart] = useState(allCartItem)
   const [totalPrice, settotalPrice] = useState(0)
   console.log('allCartItem 3=============D', allCartItem);
@@ -35,13 +35,14 @@ const Cart = ({userToken, allProducts, allCartItem, isAdmin, setAllCartItem, use
               updateCart={updateCart}
               setUpdateCart={setUpdateCart}
               userId={userId}
-              />
+              cartDisplayNumber={cartDisplayNumber}
+              setCartDisplayNumber={setCartDisplayNumber}/>
             )
           })
         :
         "Your Cart is Empty"}
         </div>
-        <div>Total: ${totalPrice}</div>
+        <div>Total: $ {totalPrice}</div>
         </div>
 
     )}

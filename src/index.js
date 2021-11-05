@@ -24,6 +24,7 @@ const App = () => {
 	const [allCartItem, setAllCartItem] = useState([]);
 	const [userId, setUserId] = useState("");
 	const [featuredProds, setFeaturedProds] = useState([]);
+	const [cartDisplayNumber, setCartDisplayNumber] = useState(localStorage.getItem('cartDisplayNumb') ? localStorage.getItem('cartDisplayNumb'): null);
 
     function productID(prod_ID) {
         localStorage.removeItem('prodId');
@@ -51,6 +52,7 @@ const App = () => {
 			.then((allCartItem) => {
 				setAllCartItem(allCartItem);
 				localStorage.setItem('cartItems', JSON.stringify(allCartItem));
+				
 			})
 			.catch(error => console.error(error))
 		}
@@ -75,7 +77,9 @@ const App = () => {
 					setIsAdmin={setIsAdmin}
 					setUserId={setUserId}
 					setMyEmail={setMyEmail}
-				/>	
+					cartDisplayNumber={cartDisplayNumber}
+					setCartDisplayNumber={setCartDisplayNumber}
+					/>	
 
 				{userToken
 				?
@@ -143,6 +147,7 @@ const App = () => {
 								key={window.location.pathname}
 								allCartItem={allCartItem}
 								setAllCartItem={setAllCartItem}
+								setCartDisplayNumber={setCartDisplayNumber}
 								/> 
                         </Route>
 						<Route exact path ="/cart">
@@ -153,6 +158,8 @@ const App = () => {
 								isAdmin={isAdmin}
 								setAllCartItem={setAllCartItem}
 								userId={userId}
+								cartDisplayNumber={cartDisplayNumber}
+								setCartDisplayNumber={setCartDisplayNumber}
 								/>
 						</Route>
 						<Route exact path = "/checkout">
@@ -236,6 +243,8 @@ const App = () => {
 								setAllCartItem={setAllCartItem}
 								myEmail={myEmail}
 								setMyEmail={setMyEmail}
+								cartDisplayNumber={cartDisplayNumber}
+								setCartDisplayNumber={setCartDisplayNumber}
 								allCartItem={allCartItem}
 								/>
 						</Route>
