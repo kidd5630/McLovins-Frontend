@@ -35,23 +35,55 @@ const IndividualProduct = ({setCartDisplayNumber, userToken, isAdmin, allProduct
         const cartId = JSON.parse(localStorage.getItem('Cart')) ? JSON.parse(localStorage.getItem('Cart')).id : null
         const userId = JSON.parse(localStorage.getItem('userId'))
         if(!userToken){
-
             const checkLocalStorageCart = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
             if(checkLocalStorageCart.filter(item=>item.product_id === filteredProduct.id).length > 0){
                 const cartIndex = checkLocalStorageCart.findIndex((obj=>obj.product_id === filteredProduct.id))
                 checkLocalStorageCart[cartIndex].item_quantity += valueQuant
                 localStorage.setItem('cartItems', JSON.stringify(checkLocalStorageCart));
-                
+                const countNumbers=[];
+                let sum = 0;
+                checkLocalStorageCart.map(
+                    (item)=>{
+                        countNumbers.push(item.item_quantity);
+                    }
+                )
+                for(let i=0; i<countNumbers.length; i++){
+                    sum += parseInt(countNumbers[i]);
+                }
+                setCartDisplayNumber(sum);
+                localStorage.setItem('cartDisplayNumb', sum)
                 setAllCartItem(checkLocalStorageCart)
-
+                setValueQuant(0);
             } else {
                 const productItem = { product_id:filteredProduct.id, item_quantity:valueQuant, price:filteredProduct.price, };
                 checkLocalStorageCart.push(productItem);
                 localStorage.setItem('cartItems', JSON.stringify(checkLocalStorageCart));
+                
+                const countNumbers=[];
+                let sum = 0;
+                checkLocalStorageCart.map(
+                    (item)=>{
+                        countNumbers.push(item.item_quantity);
+                    }
+                )
+                for(let i=0; i<countNumbers.length; i++){
+                    sum += parseInt(countNumbers[i]);
+                }
+                setCartDisplayNumber(sum);
+                localStorage.setItem('cartDisplayNumb', sum)
                 setAllCartItem(checkLocalStorageCart)
+                setValueQuant(0);
 
             }
             }
+
+
+
+
+
+
+
+
         else {console.log('here?')
                 try{
                 const productCheck = await checkCartByProduct(userToken, userId, cartId, filteredProduct.id)     

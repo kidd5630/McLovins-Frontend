@@ -30,26 +30,35 @@ const CartItem = ({cartDisplayNumber, setCartDisplayNumber, cartItem, productsTo
             const cartItemCheck = await checkByProduct(userToken, cartItem.product_id)
             if(!userToken){
                 if(valueQuant <= cartItemCheck.quantity){
+                    const countNumbers=[];
+                    let sum = 0;
+                    console.log(allCartItem,"THIS THE ONE")
+                    const theIndex = allCartItem.findIndex((obj=> obj.product_id === cartItem.product_id))
+                    allCartItem[theIndex].item_quantity = valueQuant
+                    console.log(allCartItem,"updated?")
+                    const updateCartItems = allCartItem.map(
+                        (item, idx)=>{
+                            if(idx===theIndex){
+                                item.item_quantity =valueQuant
+                                return item
+                            }else{
+                                return item
+                            }
+                        }
+                    )
 
-                console.log(allCartItem,"THIS THE ONE")
-                const theIndex = allCartItem.findIndex((obj=> obj.product_id === cartItem.product_id))
-                allCartItem[theIndex].item_quantity = valueQuant
-                console.log(allCartItem,"updated?")
-                const updatecartitems = allCartItem.map((item, idx)=>{
-                    if(idx===theIndex){
-
-                        item.item_quantity =valueQuant
-                        return item
-                    }else{
-                        return item
+                    updateCartItems.map(
+                        (item)=>{
+                            countNumbers.push(item.item_quantity);
+                        }
+                    )
+                    for(let i=0; i<countNumbers.length; i++){
+                        sum += parseInt(countNumbers[i]);
                     }
-
-
-                }
-                )
-
-                setAllCartItem(updatecartitems)
-                localStorage.setItem('cartItems', JSON.stringify(updatecartitems))
+                    setCartDisplayNumber(sum);
+                    localStorage.setItem('cartDisplayNumb', sum)
+                    setAllCartItem(updateCartItems)
+                    localStorage.setItem('cartItems', JSON.stringify(updateCartItems))
 
                 }else{
                   alert('Calm down!!! We only have '+ cartItemCheck.quantity+' available!')

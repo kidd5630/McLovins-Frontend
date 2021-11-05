@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import { BASE_URL } from '../api'
+import { DoNotDisturbOnTotalSilenceTwoTone } from '@mui/icons-material';
 const Button = styled.button`
   display: flex;
   border-radius: 6px;
@@ -28,7 +29,19 @@ const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, upda
         return cartItem.product_id!==itemToDelete.product_id
       })
       localStorage.setItem('cartItems', JSON.stringify(newCart))
+      let newCartAmount = 0;
+      console.log("newcart!!", newCart)
+
+      newCart.map((item)=>{
+        console.log('items', item.item_quantity)
+        newCartAmount = newCartAmount + item.item_quantity;
+        console.log("newCartAmount", newCartAmount)
+      })
+      setCartDisplayNumber(newCartAmount)
+      localStorage.setItem('cartDisplayNumb', newCartAmount)
       setAllCartItem(newCart);  
+
+
     } else{
     const response = await fetch(`${BASE_URL}/cart_items/${itemToDelete.id}`, {
       method: "DELETE",
