@@ -106,14 +106,11 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
                 const userId = await results.user.id
                 const myUsername = await results.user.username
                 const email = await results.user.email
-                
-
                 setUserToken(token);
                 setMyUsername(myUsername);
                 setIsAdmin(admin);
                 setUserId(userId);
                 setMyEmail(email);
-
                 localStorage.setItem('userToken', token);
                 localStorage.setItem('isAdmin', admin);
                 localStorage.setItem('myUsername', JSON.stringify(myUsername));
@@ -133,33 +130,35 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
                     }
                 )
                 .catch(error => console.error(error))
-                // fetchUsersCartItems(results.user.id, token)
+                // fetchUsersCartIte)
                 // .then((allCartItem) => {
                 //     console.log(allCartItem, "loggin")
                 //     setAllCartItem(allCartItem);
                 //     localStorage.setItem('cartItems', JSON.stringify(allCartItem));
-                //     const countNumbers=[];
-                //     let sum = 0;
-                //     allCartItem.map(
-                //         (item)=>{
-                //             countNumbers.push(item.item_quantity);
-                //         }
-                //     )
-                //     for(let i=0; i<countNumbers.length; i++){
-                //         sum += parseInt(countNumbers[i]);
-                //     }
-                //     setCartDisplayNumber(sum);
-                //     localStorage.setItem('cartDisplayNumb', sum);
-                // })
+                    const countNumbers=[];
+                    let sum = 0;
+                        // allCartItem.map(
+                        //     (item)=>{
+                        //         countNumbers.push(item.item_quantity);
+                        //     }
+                        // )
+                        // for(let i=0; i<countNumbers.length; i++){
+                        //     sum += parseInt(countNumbers[i]);
+                        // }
+                        // setCartDisplayNumber(sum);
+                        // localStorage.setItem('cartDisplayNumb', sum);
+                // }
+                // )
                 // .catch(error => console.error(error))
-
+                let combined = [];
                 const fetchedUserCartItems = await fetchUsersCartItems(results.user.id, token)
                 setAllCartItem(fetchedUserCartItems)
                 
                 const storageCartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
+                
                 const getCart = localStorage.getItem('Cart') ? parseInt(JSON.parse(localStorage.getItem('Cart')).id) : []
-                localStorage.setItem('cartItems', JSON.stringify(fetchedUserCartItems))
-                console.log(allCartItem,"the beginning of the end")
+                
+                localStorage.setItem('lalacartItems', JSON.stringify(fetchedUserCartItems))
 
 
                 for (let i=0; i<storageCartItems.length; i++){
@@ -179,14 +178,22 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
                         )
                      
                         setAllCartItem(updatedAllCart)
-                        localStorage.setItem('cartItems', JSON.stringify(updatedAllCart))
+                        console.log("this happens if there was stuff in the cart", updatedAllCart)
+                        // localStorage.setItem('cartItems', JSON.stringify(updatedAllCart))
                     } else {
                         
                         const createItem = await createCartItems(token, getCart, storageCartItems[i].product_id, storageCartItems[i].item_quantity, storageCartItems[i].price, userId);
                         const newArr = [...fetchedUserCartItems, createItem]
                         setAllCartItem(newArr);
-                        localStorage.setItem('cartItems', JSON.stringify(newArr))
+                        console.log("this happens if there was not stuff in the cart", updatedAllCart)
+
+                        // localStorage.setItem('cartItems', JSON.stringify(newArr))
                     }
+
+
+
+
+
                 }
                 history.push("/");
 
