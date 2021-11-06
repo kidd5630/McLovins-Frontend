@@ -159,8 +159,6 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
                 const storageCartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
                 const getCart = localStorage.getItem('Cart') ? parseInt(JSON.parse(localStorage.getItem('Cart')).id) : []
                 localStorage.setItem('cartItems', JSON.stringify(fetchedUserCartItems))
-                console.log(allCartItem,"the beginning of the end")
-
 
                 for (let i=0; i<storageCartItems.length; i++){
     

@@ -1,16 +1,11 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import OrderHistory from './OrderHistory'
-import Users from './Users'
 
 const Admin = ({userToken, allProducts, allCartItem}) => {
 
 return(
     <>
-    <div>You're an admin?!</div>
-    
-    <Users/>
-    <OrderHistory/>
+    <div>Your a McLovin's Admin, GOOD FOR YOU</div>
     </>
 )
 }

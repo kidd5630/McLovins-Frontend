@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Admin from './Admin';
 import {editUser, BASE_URL} from '../api'
 import EditProfile from './EditProfile';
+import OrderHistory from './OrderHistory';
 
 
 const Profile = ({myUsername, userToken, setMyUsername, isAdmin, myPassword, setMyPassword, myEmail, setMyEmail}) => {
@@ -55,10 +56,6 @@ const Profile = ({myUsername, userToken, setMyUsername, isAdmin, myPassword, set
             :
             (<div></div>)
             }
-
-
-
-
             {isAdmin?
             <Admin />
             :

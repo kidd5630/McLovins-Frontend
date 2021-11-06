@@ -166,6 +166,7 @@ const App = () => {
 							<Checkout
 							userToken={userToken}
 							userId={userId}
+							setAllCartItem={setAllCartItem}
 							/>
 						</Route>
 						<Route exact path = "/confirmation">
@@ -273,6 +274,8 @@ const App = () => {
 							<Checkout
 							userToken={userToken}
 							userId={userId}
+							setAllCartItem={setAllCartItem}
+
 							/>
 						</Route>
 						<Route exact path = "/confirmation">

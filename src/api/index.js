@@ -324,7 +324,7 @@ export async function createOrderHistory(userToken, userId, cartId,fullname , em
         cvv:cvv
     };
     try{    
-      const response = await fetch(`${BASE_URL}/order_history/`, 
+      const response = await fetch(`${BASE_URL}/order_history`, 
       {
         method: "POST",
         headers: {
@@ -406,7 +406,21 @@ export async function checkAnonymousUser( fullname , email, address, city, state
   }
 }
 
-
+export async function fetchOrderHistory(usersId, userToken){
+    try{
+        const headers = {
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${userToken}`,
+          },
+      }
+      const response = await fetch(`${BASE_URL}/order_history/${usersId}`, headers)
+      const results = await response.json()
+      return results
+  }catch(error){
+      console.error(error)
+  }
+}
 
 
 
