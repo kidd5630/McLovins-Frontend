@@ -76,14 +76,6 @@ const IndividualProduct = ({setCartDisplayNumber, userToken, isAdmin, allProduct
 
             }
             }
-
-
-
-
-
-
-
-
         else {console.log('here?')
                 try{
                 const productCheck = await checkCartByProduct(userToken, userId, cartId, filteredProduct.id)     

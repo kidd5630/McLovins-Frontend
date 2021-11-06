@@ -11,5 +11,6 @@ export { default as FeaturedProducts } from './FeaturedProducts';
 export { default as Profile } from './Profile';
 export { default as DeleteCartItem } from './DeleteCartItem';
 export { default as Checkout } from './Checkout';
+export { default as Confirmation } from './Confirmation';
 
 
