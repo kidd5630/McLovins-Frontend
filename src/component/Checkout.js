@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { setCartInactive, createOrderHistory, createNewCart, checkAnonymousUser, createCartItems } from '../api'
+import Confirmation from './Confirmation'
 
 
 const Checkout = ({userToken, userId}) => {
@@ -16,6 +17,7 @@ const Checkout = ({userToken, userId}) => {
     const [expmonth, setExpmonth] = useState('')
     const [expyear, setExpyear] = useState('')
     const [cvv, setCvv] = useState('')
+    const confirmation = useHistory();
 
     async function nonUserCheckout(userId){
             const checkoutAnon = await checkAnonymousUser(fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv);
@@ -38,13 +40,17 @@ const Checkout = ({userToken, userId}) => {
             createOrderHistory(userToken, userId, cartId, fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv);
             const newCart = await createNewCart(userToken, userId, email, address, city, state, zip);
             localStorage.setItem('Cart', JSON.stringify(newCart));
+
+            confirmation.push('/confirmation')
         }
     }
 
     return(
         <div>
             <h3>Billing Address</h3>
-                <form onSubmit={(e)=>{SubmitHandler(e)}}>
+                <form onSubmit={(e)=>{
+                    SubmitHandler(e)
+                    }}>
                     <label for="fname" > Full Name</label>
                     <input type="text" placeholder="Firstname Lastname" value={fullname} onChange={(event) => {
                                 setFullname(event.target.value);
