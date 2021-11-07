@@ -8,7 +8,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
 
 const IndividualProduct = ({setCartDisplayNumber, userToken, isAdmin, allProducts, setAllProducts, selectedProduct, setProductName, setProductDescript, setProductPrice, setProductCategory, setProductQuantity, setProductPhoto, allCartItem, setAllCartItem}) => {
-    console.log('=====>', allCartItem);
     const [isActiveEdit, setActiveEdit] = useState("false");
     const [valueQuant, setValueQuant] = useState(0);
     const ToggleClass = () => {

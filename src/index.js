@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Profile, Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register, Cart, FeaturedProducts, Checkout, Confirmation } from './component';
 import { getCurrentUserToken, getCurrentUsername, getIsAdmin } from './auth'
-import {  fetchAllProducts,fetchUsersCart, fetchUsersCartItems } from './api'
+import {  fetchAllProducts,fetchUsersCart, fetchUsersCartItems , fetchAllUsers} from './api'
 import './style.css'
 
 
@@ -25,6 +25,8 @@ const App = () => {
 	const [userId, setUserId] = useState("");
 	const [featuredProds, setFeaturedProds] = useState([]);
 	const [cartDisplayNumber, setCartDisplayNumber] = useState(localStorage.getItem('cartDisplayNumb') ? localStorage.getItem('cartDisplayNumb'): null);
+	
+
 
     function productID(prod_ID) {
         localStorage.removeItem('prodId');
@@ -38,7 +40,7 @@ const App = () => {
         fetchAllProducts()
             .then((allProducts) => {
                 setAllProducts(allProducts);
-					const arr = [];
+				const arr = [];
 				for(let i = 0; i < allProducts.length; i++){
 					const randomProd = Math.floor(Math.random()*allProducts.length)
 					arr.push(allProducts[randomProd])
@@ -49,6 +51,8 @@ const App = () => {
 				setFeaturedProds(filtered);
             })
             .catch(error => console.error(error))
+
+			
 		if(JSON.parse(localStorage.getItem('userId')) && userToken){
 			const userId = JSON.parse(localStorage.getItem('userId'))
 			fetchUsersCartItems(userId, userToken)
@@ -256,6 +260,7 @@ const App = () => {
 								cartDisplayNumber={cartDisplayNumber}
 								setCartDisplayNumber={setCartDisplayNumber}
 								allCartItem={allCartItem}
+								userToken={userToken}
 								/>
 						</Route>
 						<Route exact path ="/cart">
