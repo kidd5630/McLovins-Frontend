@@ -421,13 +421,3 @@ export async function fetchOrderHistory(usersId, userToken){
       console.error(error)
   }
 }
-
-
-
-
-
-
-
-
-
-
