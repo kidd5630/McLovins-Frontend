@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { Link, Redirect } from "react-router-dom";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
@@ -90,30 +90,23 @@ const FooterButton = styled.div`
 `;
 const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem, cartDisplayNumber, setCartDisplayNumber, allCartItem}) => {
     let history = useHistory();
-
-
-
-
     async function loginUser(event) {
         event.preventDefault();
-        
         try {
             const results = await fetchLoginUser(BASE_URL, myUsername, myPassword);
-            console.log('resultsresultsresults', results);
+            const countNumbers=[];
+            let sum = 0;
             if(results.user) {
                 const token = await results.token;
                 const admin = await results.user.admin;
                 const userId = await results.user.id
                 const myUsername = await results.user.username
                 const email = await results.user.email
-                
-
                 setUserToken(token);
                 setMyUsername(myUsername);
                 setIsAdmin(admin);
                 setUserId(userId);
                 setMyEmail(email);
-
                 localStorage.setItem('userToken', token);
                 localStorage.setItem('isAdmin', admin);
                 localStorage.setItem('myUsername', JSON.stringify(myUsername));
@@ -125,69 +118,26 @@ const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, m
                     localStorage.setItem('Cart', JSON.stringify(cart));
                 })                
                 .catch(error => console.error(error))
-                
-                fetchAllUsers(token)
-                .then(
-                    users => {
-                        console.log(users)
+
+                fetchUsersCartItems(results.user.id, token)
+                .then((allCartItem) => {
+                    console.log(allCartItem, "loggin")
+                    setAllCartItem(allCartItem);
+                    localStorage.setItem('cartItems', JSON.stringify(allCartItem));
+                    const countNumbers=[];
+                    let sum = 0;
+                    allCartItem.map(
+                        (item)=>{
+                            countNumbers.push(item.item_quantity);
+                        }
+                    )
+                    for(let i=0; i<countNumbers.length; i++){
+                        sum += parseInt(countNumbers[i]);
                     }
-                )
+                    setCartDisplayNumber(sum);
+                    localStorage.setItem('cartDisplayNumb', sum);
+                })
                 .catch(error => console.error(error))
-                // fetchUsersCartItems(results.user.id, token)
-                // .then((allCartItem) => {
-                //     console.log(allCartItem, "loggin")
-                //     setAllCartItem(allCartItem);
-                //     localStorage.setItem('cartItems', JSON.stringify(allCartItem));
-                //     const countNumbers=[];
-                //     let sum = 0;
-                //     allCartItem.map(
-                //         (item)=>{
-                //             countNumbers.push(item.item_quantity);
-                //         }
-                //     )
-                //     for(let i=0; i<countNumbers.length; i++){
-                //         sum += parseInt(countNumbers[i]);
-                //     }
-                //     setCartDisplayNumber(sum);
-                //     localStorage.setItem('cartDisplayNumb', sum);
-                // })
-                // .catch(error => console.error(error))
-
-                const fetchedUserCartItems = await fetchUsersCartItems(results.user.id, token)
-                setAllCartItem(fetchedUserCartItems)
-                
-                const storageCartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
-                const getCart = localStorage.getItem('Cart') ? parseInt(JSON.parse(localStorage.getItem('Cart')).id) : []
-                localStorage.setItem('cartItems', JSON.stringify(fetchedUserCartItems))
-                console.log(allCartItem,"the beginning of the end")
-
-
-                for (let i=0; i<storageCartItems.length; i++){
-    
-                    if(fetchedUserCartItems.filter(item =>item.product_id === storageCartItems[i].product_id).length > 0){
-                        const fetchedCartIndex = fetchedUserCartItems.findIndex(item=>item.product_id === storageCartItems[i].product_id)
-                        const updateItem = await updateItemQuantity(token, userId, fetchedUserCartItems[fetchedCartIndex].id, storageCartItems[i].item_quantity + fetchedUserCartItems[fetchedCartIndex].item_quantity)
-                        const updatedAllCart = fetchedUserCartItems.map(
-                            (item)=>{
-                                console.log(item,"item")
-                                if (item.product_id === storageCartItems[i].product_id){
-                                    return updateItem[0]
-                                } else {
-                                    return item
-                                }
-                            }
-                        )
-                     
-                        setAllCartItem(updatedAllCart)
-                        localStorage.setItem('cartItems', JSON.stringify(updatedAllCart))
-                    } else {
-                        
-                        const createItem = await createCartItems(token, getCart, storageCartItems[i].product_id, storageCartItems[i].item_quantity, storageCartItems[i].price, userId);
-                        const newArr = [...fetchedUserCartItems, createItem]
-                        setAllCartItem(newArr);
-                        localStorage.setItem('cartItems', JSON.stringify(newArr))
-                    }
-                }
                 history.push("/");
 
             } else {
