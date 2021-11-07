@@ -61,9 +61,8 @@ const Profile = ({myUsername, userToken, setMyUsername, isAdmin, myPassword, set
             :
             <div></div>
             }
+        <OrderHistory/>
         </>
         )
     }
 export default Profile;
-
-

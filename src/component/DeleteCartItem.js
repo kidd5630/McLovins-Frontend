@@ -83,19 +83,3 @@ const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, upda
   )
 }
 export default DeleteCartItem;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
