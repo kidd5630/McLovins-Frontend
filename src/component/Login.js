@@ -89,6 +89,7 @@ const FooterButton = styled.div`
   }
 `;
 const Login = ({myEmail, setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem, cartDisplayNumber, setCartDisplayNumber, allCartItem}) => {
+    console.log("peter is smexy")
     let history = useHistory();
     async function loginUser(event) {
         event.preventDefault();
