@@ -28,4 +28,3 @@ const FeaturedProducts = ({allProducts, isAdmin, setselectedProduct}) => {
     )
 }
 export default FeaturedProducts;
-

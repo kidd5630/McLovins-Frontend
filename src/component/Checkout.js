@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { setCartInactive, createOrderHistory, createNewCart, checkAnonymousUser, createCartItems } from '../api'
+import { removeCurrentCartItems } from '../auth'
 import Confirmation from './Confirmation'
 
 
-const Checkout = ({userToken, userId}) => {
+const Checkout = ({userToken, userId, setAllCartItem}) => {
 
     const [fullname, setFullname] = useState('')
     const [email, setEmail] = useState('')
@@ -28,13 +29,16 @@ const Checkout = ({userToken, userId}) => {
             }
             const setInactive = await setCartInactive(checkoutAnon.token, checkoutAnon.userId, newCart.id);
             const createOH = await createOrderHistory(checkoutAnon.token, checkoutAnon.userId, newCart.id, fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv);
-    }
+        }
 
     const cartId = localStorage.getItem('Cart') ? JSON.parse(localStorage.getItem('Cart')).id : null
     async function SubmitHandler (e) {
         e.preventDefault();
         if(!userToken){
             nonUserCheckout();
+            setAllCartItem(removeCurrentCartItems())
+
+            confirmation.push('/confirmation')
         } else {
             setCartInactive(userToken, userId, cartId);
             createOrderHistory(userToken, userId, cartId, fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv);
