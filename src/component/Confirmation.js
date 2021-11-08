@@ -8,11 +8,11 @@ const Confirmation = ({ cartDisplayNumber, setCartDisplayNumber, userToken, allP
 
 
   return (
-    <div>
-      <h1 className="thankyoucomeagain">THANK YOU FOR YOUR PURCHASE</h1>
-      <h2 className="thankyoucomeagain2">Want to continue shopping at McLovin's?</h2>
-      <Link to="/product" className="link">
-        <li className="navBtn">Click Here</li>
+    <div className="confirmationPage">
+      <h1 className="thankyouforpurchase">THANK YOU FOR YOUR PURCHASE !!!</h1>
+      <h2 className="continueshopping">Want to continue shopping at McLovin's?</h2>
+      <Link to="/product" className="link_confirmation">
+        <li className="navBtn_confirmation">Click Here Now!</li>
       </Link>
     </div>
   )

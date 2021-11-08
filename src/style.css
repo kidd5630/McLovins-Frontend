@@ -12,6 +12,12 @@
     width: 100%;
     padding: 10px;
     position:fixed;
+    background-image: url('https://i1.wp.com/media3.giphy.com/media/E8wm3nfbNWBdC/giphy.gif');
+    background-position: center center;
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;  
+    color: white;
 } 
 .backdrop{
     height: 90vh;
@@ -157,7 +163,7 @@
 }
 .slogan{
     font-style: italic;
-    color: black;
+    color: white;
     text-decoration: underline;
     font-size: 30px;
     align-self: center;
@@ -252,11 +258,108 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom: 1px solid black;
     background-color: red;
 }
-.thankyoucomeagain{
-    background-image: url('https://phoneky.co.uk/thumbs/screensavers/down/new/misc/fireplace_femWZxVj.gif');
-    background-size: cover;
-}
-.thankyoucomeagain2{
-    background-color: 0.5;
 
+.confirmationPage{
+    margin:0;
+    display:flex;
+    flex-direction: column;
+    background-image: url('https://i1.wp.com/media3.giphy.com/media/E8wm3nfbNWBdC/giphy.gif');
+    background-position: center center;
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;    
+    height: 100%;
+    width: 100%;
+
+}
+.thankyouforpurchase{
+    border-bottom: 1px solid black;
+    color: white;
+    align-self: center;
+    margin-top: 10%;
+    font-size: 45px;
+    font-family: "Akaya Telivigala";
+    font-style: italic;
+}
+.continueshopping{
+    background-color: 0.5;
+    color: white;
+    margin-left: 15%;
+    margin-top: 5%;
+    font-family: "Akaya Telivigala";
+    font-size: 30px;
+}
+.link_confirmation{
+    color: white;
+    font-family: "Akaya Telivigala";
+    list-style-type: none;
+    font-size: 30px;
+    margin-top: 1%;
+}
+.navBtn_confirmation{
+    text-decoration: white underline;
+    margin-left: 15%;
+    font-family: "Akaya Telivigala";
+}
+
+.checkout_whole{
+    display: flex;
+    justify-content: center; 
+    font-family: "Akaya Telivigala";
+
+}
+.billing_txt{
+    padding-bottom:10px ;
+    padding-top: 10px;
+    margin-left:5px;
+}
+.billing_form{
+    align-items: center; 
+    padding-bottom:10px ;
+    padding-top: 10px;
+    margin-left:5px;
+
+}
+.whole_form{
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    background-color:red;
+    width:30%;
+    
+}
+.payment_form{
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.checkout_label{
+    align-items: center;
+    padding-top: 10px;
+    margin-left:5px;
+
+}
+.checkout_input{
+    align-items: center;
+    width:75%;
+    margin-left:5px;
+
+}
+.checkout_input_last{
+    align-items: center;
+    width:75%;
+    margin-left:5px;
+
+}
+.checkout_confirmbtn{
+    width:25%;
+    border: 3px solid orangered;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    display: block;
+    margin-top:10px;
+    align-self: center;
+    margin-bottom:10px;
+}
+.navBtn{
+    color: white;
 }

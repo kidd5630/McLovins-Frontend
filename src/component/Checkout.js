@@ -50,59 +50,61 @@ const Checkout = ({ userToken, userId, setAllCartItem }) => {
     }
 
     return (
-        <div>
-            <h3>Billing Address</h3>
-            <form onSubmit={(e) => {
+        <div className='checkout_whole'>
+            <form className='whole_form' onSubmit={(e) => {
                 SubmitHandler(e)
             }}>
-                <label for="fname" > Full Name</label>
-                <input type="text" placeholder="Firstname Lastname" value={fullname} onChange={(event) => {
+                <h3 className='billing_txt'>Billing Address</h3>
+
+                <label for="fname" className='checkout_label'> Full Name</label>
+                <input type="text" placeholder="Firstname Lastname" className='checkout_input' value={fullname} onChange={(event) => {
                     setFullname(event.target.value);
                 }}></input>
-                <label for="email"> Email</label>
-                <input type="text" placeholder="Email" value={email} onChange={(event) => {
+                <label for="email" className='checkout_label'> Email</label>
+                <input type="text" placeholder="Email" className='checkout_input' value={email} onChange={(event) => {
                     setEmail(event.target.value);
                 }}></input>
-                <label for="email"> Address</label>
-                <input type="text" placeholder="Address" value={address} onChange={(event) => {
+                <label for="email" className='checkout_label'> Address</label>
+                <input type="text" placeholder="Address" className='checkout_input' value={address} onChange={(event) => {
                     setAddress(event.target.value);
                 }}></input>
-                <label for="email"> City</label>
-                <input type="text" placeholder="City" value={city} onChange={(event) => {
+                <label for="email" className='checkout_label'> City</label>
+                <input type="text" placeholder="City" className='checkout_input' value={city} onChange={(event) => {
                     setCity(event.target.value);
                 }}></input>
-                <label for="email"> State</label>
-                <input type="text" placeholder="State" value={state} onChange={(event) => {
+                <label for="email" className='checkout_label'> State</label>
+                <input type="text" placeholder="State" className='checkout_input' value={state} onChange={(event) => {
                     setState(event.target.value);
                 }}></input>
-                <label for="email"> Zip</label>
-                <input type="text" placeholder="Zip" value={zip} onChange={(event) => {
+                <label for="email" className='checkout_label'> Zip</label>
+                <input type="text" placeholder="Zip" className='checkout_input' value={zip} onChange={(event) => {
                     setZip(event.target.value);
                 }}></input>
 
-                <div className="paymentform">
-                    <label for="fname"> Name on Card</label>
-                    <input type="text" placeholder="Firstname Lastname" value={cardname} onChange={(event) => {
+                <div className="payment_form">
+                <h3 className='billing_form'>Card Information</h3>
+                    <label for="fname" className='checkout_label'> Name on Card</label>
+                    <input type="text" placeholder="Firstname Lastname" className='checkout_input' value={cardname} onChange={(event) => {
                         setCardname(event.target.value);
                     }}></input>
-                    <label for="email"> Credit card number</label>
-                    <input type="text" placeholder="1111 2222 3333 4444" value={cardnumber} onChange={(event) => {
+                    <label for="email" className='checkout_label'> Credit card number</label>
+                    <input type="text" placeholder="1111 2222 3333 4444" className='checkout_input' value={cardnumber} onChange={(event) => {
                         setCardnumber(event.target.value);
                     }}></input>
-                    <label for="email"> Exp Month</label>
-                    <input type="text" placeholder="September" value={expmonth} onChange={(event) => {
+                    <label for="email" className='checkout_label'> Exp Month</label>
+                    <input type="text" placeholder="11" className='checkout_input' value={expmonth} onChange={(event) => {
                         setExpmonth(event.target.value);
                     }}></input>
-                    <label for="email"> Exp Year</label>
-                    <input type="text" placeholder="2045" value={expyear} onChange={(event) => {
+                    <label for="email" className='checkout_label'> Exp Year</label>
+                    <input type="text" placeholder="2045" className='checkout_input' value={expyear} onChange={(event) => {
                         setExpyear(event.target.value);
                     }}></input>
-                    <label for="email"> CVV</label>
-                    <input type="text" placeholder="555" value={cvv} onChange={(event) => {
+                    <label for="email" className='checkout_label'> CVV</label>
+                    <input type="text" placeholder="555" className='checkout_input_last' value={cvv} onChange={(event) => {
                         setCvv(event.target.value);
                     }}></input>
                 </div>
-                <button type="submit">Confirm Order</button>
+                <button type="submit" className='checkout_confirmbtn'>Confirm Order</button>
             </form>
 
         </div>

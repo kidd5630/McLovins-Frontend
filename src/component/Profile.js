@@ -22,15 +22,15 @@ const Profile = ({ usersList, myUsername, userToken, setMyUsername, isAdmin, myP
     return (
         <>
             <div className="userInfo">
-                <h1>My Profile</h1>
-                <div>
-                    <div>UserName: {myUsername}</div>
+                <h1 className='myprofiletxt'>My Profile</h1>
+                <div className='userInfo_slot'>
+                    <div className='user_input'>UserName: {myUsername}</div>
                 </div>
-                <div>
-                    <div>Email: {myEmail}</div>
+                <div className='userInfo_slot'>
+                    <div className='user_input'>Email: {myEmail}</div>
                 </div>
-                <div>
-                    <div>Password: {hiddenPassword}</div>
+                <div className='userInfo_slot'>
+                    <div className='user_input'>Password: {hiddenPassword}</div>
                 </div>
             </div>
             {myUsername ?
