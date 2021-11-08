@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Profile, Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register, Cart, FeaturedProducts, Checkout, Confirmation } from './component';
+import { Profile, Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register, Cart, FeaturedProducts, Checkout, Confirmation, OrderHistory } from './component';
 import { getCurrentUserToken, getCurrentUsername, getIsAdmin } from './auth'
 import { fetchAllProducts, fetchUsersCart, fetchUsersCartItems, fetchAllUsers } from './api'
 import './style.css'
@@ -175,9 +175,13 @@ const App = () => {
 							</Route>
 							<Route exact path="/confirmation">
 								<Confirmation
-
 								/>
 							</Route>
+							<Route exact path="/order_history">
+								<OrderHistory
+								/>
+							</Route>
+							
 						</Switch>
 					</div>)
 					:
@@ -285,7 +289,6 @@ const App = () => {
 							</Route>
 							<Route exact path="/confirmation">
 								<Confirmation
-
 								/>
 							</Route>
 						</Switch>
