@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { Link, Redirect } from "react-router-dom";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
@@ -109,20 +109,20 @@ const FooterButton = styled.div`
     color: white;
   }
 `;
-const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUsername, myEmail, setMyEmail}) => {
+const Register = ({ setUserToken, setMyPassword, myPassword, setMyUsername, myUsername, myEmail, setMyEmail }) => {
     const [confirMmyPassword, setConfirmMyPassword] = useState('');
     let history = useHistory();
     async function registerUser(event) {
         event.preventDefault();
         if (myPassword.length < 8) {
-             alert("Password Must Be At Least 8 Characters");
-        } else if (myPassword !== confirMmyPassword){
-           alert("please make sure your passwords match");
-        }else{
+            alert("Password Must Be At Least 8 Characters");
+        } else if (myPassword !== confirMmyPassword) {
+            alert("please make sure your passwords match");
+        } else {
             try {
                 const results = await fetchRegisterUser(BASE_URL, myUsername, myPassword, myEmail);
 
-                if(results) {
+                if (results) {
                     const token = await results.token;
                     setUserToken(token);
                     setMyUsername(myUsername);
@@ -135,10 +135,10 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                     location.reload();
                 } else {
                 }
-            }catch(error) {
+            } catch (error) {
                 console.error(error);
-            }   
-        }  
+            }
+        }
     }
     return (
         <Modal>
@@ -146,72 +146,72 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                 <section className="registerContainer">
                     <Heading>{<h1 className="registerTitle">Register</h1>}</Heading>
                     <Form>
-                        <form className="registerForm"onSubmit={registerUser}>
-                        <div>
-                            <Label>Username:</Label>
-                            <UserInput type="username" 
-                                placeholder="Username" 
-                                className="registerInput"
-                                onChange={(event) => {setMyUsername(event.target.value)}} 
-                                required/>
-                        </div>
-                        <div>
-                            <Label>Email:</Label>
-                            <EmailInput type="email" 
-                                placeholder="Email" 
-                                className="registerInput"
-                                onChange={(event) => {setMyEmail(event.target.value)}} 
-                                required/>
-                        </div>
-                        <div>
-                            <Label>Password:</Label>
-                            <PassInput type="password" 
-                                placeholder="Password" 
-                                className="registerInput"
-                                onChange={(event) => {setMyPassword(event.target.value)}} 
-                                required/>
-                        </div>
-                        <div>
-                            <Label>Confirm:</Label>
-                            <ConfirmInput type="password" 
-                                placeholder="Confirm Password" 
-                            className="registerInput"
-                            onChange={(event) => {setConfirmMyPassword(event.target.value)}} 
-                            required/>
-                        </div>
-                        <Footer>
-                            <FooterButton>
-                                <CheckRoundedIcon
-                                    style={{ color: "white", fontSize: 30 }}
-                                ></CheckRoundedIcon>
-                                <Button
-                                    variant="contained"
-                                    style={{
-                                    textDecoration: "none",
-                                    backgroundColor: "red",
-                                    color: "white",
-                                    fontFamily: "Akaya Telivigala",
-                                    }}
-                                    className="btn btn-primary"
-                                    type="submit"
+                        <form className="registerForm" onSubmit={registerUser}>
+                            <div>
+                                <Label>Username:</Label>
+                                <UserInput type="username"
+                                    placeholder="Username"
+                                    className="registerInput"
+                                    onChange={(event) => { setMyUsername(event.target.value) }}
+                                    required />
+                            </div>
+                            <div>
+                                <Label>Email:</Label>
+                                <EmailInput type="email"
+                                    placeholder="Email"
+                                    className="registerInput"
+                                    onChange={(event) => { setMyEmail(event.target.value) }}
+                                    required />
+                            </div>
+                            <div>
+                                <Label>Password:</Label>
+                                <PassInput type="password"
+                                    placeholder="Password"
+                                    className="registerInput"
+                                    onChange={(event) => { setMyPassword(event.target.value) }}
+                                    required />
+                            </div>
+                            <div>
+                                <Label>Confirm:</Label>
+                                <ConfirmInput type="password"
+                                    placeholder="Confirm Password"
+                                    className="registerInput"
+                                    onChange={(event) => { setConfirmMyPassword(event.target.value) }}
+                                    required />
+                            </div>
+                            <Footer>
+                                <FooterButton>
+                                    <CheckRoundedIcon
+                                        style={{ color: "white", fontSize: 30 }}
+                                    ></CheckRoundedIcon>
+                                    <Button
+                                        variant="contained"
+                                        style={{
+                                            textDecoration: "none",
+                                            backgroundColor: "red",
+                                            color: "white",
+                                            fontFamily: "Akaya Telivigala",
+                                        }}
+                                        className="btn btn-primary"
+                                        type="submit"
                                     >
                                         Register
-                                </Button>
-                            </FooterButton>
-                            <FooterButton>
-                                <CloseRoundedIcon
-                                    style={{ color: "white", fontSize: 30 }}
-                                ></CloseRoundedIcon>{" "}
-                                <Link
-                                    to="/"
-                                    style={{ textDecoration: "none" }}
-                                    className="btn btn-primary"
-                                    onClick={() => {}}
-                                >
-                                    CANCEL
-                                </Link>
-                            </FooterButton>
-                        </Footer>
+                                    </Button>
+                                </FooterButton>
+                                <FooterButton>
+                                    <CloseRoundedIcon
+                                        style={{ color: "white", fontSize: 30 }}
+                                    ></CloseRoundedIcon>{" "}
+                                    <Link
+                                        to="/"
+                                        style={{ textDecoration: "none" }}
+                                        className="btn btn-primary"
+                                        onClick={() => { }}
+                                    >
+                                        CANCEL
+                                    </Link>
+                                </FooterButton>
+                            </Footer>
                         </form>
                     </Form>
                 </section>
@@ -219,4 +219,4 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
         </Modal>
     )
 }
-export default Register; 
+export default Register;

@@ -17,57 +17,58 @@ const Button = styled.button`
     color: white;
   }
 `;
-const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, updateCart, setUpdateCart, itemToDelete, userId, allCartItem, setAllCartItem}) => {
+const DeleteCartItem = ({ cartDisplayNumber, setCartDisplayNumber, userToken, updateCart, setUpdateCart, itemToDelete, userId, allCartItem, setAllCartItem }) => {
 
-  const deleteHandler = async () =>{
+  const deleteHandler = async () => {
     const actObj = {
       "cartItemId": itemToDelete.id,
       "userId": userId
     }
-    if(!userToken){
-      const newCart = allCartItem.filter((cartItem)=>{
-        return cartItem.product_id!==itemToDelete.product_id
+    if (!userToken) {
+      const newCart = allCartItem.filter((cartItem) => {
+        return cartItem.product_id !== itemToDelete.product_id
       })
       localStorage.setItem('cartItems', JSON.stringify(newCart))
       let newCartAmount = 0;
 
-      newCart.map((item)=>{
+      newCart.map((item) => {
         newCartAmount = newCartAmount + item.item_quantity;
       })
       setCartDisplayNumber(newCartAmount)
       localStorage.setItem('cartDisplayNumb', newCartAmount)
-      setAllCartItem(newCart);  
+      setAllCartItem(newCart);
 
 
-    } else{
-    const response = await fetch(`${BASE_URL}/cart_items/${itemToDelete.id}`, {
-      method: "DELETE",
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${userToken}`
-      },
-      body: JSON.stringify(
-        actObj
-      )
-    })
-    const data = await response.json();
-    if(data){
-      const newCart = allCartItem.filter((cartItem)=>{
-        return cartItem.id!==itemToDelete.id
+    } else {
+      const response = await fetch(`${BASE_URL}/cart_items/${itemToDelete.id}`, {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${userToken}`
+        },
+        body: JSON.stringify(
+          actObj
+        )
       })
-      let newNumber = cartDisplayNumber-data[0].item_quantity
-      setCartDisplayNumber(newNumber)
-      localStorage.setItem('cartDisplayNumb', newNumber)
-      setAllCartItem(newCart);  
+      const data = await response.json();
+      if (data) {
+        const newCart = allCartItem.filter((cartItem) => {
+          return cartItem.id !== itemToDelete.id
+        })
+        let newNumber = cartDisplayNumber - data[0].item_quantity
+        setCartDisplayNumber(newNumber)
+        localStorage.setItem('cartDisplayNumb', newNumber)
+        setAllCartItem(newCart);
+      }
     }
-  }}
+  }
   return (
     <div>
       <Button
         type="button"
         title="Delete Cart Item"
         className="cartItem-delete-btn"
-        onClick={() => 
+        onClick={() =>
           deleteHandler()
         }
       >

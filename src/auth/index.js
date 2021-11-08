@@ -15,10 +15,10 @@ export function removeCurrentUsername() {
 export function removeIsAdmin() {
   localStorage.removeItem('isAdmin')
 }
-export function removeUserId(){
+export function removeUserId() {
   localStorage.removeItem('userId')
 }
-export function  getIsAdmin() {
+export function getIsAdmin() {
   const storageUsername = JSON.parse(localStorage.getItem('isAdmin'));
   return storageUsername;
 }
@@ -35,6 +35,6 @@ export function removeCurrentCartItems() {
 export function removeCurrentCart() {
   localStorage.removeItem('Cart')
 }
-export function removeUserList(){
+export function removeUserList() {
   localStorage.removeItem('usersList');
 }

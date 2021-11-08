@@ -8,9 +8,9 @@ export async function fetchRegisterUser(url, username, password, email) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                    "username": username,
-                    "password": password,
-                    "email": email
+                "username": username,
+                "password": password,
+                "email": email
             })
         })
         const data = await response.json()
@@ -19,15 +19,15 @@ export async function fetchRegisterUser(url, username, password, email) {
         console.error(error);
     }
 }
-export async function editUser( url, userToken, userName, password,email) {
-    const actObj = { }
-    if(userName) {
+export async function editUser(url, userToken, userName, password, email) {
+    const actObj = {}
+    if (userName) {
         actObj["username"] = userName;
     }
-    if(password) {
+    if (password) {
         actObj["password"] = password;
     }
-    if(email) {
+    if (email) {
         actObj["email"] = email;
     }
     try {
@@ -52,15 +52,15 @@ export async function editUser( url, userToken, userName, password,email) {
 export async function fetchLoginUser(url, username, password) {
     try {
         const response = await fetch(`${url}/users/login`, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-               "username": username,
-               "password": password
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "username": username,
+                "password": password
+            })
         })
-    })
         const data = await response.json();
         return data
     } catch (error) {
@@ -68,8 +68,8 @@ export async function fetchLoginUser(url, username, password) {
     }
 }
 
-export async function fetchAllProducts(){
-    try{
+export async function fetchAllProducts() {
+    try {
         const response = await fetch(`${BASE_URL}/product`)
         const results = await response.json()
         const products = await results
@@ -80,7 +80,7 @@ export async function fetchAllProducts(){
 }
 
 //isAdmin?
-export async function createProduct( url, userToken, name, description, category, quantity, price, photo) {
+export async function createProduct(url, userToken, name, description, category, quantity, price, photo) {
     const actObj = {
         "name": name,
         "description": description,
@@ -107,9 +107,9 @@ export async function createProduct( url, userToken, name, description, category
     }
 }
 
-export async function fetchUsersCart(usersId, userToken){
-      try{
-          const headers = {
+export async function fetchUsersCart(usersId, userToken) {
+    try {
+        const headers = {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${userToken}`,
@@ -118,28 +118,28 @@ export async function fetchUsersCart(usersId, userToken){
         const response = await fetch(`${BASE_URL}/users/${usersId}/cart`, headers)
         const results = await response.json()
         return results
-    }catch(error){
+    } catch (error) {
         console.error(error)
     }
 }
 
-export async function fetchUsersCartItems(id, userToken){
-    try{    
-      const response = await fetch(`${BASE_URL}/cart/${id}`, 
-      {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-        }
-      })
-      const results = await response.json()
-      return results
-  }catch(error){
-      console.error(error)
-  }
+export async function fetchUsersCartItems(id, userToken) {
+    try {
+        const response = await fetch(`${BASE_URL}/cart/${id}`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${userToken}`,
+                }
+            })
+        const results = await response.json()
+        return results
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-export async function createCartItems(userToken, cartId, product_id, item_quantity, price, userId){
+export async function createCartItems(userToken, cartId, product_id, item_quantity, price, userId) {
     const actObj = {
         "cartId": cartId,
         "product_id": product_id,
@@ -147,43 +147,43 @@ export async function createCartItems(userToken, cartId, product_id, item_quanti
         "price": price,
         "userId": userId
     }
-    try{    
-      const response = await fetch(`${BASE_URL}/cart_items`, 
-      {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-        },
-        body: JSON.stringify(
-            actObj
-        )
-    })
-      const results = await response.json()
-      return results
-  }catch(error){
-      console.error(error)
-  }
+    try {
+        const response = await fetch(`${BASE_URL}/cart_items`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${userToken}`,
+                },
+                body: JSON.stringify(
+                    actObj
+                )
+            })
+        const results = await response.json()
+        return results
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-export async function editThisProduct( url, SelectedProduct, userToken, name, description, category, quantity, price, photo) {
-    const actObj = { }
-    if(name) {
+export async function editThisProduct(url, SelectedProduct, userToken, name, description, category, quantity, price, photo) {
+    const actObj = {}
+    if (name) {
         actObj["name"] = name;
     }
-    if(description) {
+    if (description) {
         actObj["description"] = description;
     }
-    if(category) {
+    if (category) {
         actObj["category"] = category;
     }
-    if(quantity) {
+    if (quantity) {
         actObj["quantity"] = quantity;
     }
-    if(price) {
+    if (price) {
         actObj["price"] = price;
     }
-    if(photo) {
+    if (photo) {
         actObj["photo"] = photo;
     }
     try {
@@ -203,31 +203,31 @@ export async function editThisProduct( url, SelectedProduct, userToken, name, de
         console.error(error);
     }
 }
-export async function fetchAllUsers(userToken){
-    try{    
-      const response = await fetch(`${BASE_URL}/users/allUsers`, 
-      {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-        }
-      })
-      const results = await response.json()
-      return results
-  }catch(error){
-      console.error(error)
-  }
+export async function fetchAllUsers(userToken) {
+    try {
+        const response = await fetch(`${BASE_URL}/users/allUsers`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${userToken}`,
+                }
+            })
+        const results = await response.json()
+        return results
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-export async function checkCartByProduct(userToken, userId, cartId, product_id){
-    try{
-        const response = await fetch(`${BASE_URL}/cart/cart_check/${userId}/${cartId}/${product_id}`, 
-        {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userToken}`,
-            }
-        })
+export async function checkCartByProduct(userToken, userId, cartId, product_id) {
+    try {
+        const response = await fetch(`${BASE_URL}/cart/cart_check/${userId}/${cartId}/${product_id}`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${userToken}`,
+                }
+            })
         const results = await response.json()
         const products = await results
         return products
@@ -236,24 +236,24 @@ export async function checkCartByProduct(userToken, userId, cartId, product_id){
     }
 }
 
-export async function updateItemQuantity(userToken, userId, cartItemId, item_quantity){
-    try{
+export async function updateItemQuantity(userToken, userId, cartItemId, item_quantity) {
+    try {
         const actObj = {
             "cartItemId": cartItemId,
             "item_quantity": item_quantity,
             "userId": userId
         }
-        const response = await fetch(`${BASE_URL}/cart_items/cartItemUpdate`, 
-        {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userToken}`,
-            },
-            body: JSON.stringify(
-                actObj
-            )
-        })
+        const response = await fetch(`${BASE_URL}/cart_items/cartItemUpdate`,
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${userToken}`,
+                },
+                body: JSON.stringify(
+                    actObj
+                )
+            })
         const results = await response.json()
         const products = await results
         return products
@@ -262,38 +262,38 @@ export async function updateItemQuantity(userToken, userId, cartItemId, item_qua
     }
 }
 
-export async function checkByProduct(userToken, product_id){
-    try{    
-      const response = await fetch(`${BASE_URL}/product/${product_id}`, 
-      {
-        headers: {
-            "Content-Type": "application/json",
-            
-        }
-      })
-      const results = await response.json()
-      return results
-  }catch(error){
-      console.error(error)
-  }
+export async function checkByProduct(userToken, product_id) {
+    try {
+        const response = await fetch(`${BASE_URL}/product/${product_id}`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+
+                }
+            })
+        const results = await response.json()
+        return results
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-export async function setCartInactive(userToken, userId, cartId){
-    try{
+export async function setCartInactive(userToken, userId, cartId) {
+    try {
         const actObj = {
             "userId": userId
         }
-        const response = await fetch(`${BASE_URL}/cart/cartInactive/${cartId}`, 
-        {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userToken}`,
-            },
-            body: JSON.stringify(
-                actObj
-            )
-        })
+        const response = await fetch(`${BASE_URL}/cart/cartInactive/${cartId}`,
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${userToken}`,
+                },
+                body: JSON.stringify(
+                    actObj
+                )
+            })
         const results = await response.json()
         const products = await results
         return products
@@ -302,9 +302,9 @@ export async function setCartInactive(userToken, userId, cartId){
     }
 }
 
-export async function createOrderHistory(userToken, userId, cartId,fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv){
+export async function createOrderHistory(userToken, userId, cartId, fullname, email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv) {
     const actObj = {
-        userId: userId, 
+        userId: userId,
         cartId: cartId,
         fullname: fullname,
         email: email,
@@ -313,59 +313,59 @@ export async function createOrderHistory(userToken, userId, cartId,fullname , em
         state: state,
         zip: zip,
         cardname: cardname,
-        cardnumber:cardnumber,
-        expmonth:expmonth,
-        expyear:expyear,
-        cvv:cvv
+        cardnumber: cardnumber,
+        expmonth: expmonth,
+        expyear: expyear,
+        cvv: cvv
     };
-    try{    
-      const response = await fetch(`${BASE_URL}/order_history`, 
-      {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-        },
-        body: JSON.stringify(
-            actObj
-        )
-    })
-      const results = await response.json()
-      return results
-  }catch(error){
-      console.error(error)
-  }
+    try {
+        const response = await fetch(`${BASE_URL}/order_history`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${userToken}`,
+                },
+                body: JSON.stringify(
+                    actObj
+                )
+            })
+        const results = await response.json()
+        return results
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-export async function createNewCart(userToken, userId, email, street, city, state, zip){
+export async function createNewCart(userToken, userId, email, street, city, state, zip) {
     const actObj = {
-        userId: userId, 
+        userId: userId,
         email: email,
         street: street,
         city: city,
         state: state,
         zip: zip
     };
-    try{    
-      const response = await fetch(`${BASE_URL}/cart/`, 
-      {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-        },
-        body: JSON.stringify(
-            actObj
-        )
-    })
-      const results = await response.json()
-      return results
-  }catch(error){
-      console.error(error)
-  }
+    try {
+        const response = await fetch(`${BASE_URL}/cart/`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${userToken}`,
+                },
+                body: JSON.stringify(
+                    actObj
+                )
+            })
+        const results = await response.json()
+        return results
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-export async function checkAnonymousUser( fullname , email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv){
+export async function checkAnonymousUser(fullname, email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv) {
     const actObj = {
         fullname: fullname,
         email: email,
@@ -374,41 +374,41 @@ export async function checkAnonymousUser( fullname , email, address, city, state
         state: state,
         zip: zip,
         cardname: cardname,
-        cardnumber:cardnumber,
-        expmonth:expmonth,
-        expyear:expyear,
-        cvv:cvv
+        cardnumber: cardnumber,
+        expmonth: expmonth,
+        expyear: expyear,
+        cvv: cvv
     };
-    try{    
-      const response = await fetch(`${BASE_URL}/users/anonymouslogin/`, 
-      {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(
-            actObj
-        )
-    })
-      const results = await response.json()
-      return results
-  }catch(error){
-      console.error(error)
-  }
+    try {
+        const response = await fetch(`${BASE_URL}/users/anonymouslogin/`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(
+                    actObj
+                )
+            })
+        const results = await response.json()
+        return results
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-export async function fetchOrderHistory(usersId, userToken){
-    try{
+export async function fetchOrderHistory(usersId, userToken) {
+    try {
         const headers = {
-          headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${userToken}`,
-          },
-      }
-      const response = await fetch(`${BASE_URL}/order_history/${usersId}`, headers)
-      const results = await response.json()
-      return results
-  }catch(error){
-      console.error(error)
-  }
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userToken}`,
+            },
+        }
+        const response = await fetch(`${BASE_URL}/order_history/${usersId}`, headers)
+        const results = await response.json()
+        return results
+    } catch (error) {
+        console.error(error)
+    }
 }

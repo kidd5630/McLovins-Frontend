@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { Link, Redirect } from "react-router-dom";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
@@ -88,15 +88,15 @@ const FooterButton = styled.div`
     color: white;
   }
 `;
-const Login = ({setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem, cartDisplayNumber, setCartDisplayNumber, allCartItem}) => {
+const Login = ({ setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem, cartDisplayNumber, setCartDisplayNumber, allCartItem }) => {
     let history = useHistory();
     async function loginUser(event) {
         event.preventDefault();
         try {
             const results = await fetchLoginUser(BASE_URL, myUsername, myPassword);
-            const countNumbers=[];
+            const countNumbers = [];
             let sum = 0;
-            if(results.user) {
+            if (results.user) {
                 const token = await results.token;
                 const admin = await results.user.admin;
                 const userId = await results.user.id
@@ -114,37 +114,37 @@ const Login = ({setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername
                 localStorage.setItem('email', email);
 
                 fetchUsersCart(results.user.id, token)
-                .then((cart) => {
-                    localStorage.setItem('Cart', JSON.stringify(cart));
-                })                
-                .catch(error => console.error(error))
+                    .then((cart) => {
+                        localStorage.setItem('Cart', JSON.stringify(cart));
+                    })
+                    .catch(error => console.error(error))
 
                 fetchUsersCartItems(results.user.id, token)
-                .then((allCartItem) => {
-                    setAllCartItem(allCartItem);
-                    localStorage.setItem('cartItems', JSON.stringify(allCartItem));
-                    const countNumbers=[];
-                    let sum = 0;
-                    allCartItem.map(
-                        (item)=>{
-                            countNumbers.push(item.item_quantity);
+                    .then((allCartItem) => {
+                        setAllCartItem(allCartItem);
+                        localStorage.setItem('cartItems', JSON.stringify(allCartItem));
+                        const countNumbers = [];
+                        let sum = 0;
+                        allCartItem.map(
+                            (item) => {
+                                countNumbers.push(item.item_quantity);
+                            }
+                        )
+                        for (let i = 0; i < countNumbers.length; i++) {
+                            sum += parseInt(countNumbers[i]);
                         }
-                    )
-                    for(let i=0; i<countNumbers.length; i++){
-                        sum += parseInt(countNumbers[i]);
-                    }
-                    setCartDisplayNumber(sum);
-                    localStorage.setItem('cartDisplayNumb', sum);
-                })
-                .catch(error => console.error(error))
+                        setCartDisplayNumber(sum);
+                        localStorage.setItem('cartDisplayNumb', sum);
+                    })
+                    .catch(error => console.error(error))
                 history.push("/");
 
             } else {
                 alert("Your Username Or Password Is Incorrect");
             }
-        } catch(error) {
+        } catch (error) {
             console.error(error);
-        } 
+        }
 
     }
     return (
@@ -153,66 +153,66 @@ const Login = ({setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername
                 <Content>
                     <section className="loginContainer">
                         <Heading>{<h1 className="loginTitle">Login</h1>}</Heading>
-                        <Form>    
-                                <form className="loginForm" onSubmit={loginUser}>
-                                    <div>
-                                        <Label>Username:</Label>
-                                        <UserInput 
-                                            type="username" 
-                                            placeholder="Username" 
-                                            className="loginInput" 
-                                            onChange={(event) => {setMyUsername(event.target.value)}} 
-                                        required/>
-                                    </div>
-                                    <div>
-                                        <Label>Password:</Label>
-                                        <PassInput type="password" 
-                                        placeholder="Password" 
-                                        className="loginInput" 
-                                        onChange={(event) => {setMyPassword(event.target.value)}} 
-                                        required/>
-                                    </div>
-                                    <Footer>
-                                        <FooterButton>
-                                            <CheckRoundedIcon
-                                                style={{ color: "white", fontSize: 30 }}
-                                            ></CheckRoundedIcon>
-                                            <Button
-                                                variant="contained"
-                                                style={{
+                        <Form>
+                            <form className="loginForm" onSubmit={loginUser}>
+                                <div>
+                                    <Label>Username:</Label>
+                                    <UserInput
+                                        type="username"
+                                        placeholder="Username"
+                                        className="loginInput"
+                                        onChange={(event) => { setMyUsername(event.target.value) }}
+                                        required />
+                                </div>
+                                <div>
+                                    <Label>Password:</Label>
+                                    <PassInput type="password"
+                                        placeholder="Password"
+                                        className="loginInput"
+                                        onChange={(event) => { setMyPassword(event.target.value) }}
+                                        required />
+                                </div>
+                                <Footer>
+                                    <FooterButton>
+                                        <CheckRoundedIcon
+                                            style={{ color: "white", fontSize: 30 }}
+                                        ></CheckRoundedIcon>
+                                        <Button
+                                            variant="contained"
+                                            style={{
                                                 fontFamily: "Akaya Telivigala",
                                                 textDecoration: "none",
                                                 backgroundColor: "red",
                                                 color: "white",
-                                                
-                                                }}
-                                                className="btn btn-primary"
-                                                type="submit"
-                                            >
-                                                LOGIN
-                                            </Button>
-                                        </FooterButton>
-                                        <FooterButton>
-                                            <CloseRoundedIcon
-                                                style={{ color: "white", fontSize: 30 }}
-                                            ></CloseRoundedIcon>{" "}
-                                            <Link
-                                                to="/"
-                                                style={{ textDecoration: "none" }}
-                                                className="btn btn-primary"
-                                                onClick={() => {}}
-                                            >
-                                                CANCEL
-                                            </Link>
-                                        </FooterButton>
-                                    </Footer>
-                    
-                                </form>
-                        </Form>    
+
+                                            }}
+                                            className="btn btn-primary"
+                                            type="submit"
+                                        >
+                                            LOGIN
+                                        </Button>
+                                    </FooterButton>
+                                    <FooterButton>
+                                        <CloseRoundedIcon
+                                            style={{ color: "white", fontSize: 30 }}
+                                        ></CloseRoundedIcon>{" "}
+                                        <Link
+                                            to="/"
+                                            style={{ textDecoration: "none" }}
+                                            className="btn btn-primary"
+                                            onClick={() => { }}
+                                        >
+                                            CANCEL
+                                        </Link>
+                                    </FooterButton>
+                                </Footer>
+
+                            </form>
+                        </Form>
                     </section>
                 </Content>
             </Modal>
         </div>
-    ) 
+    )
 }
-export default Login; 
+export default Login;
