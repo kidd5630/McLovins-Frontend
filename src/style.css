@@ -250,5 +250,13 @@ input[type=number]::-webkit-outer-spin-button {
 .userBox{
     display:flex;
     border-bottom: 1px solid black;
-    background-color: blueviolet;
+    background-color: red;
+}
+.thankyoucomeagain{
+    background-image: url('https://phoneky.co.uk/thumbs/screensavers/down/new/misc/fireplace_femWZxVj.gif');
+    background-size: cover;
+}
+.thankyoucomeagain2{
+    background-color: 0.5;
+
 }

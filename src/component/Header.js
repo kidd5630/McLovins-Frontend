@@ -22,7 +22,6 @@ const Button = styled.div`
 const Header = ({setMyEmail, userToken, setUserToken, setMyUsername, setIsAdmin, setUserId, cartDisplayNumber,setCartDisplayNumber, setAllCartItem}) => {
     let history = useHistory()	
 
-    console.log("header reading CDN", cartDisplayNumber)
     return(
         <>
             {userToken? 

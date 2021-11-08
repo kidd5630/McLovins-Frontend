@@ -7,7 +7,6 @@ import DeleteCartItem from './DeleteCartItem'
 
 const CartItem = ({cartDisplayNumber, setCartDisplayNumber, cartItem, productsToCartItem, allCartItem, userToken, setAllCartItem, updateCart, setUpdateCart, userId}) => {
     const [valueQuant, setValueQuant] = useState(cartItem.item_quantity)
-    console.log('cartItem ====>', cartItem);
     const Removehandler = (e)=>{
         e.preventDefault()
         if(valueQuant>0){
@@ -32,10 +31,8 @@ const CartItem = ({cartDisplayNumber, setCartDisplayNumber, cartItem, productsTo
                 if(valueQuant <= cartItemCheck.quantity){
                     const countNumbers=[];
                     let sum = 0;
-                    console.log(allCartItem,"THIS THE ONE")
                     const theIndex = allCartItem.findIndex((obj=> obj.product_id === cartItem.product_id))
                     allCartItem[theIndex].item_quantity = valueQuant
-                    console.log(allCartItem,"updated?")
                     const updateCartItems = allCartItem.map(
                         (item, idx)=>{
                             if(idx===theIndex){
@@ -100,7 +97,6 @@ const CartItem = ({cartDisplayNumber, setCartDisplayNumber, cartItem, productsTo
         
     }
     const productlength = productsToCartItem.length>0
-    console.log('productsToCartItem', productsToCartItem);
         return (
             <div className="cartContainer" key={cartItem.id}>
             <div className="cartBody">

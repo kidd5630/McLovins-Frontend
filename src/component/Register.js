@@ -121,9 +121,6 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
         }else{
             try {
                 const results = await fetchRegisterUser(BASE_URL, myUsername, myPassword, myEmail);
-                console.log(myUsername);
-                console.log(myPassword);
-                console.log(myEmail);
 
                 if(results) {
                     const token = await results.token;

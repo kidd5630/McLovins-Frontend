@@ -30,12 +30,9 @@ const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, upda
       })
       localStorage.setItem('cartItems', JSON.stringify(newCart))
       let newCartAmount = 0;
-      console.log("newcart!!", newCart)
 
       newCart.map((item)=>{
-        console.log('items', item.item_quantity)
         newCartAmount = newCartAmount + item.item_quantity;
-        console.log("newCartAmount", newCartAmount)
       })
       setCartDisplayNumber(newCartAmount)
       localStorage.setItem('cartDisplayNumb', newCartAmount)
@@ -54,7 +51,6 @@ const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, upda
       )
     })
     const data = await response.json();
-    console.log('outside of if',  data);
     if(data){
       const newCart = allCartItem.filter((cartItem)=>{
         return cartItem.id!==itemToDelete.id

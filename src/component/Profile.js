@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import Admin from './Admin';
 import {editUser, BASE_URL} from '../api'
 import EditProfile from './EditProfile';
-import OrderHistory from './OrderHistory';
 
 
 
@@ -80,14 +79,8 @@ const Profile = ({usersList, myUsername, userToken, setMyUsername, isAdmin, myPa
                 (<div></div>)
             }
             
-        <OrderHistory/>
         </>
         )
     }
 export default Profile;
 
-
-// fetchAllUsers(token)
-// .then(
-//     users => {
-//         console.log(users)

@@ -121,7 +121,6 @@ const Login = ({setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername
 
                 fetchUsersCartItems(results.user.id, token)
                 .then((allCartItem) => {
-                    console.log(allCartItem, "loggin")
                     setAllCartItem(allCartItem);
                     localStorage.setItem('cartItems', JSON.stringify(allCartItem));
                     const countNumbers=[];

@@ -75,7 +75,7 @@ const IndividualProduct = ({setCartDisplayNumber, userToken, isAdmin, allProduct
 
             }
             }
-        else {console.log('here?')
+        else {
                 try{
                 const productCheck = await checkCartByProduct(userToken, userId, cartId, filteredProduct.id)     
                 if(productCheck && productCheck.length){

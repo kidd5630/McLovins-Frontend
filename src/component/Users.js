@@ -5,7 +5,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { checkByProduct, updateItemQuantity } from '../api'
 import DeleteCartItem from './DeleteCartItem'
 
-const Users = ({cartDisplayNumber, setCartDisplayNumber, cartItem, productsToCartItem, allCartItem, userToken, setAllCartItem, updateCart, setUpdateCart, userId}) => {
+const Users = ({}) => {
     
     return(
         <div>
