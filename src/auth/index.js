@@ -35,3 +35,6 @@ export function removeCurrentCartItems() {
 export function removeCurrentCart() {
   localStorage.removeItem('Cart')
 }
+export function removeUserList(){
+  localStorage.removeItem('usersList');
+}
