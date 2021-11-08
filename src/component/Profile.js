@@ -1,13 +1,8 @@
 import React, {useState} from 'react';
-import { Link, useHistory } from 'react-router-dom';
 import Admin from './Admin';
-import {editUser, BASE_URL} from '../api'
 import EditProfile from './EditProfile';
-import OrderHistory from './OrderHistory';
 
-
-
-const Profile = ({usersList, myUsername, userToken, setMyUsername, isAdmin, myPassword, setMyPassword, myEmail, setMyEmail}) => {
+const Profile = ({usersList, myUsername, userToken,  isAdmin, myPassword,  myEmail}) => {
     const [isActiveEdit, setActiveEdit] = useState("false");
     const [isActiveAdmin, setActiveAdmin] = useState("false");
     const ToggleClass = () => {
@@ -79,15 +74,7 @@ const Profile = ({usersList, myUsername, userToken, setMyUsername, isAdmin, myPa
                 :
                 (<div></div>)
             }
-            
-        <OrderHistory/>
         </>
         )
-    }
+}
 export default Profile;
-
-
-// fetchAllUsers(token)
-// .then(
-//     users => {
-//         console.log(users)

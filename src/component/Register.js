@@ -121,10 +121,6 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
         }else{
             try {
                 const results = await fetchRegisterUser(BASE_URL, myUsername, myPassword, myEmail);
-                console.log(myUsername);
-                console.log(myPassword);
-                console.log(myEmail);
-
                 if(results) {
                     const token = await results.token;
                     setUserToken(token);
@@ -136,7 +132,8 @@ const Register = ({setUserToken, setMyPassword, myPassword, setMyUsername, myUse
                     history.push("/");
                     alert("Good News, You're Registered!")
                     location.reload();
-                } else {
+                } else{
+                    alert(console.error)
                 }
             }catch(error) {
                 console.error(error);

@@ -3,8 +3,6 @@ import {
     createProduct, 
     BASE_URL
 } from '../api'
-
-
 const MakeProduct = ({userToken, allProducts, setAllProducts}) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -25,9 +23,6 @@ const MakeProduct = ({userToken, allProducts, setAllProducts}) => {
         e.preventDefault();
         try {
             const results = await createProduct(BASE_URL, userToken, name, description,category, quantity, price, photo);
-           console.log(name, description,category, quantity, price, photo);
-            
-            console.log("lookin at results", results)
             if(results){
                 setAllProducts([...allProducts, results])
                 alert("New Product Has Been Made")

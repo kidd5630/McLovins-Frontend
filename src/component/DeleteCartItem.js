@@ -2,7 +2,6 @@ import React from 'react';
 import styled from "styled-components";
 import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import { BASE_URL } from '../api'
-import { DoNotDisturbOnTotalSilenceTwoTone } from '@mui/icons-material';
 const Button = styled.button`
   display: flex;
   border-radius: 6px;
@@ -17,8 +16,7 @@ const Button = styled.button`
     color: white;
   }
 `;
-const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, updateCart, setUpdateCart, itemToDelete, userId, allCartItem, setAllCartItem}) => {
-
+const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, itemToDelete, userId, allCartItem, setAllCartItem}) => {
   const deleteHandler = async () =>{
     const actObj = {
       "cartItemId": itemToDelete.id,
@@ -30,19 +28,13 @@ const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, upda
       })
       localStorage.setItem('cartItems', JSON.stringify(newCart))
       let newCartAmount = 0;
-      console.log("newcart!!", newCart)
-
       newCart.map((item)=>{
-        console.log('items', item.item_quantity)
         newCartAmount = newCartAmount + item.item_quantity;
-        console.log("newCartAmount", newCartAmount)
       })
       setCartDisplayNumber(newCartAmount)
       localStorage.setItem('cartDisplayNumb', newCartAmount)
       setAllCartItem(newCart);  
-
-
-    } else{
+    } else {
     const response = await fetch(`${BASE_URL}/cart_items/${itemToDelete.id}`, {
       method: "DELETE",
       headers: {
@@ -54,7 +46,6 @@ const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, upda
       )
     })
     const data = await response.json();
-    console.log('outside of if',  data);
     if(data){
       const newCart = allCartItem.filter((cartItem)=>{
         return cartItem.id!==itemToDelete.id
@@ -64,7 +55,8 @@ const DeleteCartItem = ({cartDisplayNumber, setCartDisplayNumber,userToken, upda
       localStorage.setItem('cartDisplayNumb', newNumber)
       setAllCartItem(newCart);  
     }
-  }}
+    }
+  }
   return (
     <div>
       <Button

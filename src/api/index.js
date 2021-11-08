@@ -19,6 +19,7 @@ export async function fetchRegisterUser(url, username, password, email) {
         console.error(error);
     }
 }
+
 export async function editUser( url, userToken, userName, password,email) {
     const actObj = { }
     if(userName) {
@@ -47,7 +48,6 @@ export async function editUser( url, userToken, userName, password,email) {
         console.error(error);
     }
 }
-
 
 export async function fetchLoginUser(url, username, password) {
     try {
@@ -79,7 +79,7 @@ export async function fetchAllProducts(){
     }
 }
 
-//isAdmin?
+
 export async function createProduct( url, userToken, name, description, category, quantity, price, photo) {
     const actObj = {
         "name": name,
@@ -105,6 +105,60 @@ export async function createProduct( url, userToken, name, description, category
     } catch (error) {
         console.error(error);
     }
+}
+
+export async function editThisProduct( url, SelectedProduct, userToken, name, description,category, quantity, price, photo) {
+    const actObj = { }
+    if(name) {
+        actObj["name"] = name;
+    }
+    if(description) {
+        actObj["description"] = description;
+    }
+    if(category) {
+        actObj["category"] = category;
+    }
+    if(quantity) {
+        actObj["quantity"] = quantity;
+    }
+    if(price) {
+        actObj["price"] = price;
+    }
+    if(photo) {
+        actObj["photo"] = photo;
+    }
+    try {
+        const response = await fetch(`${url}/product/${SelectedProduct}`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + userToken
+            },
+            body: JSON.stringify(
+                actObj
+            )
+        })
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function fetchAllUsers(userToken){
+    try{    
+      const response = await fetch(`${BASE_URL}/users/allUsers`, 
+      {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        }
+      })
+      const results = await response.json()
+      return results
+  }catch(error){
+      console.error(error)
+  }
 }
 
 export async function fetchUsersCart(usersId, userToken){
@@ -166,59 +220,7 @@ export async function createCartItems(userToken, cartId, product_id, item_quanti
   }
 }
 
-export async function editThisProduct( url, SelectedProduct, userToken, name, description, category, quantity, price, photo) {
-    console.log('editThisProduct marker', SelectedProduct, userToken, name, description, category, quantity, price, photo);
-    const actObj = { }
-    if(name) {
-        actObj["name"] = name;
-    }
-    if(description) {
-        actObj["description"] = description;
-    }
-    if(category) {
-        actObj["category"] = category;
-    }
-    if(quantity) {
-        actObj["quantity"] = quantity;
-    }
-    if(price) {
-        actObj["price"] = price;
-    }
-    if(photo) {
-        actObj["photo"] = photo;
-    }
-    try {
-        const response = await fetch(`${url}/product/${SelectedProduct}`, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': "Bearer " + userToken
-            },
-            body: JSON.stringify(
-                actObj
-            )
-        })
-        const data = await response.json();
-        return data
-    } catch (error) {
-        console.error(error);
-    }
-}
-export async function fetchAllUsers(userToken){
-    try{    
-      const response = await fetch(`${BASE_URL}/users/allUsers`, 
-      {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-        }
-      })
-      const results = await response.json()
-      return results
-  }catch(error){
-      console.error(error)
-  }
-}
+
 
 export async function checkCartByProduct(userToken, userId, cartId, product_id){
     try{
@@ -238,14 +240,12 @@ export async function checkCartByProduct(userToken, userId, cartId, product_id){
 }
 
 export async function updateItemQuantity(userToken, userId, cartItemId, item_quantity){
-    console.log('updateItemQuantity function', userId, cartItemId, item_quantity);
     try{
         const actObj = {
             "cartItemId": cartItemId,
             "item_quantity": item_quantity,
             "userId": userId
         }
-        console.log('updateItemQuantity actObj', actObj);
         const response = await fetch(`${BASE_URL}/cart_items/cartItemUpdate`, 
         {
             method: "PATCH",
@@ -259,7 +259,6 @@ export async function updateItemQuantity(userToken, userId, cartItemId, item_qua
         })
         const results = await response.json()
         const products = await results
-        console.log('updateItemQuantity products', products);
         return products
     } catch (error) {
         console.error(error);
@@ -300,7 +299,6 @@ export async function setCartInactive(userToken, userId, cartId){
         })
         const results = await response.json()
         const products = await results
-        console.log('inactive', products);
         return products
     } catch (error) {
         console.error(error);
@@ -351,8 +349,6 @@ export async function createNewCart(userToken, userId, email, street, city, stat
         state: state,
         zip: zip
     };
-    console.log('actObjactObj', actObj);
-    console.log('userTokenuserTokenuserToken', userToken);
     try{    
       const response = await fetch(`${BASE_URL}/cart/`, 
       {
@@ -366,7 +362,6 @@ export async function createNewCart(userToken, userId, email, street, city, stat
         )
     })
       const results = await response.json()
-      console.log('createNewCart resultsd', results);
       return results
   }catch(error){
       console.error(error)
@@ -399,7 +394,6 @@ export async function checkAnonymousUser( fullname , email, address, city, state
         )
     })
       const results = await response.json()
-      console.log('anonymous login', results );
       return results
   }catch(error){
       console.error(error)

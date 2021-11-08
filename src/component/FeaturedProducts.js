@@ -1,16 +1,13 @@
-import {fetchAllProducts, BASE_URL} from '../api';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { Link} from 'react-router-dom';
 
-
-const FeaturedProducts = ({allProducts, isAdmin, setselectedProduct}) => {
+const FeaturedProducts = ({allProducts, setselectedProduct}) => {
     return (
         <>
             <div className="fp">
                 {allProducts.map(prod => {
                     const {id, name, photo} = prod;
-                    return (
-                    <div className="featuredContainer" key={id}>
+                    return (<div className="featuredContainer" key={id}>
                         <div className="featuredShowBox"onClick={()=>{
                             setselectedProduct(id)
                         }}>  

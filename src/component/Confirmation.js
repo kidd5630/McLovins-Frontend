@@ -1,12 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import CartItem from './CartItem'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Confirmation = ({cartDisplayNumber, setCartDisplayNumber, userToken, allProducts, allCartItem, isAdmin, setAllCartItem, userId}) => {
-  const [updateCart,setUpdateCart] = useState(allCartItem)
-  const [totalPrice, settotalPrice] = useState(0)
-
-
+const Confirmation = () => { 
   return(
     <div>
         <h1>THANK YOU FOR YOUR PURCHASE</h1>
@@ -15,7 +10,6 @@ const Confirmation = ({cartDisplayNumber, setCartDisplayNumber, userToken, allPr
           <li className="navBtn">Click Here</li>
         </Link>
     </div>
-)
-
+  )
 }
 export default Confirmation;

@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { useHistory } from "react-router-dom";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import Button from "@material-ui/core/Button";
@@ -9,10 +9,7 @@ import {
     BASE_URL,
     fetchLoginUser,
     fetchUsersCartItems,
-    fetchAllUsers,
     fetchUsersCart,
-    updateItemQuantity,
-    createCartItems
 } from '../api';
 
 const Modal = styled.div`
@@ -88,14 +85,12 @@ const FooterButton = styled.div`
     color: white;
   }
 `;
-const Login = ({setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem, cartDisplayNumber, setCartDisplayNumber, allCartItem}) => {
+const Login = ({setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, setUserId, setAllCartItem, setCartDisplayNumber, allCartItem}) => {
     let history = useHistory();
     async function loginUser(event) {
         event.preventDefault();
         try {
             const results = await fetchLoginUser(BASE_URL, myUsername, myPassword);
-            const countNumbers=[];
-            let sum = 0;
             if(results.user) {
                 const token = await results.token;
                 const admin = await results.user.admin;
@@ -112,16 +107,13 @@ const Login = ({setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername
                 localStorage.setItem('myUsername', JSON.stringify(myUsername));
                 localStorage.setItem('userId', userId);
                 localStorage.setItem('email', email);
-
                 fetchUsersCart(results.user.id, token)
                 .then((cart) => {
                     localStorage.setItem('Cart', JSON.stringify(cart));
                 })                
                 .catch(error => console.error(error))
-
                 fetchUsersCartItems(results.user.id, token)
                 .then((allCartItem) => {
-                    console.log(allCartItem, "loggin")
                     setAllCartItem(allCartItem);
                     localStorage.setItem('cartItems', JSON.stringify(allCartItem));
                     const countNumbers=[];
@@ -139,14 +131,12 @@ const Login = ({setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername
                 })
                 .catch(error => console.error(error))
                 history.push("/");
-
             } else {
                 alert("Your Username Or Password Is Incorrect");
             }
         } catch(error) {
             console.error(error);
         } 
-
     }
     return (
         <div className="background">
@@ -185,12 +175,10 @@ const Login = ({setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername
                                                 textDecoration: "none",
                                                 backgroundColor: "red",
                                                 color: "white",
-                                                
                                                 }}
                                                 className="btn btn-primary"
                                                 type="submit"
-                                            >
-                                                LOGIN
+                                            >LOGIN
                                             </Button>
                                         </FooterButton>
                                         <FooterButton>
