@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from "react-router-dom";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import Button from "@material-ui/core/Button";
@@ -88,14 +88,12 @@ const FooterButton = styled.div`
     color: white;
   }
 `;
-const Login = ({ setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, userId, setUserId, setAllCartItem, cartDisplayNumber, setCartDisplayNumber, allCartItem }) => {
+const Login = ({ setMyEmail, setMyPassword, myPassword, setMyUsername, myUsername, setUserToken, setIsAdmin, setUserId, setAllCartItem, setCartDisplayNumber}) => {
     let history = useHistory();
     async function loginUser(event) {
         event.preventDefault();
         try {
             const results = await fetchLoginUser(BASE_URL, myUsername, myPassword);
-            const countNumbers = [];
-            let sum = 0;
             if (results.user) {
                 const token = await results.token;
                 const admin = await results.user.admin;

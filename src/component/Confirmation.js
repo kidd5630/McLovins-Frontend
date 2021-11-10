@@ -5,8 +5,6 @@ import CartItem from './CartItem'
 const Confirmation = ({ cartDisplayNumber, setCartDisplayNumber, userToken, allProducts, allCartItem, isAdmin, setAllCartItem, userId }) => {
   const [updateCart, setUpdateCart] = useState(allCartItem)
   const [totalPrice, settotalPrice] = useState(0)
-
-
   return (
     <div className="confirmationPage">
       <h1 className="thankyouforpurchase">THANK YOU FOR YOUR PURCHASE !!!</h1>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { checkByProduct, updateItemQuantity } from '../api'
@@ -20,7 +20,6 @@ const CartItem = ({ cartDisplayNumber, setCartDisplayNumber, cartItem, productsT
     async function SubmitHandler(e) {
         e.preventDefault();
         const userId = JSON.parse(localStorage.getItem('userId'))
-
         try {
             const cartItemCheck = await checkByProduct(userToken, cartItem.product_id)
             if (!userToken) {
@@ -39,7 +38,6 @@ const CartItem = ({ cartDisplayNumber, setCartDisplayNumber, cartItem, productsT
                             }
                         }
                     )
-
                     updateCartItems.map(
                         (item) => {
                             countNumbers.push(item.item_quantity);
@@ -52,7 +50,6 @@ const CartItem = ({ cartDisplayNumber, setCartDisplayNumber, cartItem, productsT
                     localStorage.setItem('cartDisplayNumb', sum)
                     setAllCartItem(updateCartItems)
                     localStorage.setItem('cartItems', JSON.stringify(updateCartItems))
-
                 } else {
                     alert('Calm down!!! We only have ' + cartItemCheck.quantity + ' available!')
                 }
@@ -91,7 +88,6 @@ const CartItem = ({ cartDisplayNumber, setCartDisplayNumber, cartItem, productsT
         catch (error) {
             console.error(error)
         }
-
     }
     const productlength = productsToCartItem.length > 0
     return (
@@ -139,6 +135,5 @@ const CartItem = ({ cartDisplayNumber, setCartDisplayNumber, cartItem, productsT
         </div>
     )
 }
-
 
 export default CartItem;

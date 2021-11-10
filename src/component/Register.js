@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import Button from "@material-ui/core/Button";
@@ -121,7 +121,6 @@ const Register = ({ setUserToken, setMyPassword, myPassword, setMyUsername, myUs
         } else {
             try {
                 const results = await fetchRegisterUser(BASE_URL, myUsername, myPassword, myEmail);
-
                 if (results) {
                     const token = await results.token;
                     setUserToken(token);
@@ -133,7 +132,6 @@ const Register = ({ setUserToken, setMyPassword, myPassword, setMyUsername, myUs
                     history.push("/");
                     alert("Good News, You're Registered!")
                     location.reload();
-                } else {
                 }
             } catch (error) {
                 console.error(error);

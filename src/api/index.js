@@ -48,6 +48,68 @@ export async function editUser(url, userToken, userName, password, email) {
     }
 }
 
+export async function makeAdmin(url, userToken, admin) {
+    const actObj = {}
+    if (admin) {
+        actObj["admin"] = admin;
+    }
+   
+    try {
+        const response = await fetch(`${url}/user/me`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + userToken
+            },
+            body: JSON.stringify(
+                actObj
+            )
+        })
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.error(error);
+    }
+}
+export async function removeAdmin(url, userToken, admin) {
+    const actObj = {}
+    if (admin) {
+        actObj["admin"] = admin;
+    }
+   
+    try {
+        const response = await fetch(`${url}/user/me`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + userToken
+            },
+            body: JSON.stringify(
+                actObj
+            )
+        })
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.error(error);
+    }
+}
+export async function deleteUser(url, userToken ) {
+   
+    try {
+        const response = await fetch(`${url}/user/me`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + userToken
+            },
+        })
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 export async function fetchLoginUser(url, username, password) {
     try {
@@ -79,7 +141,7 @@ export async function fetchAllProducts() {
     }
 }
 
-//isAdmin?
+
 export async function createProduct(url, userToken, name, description, category, quantity, price, photo) {
     const actObj = {
         "name": name,
@@ -165,6 +227,24 @@ export async function createCartItems(userToken, cartId, product_id, item_quanti
         console.error(error)
     }
 }
+export async function deleteProduct(url, SelectedProduct, userToken ) {
+    try {
+        const response = await fetch(`${url}/product/${SelectedProduct}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userToken}`
+            }
+        })
+        const results = await response.json()
+        console.log("this is for the delete", results)
+        return results
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 
 export async function editThisProduct(url, SelectedProduct, userToken, name, description, category, quantity, price, photo) {
     const actObj = {}

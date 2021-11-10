@@ -1,9 +1,7 @@
-import { fetchAllProducts, BASE_URL } from '../api';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-
-const FeaturedProducts = ({ allProducts, isAdmin, setselectedProduct }) => {
+const FeaturedProducts = ({ allProducts, setselectedProduct }) => {
     return (
         <>
             <div className="fp">
@@ -21,7 +19,8 @@ const FeaturedProducts = ({ allProducts, isAdmin, setselectedProduct }) => {
                                     <h2 className="fpName"> {name}</h2>
                                 </Link>
                             </div>
-                        </div>)
+                        </div>
+                    )
                 })}
             </div>
         </>

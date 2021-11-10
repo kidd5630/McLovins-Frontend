@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom'
-import { BASE_URL, createCartItems, checkCartByProduct, updateItemQuantity } from '../api'
+import { BASE_URL, createCartItems, checkCartByProduct, updateItemQuantity, deleteProduct } from '../api'
 import EditProduct from './EditProduct';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const IndividualProduct = ({ setCartDisplayNumber, userToken, isAdmin, allProducts, setAllProducts, selectedProduct, setProductName, setProductDescript, setProductPrice, setProductCategory, setProductQuantity, setProductPhoto, allCartItem, setAllCartItem }) => {
     const [isActiveEdit, setActiveEdit] = useState("false");
@@ -30,6 +31,29 @@ const IndividualProduct = ({ setCartDisplayNumber, userToken, isAdmin, allProduc
             setValueQuant(valueQuant + 1)
         }
     }
+   
+    async function removeProd(e) {
+        e.preventDefault();
+        try {
+            const results =  await deleteProduct(BASE_URL, productid , userToken )
+            // if (results.id) {
+            //     setProductName(results.name)
+            //     setProductDescript(results.description)
+            //     setProductCategory(results.category)
+            //     setProductPrice(results.price)
+            //     setProductQuantity(results.quantity)
+            //     setProductPhoto(results.photo)
+            //     setAllProducts([...allProducts]);
+            //     location.reload()
+            //     ToggleClass();
+            //     resetForm();
+        // }
+        console.log("gotta go", results)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     async function SubmitHandler(e) {
         e.preventDefault();
         const cartId = JSON.parse(localStorage.getItem('Cart')) ? JSON.parse(localStorage.getItem('Cart')).id : null
@@ -153,11 +177,15 @@ const IndividualProduct = ({ setCartDisplayNumber, userToken, isAdmin, allProduc
                         </div>
                         {isAdmin
                             ?
-                            (<div>
-                                <button className="edit button"
+                            (<div className="prodButtons">
+                                <button className="editButton"
                                     onClick={ToggleClass}>
-                                    <EditIcon></EditIcon>
+                                    <EditIcon />
                                 </button>
+                                <button className="deleteButton"
+                                onClick={removeProd}>
+                               <DeleteIcon />
+                            </button>
                             </div>)
                             :
                             (<div></div>)
@@ -181,6 +209,12 @@ const IndividualProduct = ({ setCartDisplayNumber, userToken, isAdmin, allProduc
                                         setProductQuantity={setProductQuantity}
                                         setProductPhoto={setProductPhoto}
                                         productId={productid}
+                                        name={filteredProduct.name}
+                                        photo={filteredProduct.photo}
+                                        description={filteredProduct.description}
+                                        price={filteredProduct.price}
+                                        quantity={filteredProduct.quantity}
+                                        category={filteredProduct.category}
                                     />
                                 </div>
                             </div>)
@@ -189,8 +223,6 @@ const IndividualProduct = ({ setCartDisplayNumber, userToken, isAdmin, allProduc
                         }
                     </div>
                 </div>
-
-
             </div> : null}
         </>
     )

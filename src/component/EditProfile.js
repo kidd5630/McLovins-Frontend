@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import {
-    editUser,
-    BASE_URL
-} from '../api'
-const EditProfile = ({ userToken, ToggleClass }) => {
+import { editUser, BASE_URL } from '../api'
 
-    const [newUser, setNewUser] = useState('');
-    const [newPass, setNewPass] = useState('');
-    const [newEmail, setNewEmail] = useState('');
+const EditProfile = ({password, email, userToken, ToggleClass, setMyPassword,setMyEmail }) => {
 
+    const [newPass, setNewPass] = useState(password);
+    const [newEmail, setNewEmail] = useState(email);
     function resetForm() {
         setNewUser('');
         setNewPass('');
@@ -17,9 +13,9 @@ const EditProfile = ({ userToken, ToggleClass }) => {
     async function edit(e) {
         e.preventDefault();
         try {
-            const results = await editUser(BASE_URL, userToken, newUser, newPass, newEmail);
-            if (results.id) {
-                setMyUsername(newUser);
+            const results = await editUser(BASE_URL, userToken, newPass, newEmail);
+            console.log("these are the results from edit", results)
+            if (results) {
                 setMyPassword(newPass);
                 setMyEmail(newEmail)
                 location.reload()
@@ -33,19 +29,10 @@ const EditProfile = ({ userToken, ToggleClass }) => {
     return (
         <section className="editUserAside">
             <h1 className="editUser">Edit User Information</h1>
-            <form className="editUserForm" onSubmit={edit}>
-                <div className="editUserContent">
-                    <label className="editUserLabel">Username:</label>
-                </div>
-                <div className="editUserContent">
-                    <input className="editUserInput" type="text"
-                        placeholder="username" value={newUser}
-                        onChange={(event) => {
-                            setNewUser(event.target.value);
-                        }} />
-                </div>
-
-
+            <form className="editUserForm"
+                onSubmit={(e) => {
+                edit(e)
+                }}>
                 <div className="editUserContent">
                     <label className="editUserLabel">Password:</label>
                 </div>
@@ -56,8 +43,6 @@ const EditProfile = ({ userToken, ToggleClass }) => {
                             setNewPass(event.target.value);
                         }} />
                 </div>
-
-
                 <div className="editUserContent">
                     <label className="editUserLabel">Email:</label>
                 </div>
@@ -68,12 +53,10 @@ const EditProfile = ({ userToken, ToggleClass }) => {
                             setNewEmail(event.target.value);
                         }} />
                 </div>
-
                 <button className="editProdSubmit" type="submit">Update Info!</button>
             </form>
         </section>
     )
 }
-
 
 export default EditProfile;

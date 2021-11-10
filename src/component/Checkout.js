@@ -4,7 +4,6 @@ import { setCartInactive, createOrderHistory, createNewCart, checkAnonymousUser,
 import { removeCurrentCartItems } from '../auth'
 import Confirmation from './Confirmation'
 
-
 const Checkout = ({ userToken, userId, setAllCartItem }) => {
 
     const [fullname, setFullname] = useState('')
@@ -30,21 +29,18 @@ const Checkout = ({ userToken, userId, setAllCartItem }) => {
         const setInactive = await setCartInactive(checkoutAnon.token, checkoutAnon.userId, newCart.id);
         const createOH = await createOrderHistory(checkoutAnon.token, checkoutAnon.userId, newCart.id, fullname, email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv);
     }
-
     const cartId = localStorage.getItem('Cart') ? JSON.parse(localStorage.getItem('Cart')).id : null
     async function SubmitHandler(e) {
         e.preventDefault();
         if (!userToken) {
             nonUserCheckout();
             setAllCartItem(removeCurrentCartItems())
-
             confirmation.push('/confirmation')
         } else {
             setCartInactive(userToken, userId, cartId);
             createOrderHistory(userToken, userId, cartId, fullname, email, address, city, state, zip, cardname, cardnumber, expmonth, expyear, cvv);
             const newCart = await createNewCart(userToken, userId, email, address, city, state, zip);
             localStorage.setItem('Cart', JSON.stringify(newCart));
-
             confirmation.push('/confirmation')
         }
     }

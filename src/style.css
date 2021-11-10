@@ -259,6 +259,30 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom: 1px solid black;
     background-color: red;
 }
+.iaInteractiveBox{
+    display: flex;
+    flex-direction: column;
+    
+}
+.editProductAside{
+      display: flex;  
+      flex-direction: column;
+      justify-content: start;
+}
+.editProductContent{
+  
+
+}
+.editProductInputBox{
+    height: 100px;
+    width: 50%;
+    word-wrap: break-word;
+
+
+}
+.editProductInput{
+    width: 50%;
+}
 
 .confirmationPage{
     margin:0;

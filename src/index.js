@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Profile, Products, EditProduct, Header, Home, IndividualProduct, Login, MakeProduct, Register, Cart, FeaturedProducts, Checkout, Confirmation, OrderHistory } from './component';
-import { getCurrentUserToken, getCurrentUsername, getIsAdmin } from './auth'
-import { fetchAllProducts, fetchUsersCart, fetchUsersCartItems, fetchAllUsers } from './api'
+import { Profile, Products, Header, Home, IndividualProduct, Login, Register, Cart, Checkout, Confirmation, OrderHistory } from './component';
+import { getCurrentUserToken, getIsAdmin } from './auth'
+import { fetchAllProducts, fetchUsersCartItems } from './api'
 import './style.css'
 
 
@@ -25,8 +25,6 @@ const App = () => {
 	const [userId, setUserId] = useState("");
 	const [featuredProds, setFeaturedProds] = useState([]);
 	const [cartDisplayNumber, setCartDisplayNumber] = useState(localStorage.getItem('cartDisplayNumb') ? localStorage.getItem('cartDisplayNumb') : null);
-
-
 
 	function productID(prod_ID) {
 		localStorage.removeItem('prodId');
@@ -52,7 +50,6 @@ const App = () => {
 			})
 			.catch(error => console.error(error))
 
-
 		if (JSON.parse(localStorage.getItem('userId')) && userToken) {
 			const userId = JSON.parse(localStorage.getItem('userId'))
 			fetchUsersCartItems(userId, userToken)
@@ -69,7 +66,6 @@ const App = () => {
 			setAllCartItem(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
 		}
 	}, []);
-
 
 	return (
 		<Router>
@@ -297,7 +293,6 @@ const App = () => {
 			</div>
 		</Router>
 	)
-
 }
 
 ReactDOM.render(<App />, document.getElementById('app'))

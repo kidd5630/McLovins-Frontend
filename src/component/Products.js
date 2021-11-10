@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import MakeProduct from './MakeProduct';
 import ProductsByCategory from './CategoryProducts'
@@ -35,7 +34,6 @@ const Products = ({ userToken, isAdmin, allProducts, setAllProducts, setselected
             :
             (<div></div>)
           }
-
           <div className='category'>
             Candles
             <ProductsByCategory

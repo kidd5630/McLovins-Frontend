@@ -3,14 +3,13 @@ import {
     editThisProduct,
     BASE_URL
 } from '../api'
-const EditProduct = ({ allProducts, setAllProducts, userToken, productId, ToggleClass, setProductName, setProductDescript, setProductPrice, setProductCategory, setProductQuantity, setProductPhoto }) => {
-
-    const [newName, setNewName] = useState('');
-    const [newDescription, setNewDescription] = useState('');
-    const [newPrice, setNewPrice] = useState('');
-    const [newCategory, setNewCategory] = useState('');
-    const [newQuantity, setNewQuantity] = useState('');
-    const [newPhoto, setNewPhoto] = useState('');
+const EditProduct = ({category, name, photo, description, price, quantity, allProducts, setAllProducts, userToken, productId, ToggleClass, setProductName, setProductDescript, setProductPrice, setProductCategory, setProductQuantity, setProductPhoto }) => {
+    const [newName, setNewName] = useState(name);
+    const [newDescription, setNewDescription] = useState(description);
+    const [newPrice, setNewPrice] = useState(price);
+    const [newCategory, setNewCategory] = useState(category);
+    const [newQuantity, setNewQuantity] = useState(quantity);
+    const [newPhoto, setNewPhoto] = useState(photo);
     function resetForm() {
         setNewName('');
         setNewDescription('');
@@ -22,7 +21,7 @@ const EditProduct = ({ allProducts, setAllProducts, userToken, productId, Toggle
     async function edit(e) {
         e.preventDefault();
         try {
-            const results = await editThisProduct(BASE_URL, productId, userToken, newName, newDescription, newQuantity, newPrice, newCategory, newPhoto);
+            const results = await editThisProduct(BASE_URL, productId, userToken, newName, newDescription, newCategory, newQuantity, newPrice,  newPhoto);
             if (results.id) {
                 setProductName(results.name)
                 setProductDescript(results.description)
@@ -31,20 +30,22 @@ const EditProduct = ({ allProducts, setAllProducts, userToken, productId, Toggle
                 setProductQuantity(results.quantity)
                 setProductPhoto(results.photo)
                 setAllProducts([...allProducts]);
-                location.reload()
                 ToggleClass();
                 resetForm();
             }
         } catch (error) {
             console.error(error)
         }
+        location.reload();
     }
     return (
         <section className="editProductAside">
             <h1 className="editProduct">Edit Product</h1>
-            <form className="editProductForm" onSubmit={edit}>
+            <form className="editProductForm" onSubmit={(e) => {
+                                edit(e)
+                            }}>
                 <div className="editProductContent">
-                    <label className="editProductLabel">Name</label>
+                    <label className="editProductLabel">Name:</label>
                 </div>
                 <div className="editProductContent">
                     <input className="editProductInput" type="text"
@@ -54,20 +55,18 @@ const EditProduct = ({ allProducts, setAllProducts, userToken, productId, Toggle
                         }} />
                 </div>
                 <div className="editProductContent">
-                    <label className="editProductLabel">Description</label>
+                    <label className="editProductLabel">Description:</label>
                 </div>
                 <div className="editPostContent">
-                    <input className="editProductInput" type="text"
+                    <input className="editProductInputBox" type="text"
                         placeholder="Description" value={newDescription}
                         onChange={(event) => {
                             setNewDescription(event.target.value);
                         }} />
                 </div>
 
-
-
                 <div className="editProductContent">
-                    <label className="editProductLabel">Price</label>
+                    <label className="editProductLabel">Price:</label>
                 </div>
                 <div className="editPostContent">
                     <input className="editProductInput"
@@ -80,7 +79,7 @@ const EditProduct = ({ allProducts, setAllProducts, userToken, productId, Toggle
                         }} />
                 </div>
                 <div className="editProductContent">
-                    <label className="editProductLabel">Quantity</label>
+                    <label className="editProductLabel">Quantity:</label>
                 </div>
                 <div className="editPostContent">
                     <input className="editProductInput" type="number"
@@ -90,7 +89,7 @@ const EditProduct = ({ allProducts, setAllProducts, userToken, productId, Toggle
                         }} />
                 </div>
                 <div className="editProductContent">
-                    <label className="editProductLabel">Category</label>
+                    <label className="editProductLabel">Category:</label>
                 </div>
                 <div className="editPostContent">
                     <input className="editProductInput" type="text"
@@ -103,7 +102,7 @@ const EditProduct = ({ allProducts, setAllProducts, userToken, productId, Toggle
                     <label className="editProductLabel">Photo</label>
                 </div>
                 <div className="editPostContent">
-                    <input className="editProductInput" type="image"
+                    <input className="editProductInput" type="text"
                         placeholder="Photo" value={newPhoto}
                         onChange={(event) => {
                             setNewPhoto(event.target.value);

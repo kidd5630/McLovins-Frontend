@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import {
-    createProduct,
-    BASE_URL
-} from '../api'
-
+import { createProduct, BASE_URL } from '../api'
 
 const MakeProduct = ({ userToken, allProducts, setAllProducts }) => {
     const [name, setName] = useState('');

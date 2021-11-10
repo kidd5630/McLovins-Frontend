@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
 import Admin from './Admin';
-import { editUser, BASE_URL } from '../api'
 import EditProfile from './EditProfile';
 
-
-
-const Profile = ({ usersList, myUsername, userToken, setMyUsername, isAdmin, myPassword, setMyPassword, myEmail, setMyEmail }) => {
+const Profile = ({ usersList, myUsername, userToken, isAdmin, myPassword, setMyPassword, myEmail, setMyEmail }) => {
     const [isActiveEdit, setActiveEdit] = useState("false");
     const [isActiveAdmin, setActiveAdmin] = useState("false");
     const ToggleClass = () => {
@@ -49,13 +45,17 @@ const Profile = ({ usersList, myUsername, userToken, setMyUsername, isAdmin, myP
                         <EditProfile
                             ToggleClass={ToggleClass}
                             userToken={userToken}
+                            name={myUsername}
+                            email={myEmail}
+                            password={hiddenPassword}
+                            setMyPassword={setMyPassword}
+                            setMyEmail={setMyEmail}
                         />
                     </div>
                 </div>)
                 :
                 (<div></div>)
             }
-
             {isAdmin ?
                 (<div>
                     <button className="adminbtn"
@@ -78,7 +78,6 @@ const Profile = ({ usersList, myUsername, userToken, setMyUsername, isAdmin, myP
                 :
                 (<div></div>)
             }
-
         </>
     )
 }

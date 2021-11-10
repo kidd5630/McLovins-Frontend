@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { fetchAllUsers } from '../api'
+import React from 'react';
 
 const OrderHistory = () => {
     return(
