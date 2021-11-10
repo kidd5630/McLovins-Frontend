@@ -15,6 +15,7 @@ const Profile = ({ usersList, myUsername, userToken, isAdmin, myPassword, setMyP
     for (let i = 0; i < myPassword.length; i++) {
         hiddenPassword += "*";
     }
+
     return (
         <>
             <div className="userInfo">
