@@ -169,10 +169,6 @@ const App = () => {
 									setAllCartItem={setAllCartItem}
 								/>
 							</Route>
-							<Route exact path="/confirmation">
-								<Confirmation
-								/>
-							</Route>
 							<Route exact path="/order_history">
 								<OrderHistory
 								/>
@@ -280,11 +276,6 @@ const App = () => {
 									userToken={userToken}
 									userId={userId}
 									setAllCartItem={setAllCartItem}
-
-								/>
-							</Route>
-							<Route exact path="/confirmation">
-								<Confirmation
 								/>
 							</Route>
 						</Switch>
