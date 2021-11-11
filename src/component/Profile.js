@@ -15,7 +15,9 @@ const Profile = ({ usersList, myUsername, userToken, isAdmin, myPassword, setMyP
     for (let i = 0; i < myPassword.length; i++) {
         hiddenPassword += "*";
     }
-
+    console.log("this is username", myUsername)
+    console.log("this is password", myPassword)
+    console.log("this is email", myEmail)
     return (
         <>
             <div className="userInfo">
@@ -48,7 +50,7 @@ const Profile = ({ usersList, myUsername, userToken, isAdmin, myPassword, setMyP
                             userToken={userToken}
                             name={myUsername}
                             email={myEmail}
-                            password={hiddenPassword}
+                            password={myPassword}
                             setMyPassword={setMyPassword}
                             setMyEmail={setMyEmail}
                         />
