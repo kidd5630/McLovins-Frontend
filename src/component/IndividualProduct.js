@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { BASE_URL, createCartItems, checkCartByProduct, updateItemQuantity, deleteProduct } from '../api'
 import EditProduct from './EditProduct';
 import AddIcon from '@mui/icons-material/Add';
@@ -31,24 +31,20 @@ const IndividualProduct = ({ setCartDisplayNumber, userToken, isAdmin, allProduc
             setValueQuant(valueQuant + 1)
         }
     }
+
+    let history = useHistory();
    
     async function removeProd(e) {
         e.preventDefault();
         try {
             const results =  await deleteProduct(BASE_URL, productid , userToken )
-            // if (results.id) {
-            //     setProductName(results.name)
-            //     setProductDescript(results.description)
-            //     setProductCategory(results.category)
-            //     setProductPrice(results.price)
-            //     setProductQuantity(results.quantity)
-            //     setProductPhoto(results.photo)
-            //     setAllProducts([...allProducts]);
-            //     location.reload()
-            //     ToggleClass();
-            //     resetForm();
-        // }
-        console.log("gotta go", results)
+            if (results[0].id) {
+                const newArr = allProducts.filter(product=>{
+                    return product.id != productid
+                });
+                setAllProducts(newArr);
+                history.push('/product');
+            }
         } catch (error) {
             console.error(error)
         }

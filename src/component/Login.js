@@ -110,8 +110,8 @@ const Login = ({ setMyEmail, setMyPassword, myPassword, setMyUsername, myUsernam
                 localStorage.setItem('myUsername', JSON.stringify(myUsername));
                 localStorage.setItem('userId', userId);
                 localStorage.setItem('email', email);
-
                 fetchUsersCart(results.user.id, token)
+                
                     .then((cart) => {
                         localStorage.setItem('Cart', JSON.stringify(cart));
                     })
