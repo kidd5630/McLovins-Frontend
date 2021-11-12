@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { editUser, BASE_URL } from '../api'
 
-const EditProfile = ({password, email, userToken, ToggleClass, setMyPassword,setMyEmail }) => {
+const EditProfile = ({email, userToken, ToggleClass, setMyPassword,setMyEmail }) => {
 
     const [newPass, setNewPass] = useState("");
     const [newEmail, setNewEmail] = useState(email);
-    // function resetForm() {
-    //     setNewUser('');
-    //     setNewPass('');
-    //     setNewEmail('');
-    // }
 
     async function edit(e) {
         e.preventDefault();
@@ -18,9 +13,7 @@ const EditProfile = ({password, email, userToken, ToggleClass, setMyPassword,set
             if (results) {
                 setMyPassword(newPass);
                 setMyEmail(newEmail)
-                location.reload()
                 ToggleClass();
-                // resetForm();
             }
         } catch (error) {
             console.error(error)
