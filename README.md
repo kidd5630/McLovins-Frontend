@@ -6,4 +6,4 @@ Goal was to create an ecommerce website using fullstack javascript fundamentals 
 
 Worked in a group of 4 using git for versional control
 
-Used on Website: -Javascript,React,Node,PSQL,materialUI,Morgan,Express,JWT,Bcrypt 
+Used on Website: -Javascript, React, Node, PSQL, materialUI, Morgan, Express, JWT, Bcrypt 
